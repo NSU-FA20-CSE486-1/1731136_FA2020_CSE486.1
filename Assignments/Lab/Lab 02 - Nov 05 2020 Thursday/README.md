@@ -34,5 +34,5 @@ Contains two android projects for classwork and assignment.
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   ![loggedIn-layout](./screenshots/loggedIn.png)
 
-- **Restore changed logged in view on screen rotation**
+- **Restore changed logged in view on screen rotation**  
  ![loggedIn-landscape-restore](./screenshots/loggedIn_landscape.png)
