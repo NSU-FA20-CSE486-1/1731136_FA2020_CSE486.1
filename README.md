@@ -12,13 +12,11 @@ Sample Repository for all work in CSE486.1, Fall-2020
 │
 └─── Assignments
 |    |
-│    └─── Assignment 1
+│    └─── Lab
 │    |
-│    └─── Assignment 2
+│    └─── Practice
 │    │
-│    └─── Assignment 3
-│    |
-│    └─── Assignment 4
+│    └─── Theory
 │
 |
 └─── Android Project
