@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Lab02</string>
+
+    <string name="button_toast_label">Toast</string>
+    <string name="button_count_label">Count</string>
+    <string name="text_view_count_label">0</string>
+
+    <string name="toast_message">Hello Toast!</string>
+</resources>
