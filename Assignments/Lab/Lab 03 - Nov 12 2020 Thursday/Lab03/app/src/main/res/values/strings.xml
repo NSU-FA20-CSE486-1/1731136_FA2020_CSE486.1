@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">Lab03</string>
+
+    <string name="article_text">
+
+        Naruto Uzumaki (うずまきナルト, Uzumaki Naruto) is a shinobi of Konohagakure\'s Uzumaki clan.
+        He became the jinchūriki of the Nine-Tails on the day of his birth — a fate that caused him to be shunned by most of Konoha throughout his childhood.
+        After joining Team Kakashi, Naruto worked hard to gain the village\'s acknowledgement all the while chasing his dream to become Hokage.
+        In the following years, through many hardships and ordeals, he became a capable ninja regarded as a hero both by the villagers, and soon after,
+        the rest of the world, becoming known as the <b>Hero of the Hidden Leaf</b> (木ノ葉隠れの英雄, Konohagakure no Eiyū,
+        Literally meaning: Hero of the Hidden Tree Leaves). He soon proved to be one of the main factors in winning the Fourth Shinobi World War,
+        leading him to achieve his dream and become the village\'s Seventh Hokage (七代目火影, Nanadaime Hokage, Literally meaning: Seventh Fire Shadow).
+    </string>
+
+    <string name="personality_title_text">Personality</string>
+
+    <string name="personality_text">
+
+        Naruto is noted as boisterous, exuberant, and unorthodox, quite similar to Hashirama Senju.
+        He inherited his mother\'s verbal tic, as he ends his sentences with "Dattebayo!" (だってばよ!) when emotional.
+        Though he responds best to competition and is not afraid to ask for assistance, Naruto is relatively naïve and slow to understand principles or situations.
+        He often requires an oversimplified analogy in order to grasp explanations[25] and can even prove forgetful.
+        Naruto is aware of his faults and admits he acts strong to mask his embarrassment and frustration about them.
+        Despite his naivety, Naruto can be quite observant, picking up on things others miss and retaining information casually gathered through conversation.
+        Growing up as an orphan who suffered years of hatred and social isolation has influenced Naruto\'s character in a number of ways:
+        he is heedless to formality and social standings, addressing certain people with nicknames instead of honourifics,
+        although by the time of his adulthood, Naruto has slightly outgrown this trait. He has picky eating habits of ramen, his favourite food.
+        Despite his quirks and the criticism they earn him, Naruto is said to have a personality that draws people to him,
+        inspiring friendship and loyalty through acts of genuine kindness that could change a person\'s world view and thus built
+        meaningful relationships that he lacked in early life; the Sage of Six Paths believes Naruto\'s kindness is a special gift that allows him to
+        save Kurama from its hatred.[34] Naruto deeply cherishes these bonds and will go to great lengths to protect them, best seen with Sasuke after his
+        defection from Konoha. Naruto\'s time at the Falls of Truth revealed that a part of him hated the villagers
+        for ostracising him,only to admire him after he saved them during Pain\'s Assault.
+        Upon confronting it, he learned to be at peace with it, willingly becoming greater than what he suffered.
+
+    </string>
+
+    <string name="abilities_title_text">Abilities</string>
+
+    <string name="abilities_text">
+
+        Originally, Naruto was a rather inept ninja, failing to graduate from the Academy three times.
+        Through sheer determination and training however, his skills rapidly improved to defeat strong genin like Neji Hyūga, Gaara, and Kabuto Yakushi,
+        earning acknowledgement from all the Sannin for his potential. Under various tutelage, Naruto was able to defeat various members of Akatsuki,
+        ultimately earning praise from Konohagakure as a Hokage-material hero. Naruto\'s personally defeated various reincarnated Kage and jinchūriki
+        during the Fourth Shinobi World War.[56] He also could compete against if not defeat world-threatening opponents,
+        such as Madara Uchiha, Kaguya and Toneri Ōtsutsuki. Many believe Naruto was the central key to winning the war.
+        By adulthood, his prowess made him the Seventh Hokage, regarded as the strongest shinobi in history and having command of overwhelming jutsu.
+        With the combined might of Sasuke Uchiha, noted as the only shinobi to rival him, they are said able to destroy a continent.
+        Together, they overpowered transformed Momoshiki Ōtsutsuki, and pushed Isshiki Ōtsutsuki\'s vessel to its limit, with the latter admitting
+        that his vessel was too weak to defeat Naruto without his assistance and Amado and even Isshiki himself believing they were the only ones
+        capable of possibly defeating him in his imperfect reincarnation.
+
+    </string>
+    <string name="uzumaki_naruto">Uzumaki Naruto うずまきナルト</string>
+    <string name="the_orange_hokage">The Orange Hokage</string>
+    <string name="image_alt_text">Hokage Hidden Leaf</string>
+
+</resources>
