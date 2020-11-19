@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">List App</string>
+    <string name="itemViewText_defaultLabel">item name</string>
+    <string name="itemView_alt_image">icon</string>
+</resources>

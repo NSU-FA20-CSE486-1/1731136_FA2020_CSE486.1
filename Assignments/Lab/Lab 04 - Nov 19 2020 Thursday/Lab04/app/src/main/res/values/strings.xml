@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Lab04</string>
+    <string name="sent_button_label">open second activity</string>
+    <string name="secondActivity_textView">Parent: MainActivity</string>
+    <string name="open_thirdActivity_button_label">Open Third Activity</string>
+    <string name="open_secondActivity_button_label">Open Second Activity</string>
+    <string name="thirdActivity_text">Parent: SecondActivity</string>
+</resources>
