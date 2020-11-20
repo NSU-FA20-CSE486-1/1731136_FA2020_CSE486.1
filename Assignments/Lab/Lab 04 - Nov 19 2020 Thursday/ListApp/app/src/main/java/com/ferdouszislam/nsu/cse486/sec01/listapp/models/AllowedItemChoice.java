@@ -2,14 +2,15 @@ package com.ferdouszislam.nsu.cse486.sec01.listapp.models;
 
 import com.ferdouszislam.nsu.cse486.sec01.listapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AllowedItemChoice {
 // class to load allowed(hardcoded) item choices
 
-    private static List<Item> itemList;
+    private static ArrayList<Item> itemList = new ArrayList<>();
 
-    private static final String[] LABEL_CHOICES = {
+    public static final String[] LABEL_CHOICES = {
             "Stark", "Jon Snow",
             "Lannister", "Tyrion",
             "Targeryen", "Daeneris",
@@ -17,7 +18,7 @@ public class AllowedItemChoice {
             "Tyrell", "Margery"
     };
 
-    private static final int[] IMAGE_CHOICES = {
+    public static final int[] IMAGE_CHOICES = {
             R.drawable.ic_house_stark, R.drawable.ic_jon_snow,
 
             R.drawable.ic_house_lannister, R.drawable.ic_tyrion,
@@ -29,7 +30,7 @@ public class AllowedItemChoice {
             R.drawable.ic_house_tyrell, R.drawable.ic_margaery
     };
 
-    public static List<Item> getAllowedItemsList(){
+    public static ArrayList<Item> getAllowedItemsList(){
 
         if(!itemList.isEmpty())
             return itemList;

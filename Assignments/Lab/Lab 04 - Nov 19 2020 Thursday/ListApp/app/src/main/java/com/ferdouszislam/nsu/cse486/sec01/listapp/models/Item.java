@@ -30,4 +30,11 @@ public class Item {
         this.imageResource = imageResource;
     }
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "label='" + label + '\'' +
+                ", imageResource=" + imageResource +
+                '}';
+    }
 }

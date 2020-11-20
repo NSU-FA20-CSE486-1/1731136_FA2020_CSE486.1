@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ListApp">
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:label="G.O.T List">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +20,8 @@
         </activity>
 
         <activity android:name=".SelectItemActivity"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:label="Pick Items">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
