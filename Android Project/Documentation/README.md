@@ -12,7 +12,7 @@ https://docs.google.com/document/d/13k6JFobf1ehFxS1JiSu4tFIxx0fdNKmcdAk6A1n1Gww/
 Use case diagram created using lucidchart-  
 https://lucid.app/invitations/accept/6b9bb266-a47c-4394-a7a1-6f76b722b633  
 
-![use case diagram](./use-case-diagram.png)  
+![use case diagram](./use_case_diagram.png)  
 
 ## Features
 
