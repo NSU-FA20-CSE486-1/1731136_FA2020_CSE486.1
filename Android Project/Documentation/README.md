@@ -51,7 +51,17 @@ https://lucid.app/invitations/accept/6b9bb266-a47c-4394-a7a1-6f76b722b633
 
 8. Notify chef user when an order is placed. **[S]**  
 
-9. Keep track of chef user's delivered orders. **[S]**  
+9. Cancel placed order.  
+
+10. Notify rider(if assigned) and customer of cancelled order. **[S]**  
+
+11. Keep track of chef user's delivered orders. **[S]**  
+
+12. Track placed order's status, **[S]**
+    - *In Queue*- Rider not assigned yet.  
+    - *Rider Assigned*- Rider assigned not picked up yet.  
+    - *Picked Up*- delivery picked up from vendor and on the way.
+    - *Delivered*- Customer received the food.
 
 ### **Customer side features**
 
@@ -73,4 +83,55 @@ https://lucid.app/invitations/accept/6b9bb266-a47c-4394-a7a1-6f76b722b633
 
 9. Keep track of customer user order history. **[S]**  
 
-10. <span style="color:red">Keep 7% of the payment for an order. (how?)<span> **[S]**
+10. <span style="color:red">Keep 7% of the payment for an order. (how?)<span> **[S]**  
+
+11. Track placed order's status, **[S]**  
+    - *In Queue*- Rider not assigned yet.  
+    - *Rider Assigned*- Rider assigned not picked up yet.  
+    - *Picked Up*- delivery picked up from vendor and on the way.
+    - *Delivered*- Customer received the food.
+
+### **Rider side features**
+  
+1. <span style="color:yellow">Apply to become a food delivery rider by providing,<span>  
+    - *Full Name*  
+    - *Work Schedule* - Days and hours rider wants to work for.
+    - *Phone Number*  
+    - *Age* - Must be above 18.  
+    - *Vehicle Type* - Bicycle, Motorbike, Car
+    - *Vehicle Purchase Documents* - Attach photo of documents that prove of vehicles ownership.
+    - *Driver's License* - Attach photo.
+    - *NID Card Photo* Attach photo.
+
+2. Block rider account until verified.**[S]**  
+
+3. <span style="color:yellow">Login with verified rider account using,<span>
+   - *Phone number* - used during applying.
+   - *Assigned Password* - password is assigned by system after rider is verified.  
+
+4. <span style="color:red">Apply to update work schedule.<span>  
+
+5. <span style="color:yellow">Track rider user's status,<span> **[S]**
+   - Free - During work hour but rider isn't assigned any delivery.  
+   - On Delivery - Currently working on a delivery.  
+   - Unavailable - Rider is unavailable during work hour(not online in app).  
+   - Not working - It's not rider's work schedule.  
+
+6. <span style="color:yellow">Assign placed order's delivery to nearby rider.<span> **[S]**  
+
+7. View assigned delivery's pickup & customer location.  
+
+8. Accept or Decline assigned delivery.  
+
+9. Track delivery's status, **[S]**
+    - *Rider Assigned*- Rider assigned not picked up yet.  
+    - *Picked Up*- delivery picked up from vendor and on the way.
+    - *Delivered*- Customer received the food.  
+
+10. Confirm order pickup.  
+
+11. Confirm order delivery.  
+
+12. Keep track of delivered orders. **[S]**  
+
+13. <span style="color:red">Record payments for every order.<span> **[S]**
