@@ -1,2 +1,3 @@
 # App Prototype
-This folder will contain app mockup resources- screenshots, link to figma, images, icons etc.
+This folder contains app mockup resources- frame screenshots, images, icons etc.  
+Figma link: <https://www.figma.com/file/2IAJpuyYGbnRLLsc0we3N4/BLANK-App?node-id=27%3A22> 
