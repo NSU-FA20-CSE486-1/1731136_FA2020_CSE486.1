@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">DateTimePicker App</string>
+
+    <string name="action_proceed">Proceed</string>
+    <string name="action_reset">Reset</string>
+
+    <string name="editText_time_hint">Pick a time</string>
+    <string name="editText_date_hint">Pick a date</string>
+    <string name="time_icon_alt">time</string>
+    <string name="date_icon_alt">date</string>
+
+    <string name="invalid_dateTime_input_error">Invalid date and/or time selected!</string>
+    <string name="timePickerDialogTag">time</string>
+    <string name="datePickerDialogTag">date</string>
+    <string name="pickDateTime_Header"><![CDATA[Pick Date & Time]]></string>
+    <string name="pickedDateTimeTextView_label"><![CDATA[Pick Date & Time]]></string>
+
+</resources>
