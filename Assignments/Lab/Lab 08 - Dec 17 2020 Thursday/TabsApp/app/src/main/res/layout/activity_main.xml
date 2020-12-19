@@ -6,40 +6,50 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/navigation_tab"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#90CAF9"
+        app:tabPadding="8dp">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/home_tabItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:icon="@drawable/ic_action_home" />
+            android:icon="@drawable/ic_action_home"
+            android:onClick="homeTabItemClick" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/profile_tabItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:icon="@drawable/ic_action_profile" />
+            android:icon="@drawable/ic_action_profile"
+            android:onClick="profileTabItemClick" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/search_tabItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:icon="@drawable/ic_action_search" />
+            android:icon="@drawable/ic_action_search"
+            android:onClick="searchTabItemClick" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/settings_tabItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:icon="@drawable/ic_action_settings" />
+            android:icon="@drawable/ic_action_settings"
+            android:onClick="settingsTabItemClick" />
 
     </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/navigation_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>
