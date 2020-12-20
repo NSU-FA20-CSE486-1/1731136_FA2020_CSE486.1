@@ -2,6 +2,8 @@ package com.nsu.ece.ferdouszislam.cse486l.sec01.secrettextapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -117,7 +119,18 @@ public class EncryptMessageActivity extends AppCompatActivity {
      */
     private void sendMessageViaDefaultSMSApp(){
 
-        showToast("sending message...");
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+
+        intent.setData(Uri.parse("smsto:"+mSms.getmRecipientPhoneNumber()));  // This ensures only SMS apps respond
+
+        intent.putExtra("sms_body", mSms.getmMessage().getmEncryptedMessage());
+
+        if (intent.resolveActivity(getPackageManager()) != null){
+
+            startActivity(intent);
+        }
+
+        else showToast( getString(R.string.no_default_sms_app_found) );
     }
 
     /*

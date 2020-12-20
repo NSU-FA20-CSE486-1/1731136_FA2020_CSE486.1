@@ -14,6 +14,7 @@
     <string name="sendButton_Label">send</string>
     <string name="invalid_input">Invalid input/s</string>
     <string name="encryption_error">"An unexpected error occurred. Please re-enter encryption key."</string>
+    <string name="no_default_sms_app_found">No default SMS app found!</string>
 
     <!--Decrypt SMS Activity -->
     <string name="decrypt_activity_title">Decrypt SMS</string>
