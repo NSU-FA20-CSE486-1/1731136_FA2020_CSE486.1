@@ -36,4 +36,11 @@ public class SMS {
     public void setmMessage(Message mMessage) {
         this.mMessage = mMessage;
     }
+
+    public boolean isValid(){
+
+        return mMessage.isValid()
+                && mRecipientPhoneNumber.startsWith("+880")
+                && mRecipientPhoneNumber.length() == 14;
+    }
 }
