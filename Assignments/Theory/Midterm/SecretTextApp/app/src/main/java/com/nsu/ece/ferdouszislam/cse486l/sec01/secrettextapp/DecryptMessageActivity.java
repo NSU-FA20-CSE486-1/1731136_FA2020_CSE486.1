@@ -26,7 +26,7 @@ public class DecryptMessageActivity extends AppCompatActivity {
     private Button mDecryptButton;
 
     // model
-    Message mMessage;
+    private Message mMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
