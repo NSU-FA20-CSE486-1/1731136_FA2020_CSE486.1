@@ -10,8 +10,10 @@
     <string name="encryptedMessages_message_textInput_hint">enter your message within 150 words</string>
     <string name="phoneCountryCode_textLabel">+880</string>
     <string name="phoneNumberInput_hint">1XX XXXX XXX</string>
-    <string name="encryptionKey_hint">enter 3 letter encryption key</string>
+    <string name="encryptionKey_hint">enter 3 alphanumeric letter encryption key</string>
     <string name="sendButton_Label">send</string>
+    <string name="invalid_input">Invalid input/s</string>
+    <string name="encryption_error">"An unexpected error occurred. Please re-enter encryption key."</string>
 
     <!--Decrypt SMS Activity -->
     <string name="decrypt_activity_title">Decrypt SMS</string>

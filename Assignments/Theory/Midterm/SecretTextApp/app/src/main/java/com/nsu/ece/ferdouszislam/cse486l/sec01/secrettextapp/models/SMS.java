@@ -43,4 +43,12 @@ public class SMS {
                 && mRecipientPhoneNumber.startsWith("+880")
                 && mRecipientPhoneNumber.length() == 14;
     }
+
+    @Override
+    public String toString() {
+        return "SMS{" +
+                "mRecipientPhoneNumber='" + mRecipientPhoneNumber + '\'' +
+                ", mMessage=" + mMessage +
+                '}';
+    }
 }

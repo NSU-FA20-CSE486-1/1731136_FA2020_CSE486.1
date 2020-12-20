@@ -38,8 +38,27 @@ public class Message {
 
     public boolean isValid(){
 
+        boolean isEncryptionKeyAlphaNumeric = true;
+        for(int i=0;i<mEncryptionKey.length();i++) {
+
+            if ((mEncryptionKey.charAt(i) < 48 || mEncryptionKey.charAt(i) > 57)
+                    && (mEncryptionKey.charAt(i) < 97 || mEncryptionKey.charAt(i) > 122)) {
+
+                isEncryptionKeyAlphaNumeric = false;
+                break;
+            }
+        }
+
         return mPlainMessage.length()>0 && mPlainMessage.length()<=150
-                && mEncryptionKey.length()==3
-                && mEncryptedMessage!=null;
+                && mEncryptionKey.length()==3 && isEncryptionKeyAlphaNumeric;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "mPlainMessage='" + mPlainMessage + '\'' +
+                ", mEncryptedMessage='" + mEncryptedMessage + '\'' +
+                ", mEncryptionKey='" + mEncryptionKey + '\'' +
+                '}';
     }
 }

@@ -1,5 +1,7 @@
 package com.nsu.ece.ferdouszislam.cse486l.sec01.secrettextapp;
 
+import java.util.Random;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -11,7 +13,8 @@ import javax.crypto.spec.SecretKeySpec;
 public class AESUtils {
 
     private static byte[] ENCRYPTION_KEY =
-            new byte[]{'a', 'b', 'c'}; // default encryption key
+            // default 128 bits encryption key
+            new byte[]{'n', 'e', 'e', 'd', 'S', 'i', 'x', 't', 'e', 'e', 'n', 'l', 'e', 't', 'e', 'r'};
 
     public static String encrypt(String cleartext)
             throws Exception {
@@ -76,7 +79,12 @@ public class AESUtils {
         sb.append(HEX.charAt((b >> 4) & 0x0f)).append(HEX.charAt(b & 0x0f));
     }
 
-    public static void setEncryptionKey(byte[] encryptionKey) {
-        ENCRYPTION_KEY = encryptionKey;
+    public static void setEncryptionKey(String encryptionKey) {
+
+        // need a 16 letter(128 bits) encryption key
+        while(encryptionKey.length()<16)
+            encryptionKey+= "@";
+
+        ENCRYPTION_KEY = encryptionKey.getBytes();
     }
 }

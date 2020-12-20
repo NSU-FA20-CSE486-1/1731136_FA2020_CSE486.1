@@ -34,14 +34,14 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editTextPhone"
+                android:id="@+id/editTextPhoneNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="90"
+                android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/phoneNumberInput_hint"
-                android:inputType="phone"
-                android:autofillHints="" />
+                android:inputType="phone" />
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -54,6 +54,7 @@
             app:counterMaxLength="150">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/messageContentEditText"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_gravity="start"
@@ -64,7 +65,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/encryptionKeyEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -73,14 +74,15 @@
             android:ems="10"
             android:gravity="center"
             android:hint="@string/encryptionKey_hint"
-            android:inputType="textShortMessage" />
+            android:inputType="textShortMessage"
+            android:textSize="14sp" />
 
         <Button
-            android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="16dp"
+            android:onClick="sendButtonClick"
             android:text="@string/sendButton_Label" />
 
     </LinearLayout>
