@@ -4,6 +4,10 @@ Question - <https://docs.google.com/document/d/12ym0zKL4wGaKJ4H9-Cm1CfADjv30Wo-M
 
 ## Answer To Question-2: **Secret Text App**  
 
+- Home Page  
+  
+  ![home-page](./screenshots/home.png)
+
 - Encrypt a text with an encryption key  
   
   ![encrypt-message-1](./screenshots/encrypt_message_without_input.png) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![encrypt-message-2](./screenshots/encrypt_message_with_input.png)
