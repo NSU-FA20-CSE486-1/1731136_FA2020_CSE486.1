@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+/**
+ * Activity to decrypt an encrypted message
+ */
 public class DecryptMessageActivity extends AppCompatActivity {
 
     @Override

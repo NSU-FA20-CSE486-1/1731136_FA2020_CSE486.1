@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+/**
+ * Activity to encrypt message and send via default SMS app
+ */
 public class EncryptMessageActivity extends AppCompatActivity {
 
     @Override
