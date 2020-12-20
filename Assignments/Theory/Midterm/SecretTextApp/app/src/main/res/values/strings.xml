@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">SecretTextApp</string>
+    <string name="app_name">Secret Text App</string>
+
+    <!--MainActivity -->
+    <string name="encryptMessage_button_label">Encrypt Message</string>
+    <string name="decryptMessage_button_label">Decrypt Message</string>
+
+    <!--Encrypt SMS Activity -->
+    <string name="encrypt_activity_title">Encrypt SMS</string>
+    <string name="encryptedMessages_message_textInput_hint">enter your message within 150 words</string>
+    <string name="phoneCountryCode_textLabel">+880</string>
+    <string name="phoneNumberInput_hint">1XX XXXX XXX</string>
+    <string name="encryptionKey_hint">enter 3 letter encryption key</string>
+    <string name="sendButton_Label">send</string>
+
+    <!--Decrypt SMS Activity -->
+    <string name="decrypt_activity_title">Decrypt SMS</string>
+    <string name="decryptMessageEditText_hint">copy paste encrypted message here</string>
+    <string name="decryptButton_label">decrypt</string>
+
 </resources>
