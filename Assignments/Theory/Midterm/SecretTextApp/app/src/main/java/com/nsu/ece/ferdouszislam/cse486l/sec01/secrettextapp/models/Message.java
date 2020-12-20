@@ -36,6 +36,19 @@ public class Message {
         this.mEncryptionKey = mEncryptionKey;
     }
 
+    /*
+    received sms format- encryption_key[blank space]encrypted_message
+     */
+    public void extractEncryptedMessageAndKey(String receivedMessage){
+
+        int indexOfFirstSpace = receivedMessage.indexOf(' ');
+        String encryptionKey = receivedMessage.substring(0, indexOfFirstSpace);
+        String encryptedMessage = receivedMessage.substring(indexOfFirstSpace+1);
+
+        this.mEncryptionKey = encryptionKey;
+        this.mEncryptedMessage = encryptedMessage;
+    }
+
     public boolean isValid(){
 
         boolean isEncryptionKeyAlphaNumeric = true;

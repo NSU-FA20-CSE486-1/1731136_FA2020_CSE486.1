@@ -123,7 +123,9 @@ public class EncryptMessageActivity extends AppCompatActivity {
 
         intent.setData(Uri.parse("smsto:"+mSms.getmRecipientPhoneNumber()));  // This ensures only SMS apps respond
 
-        intent.putExtra("sms_body", mSms.getmMessage().getmEncryptedMessage());
+        String messageToSend = mSms.getmMessage().getmEncryptionKey()+" "+mSms.getmMessage().getmEncryptedMessage();
+
+        intent.putExtra("sms_body", messageToSend);
 
         if (intent.resolveActivity(getPackageManager()) != null){
 

@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/messageTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -26,6 +27,7 @@
             app:counterMaxLength="154">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/messageContentEditText"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_gravity="start"
@@ -37,7 +39,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/decryptButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
