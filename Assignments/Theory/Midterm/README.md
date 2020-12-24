@@ -2,6 +2,9 @@
 
 Question - <https://docs.google.com/document/d/12ym0zKL4wGaKJ4H9-Cm1CfADjv30Wo-MEL-bBM2nzMI/edit>  
 
+## Answer To Question-1: **Current State of Mobile Supported Augmented Reality research**  
+PDF attached in this directory at Paper-Review/1731136_FA2020_Mid_CSE486_1.pdf
+
 ## Answer To Question-2: **Secret Text App**  
 
 - Home Page  
