@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">HomeMealApp</string>
+    <string name="app_name">Home Meal App</string>
+    <string name="getStarted_ButtonLabel">Get started</string>
+    <string name="welcome_Textview">Your one stop destination to order, sell, and/or deliver home-cooked meals.</string>
+    <string name="appLogo_ImageViewAltText">app logo</string>
 </resources>
