@@ -25,8 +25,14 @@
             android:parentActivityName=".UserTypeChoiceActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".UserTypeChoiceActivity"
-                />
+                android:value=".UserTypeChoiceActivity" />
+        </activity>
+
+        <activity android:name=".ChefSignupActivity"
+            android:parentActivityName=".UserTypeChoiceActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".UserTypeChoiceActivity" />
         </activity>
 
     </application>

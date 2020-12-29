@@ -14,5 +14,13 @@
     <string name="password_editTextHint">Password</string>
     <string name="noAccount_TextView">Don\'t have and account? Sign up.</string>
     <string name="loginWelcome_TextView">Login with an existing account</string>
+    <string name="chefSignupWelcome_Textview">Register as a Home Cook</string>
+    <string name="phoneNumberHint_TextView">Enter your valid 11 digit phone number</string>
+    <string name="addressHint_Textview">Your orders will get picked up from this address</string>
+    <string name="passwordHint_TextView">Password must be 8 characters long</string>
+    <string name="signup_ButtonLabel">Signup</string>
+    <string name="phoneCode_Text">+880 </string>
+    <string name="address_EditTextHint">Home Address</string>
+    <string name="confirmPassword_EditTextHint">Confirm Password</string>
 
 </resources>

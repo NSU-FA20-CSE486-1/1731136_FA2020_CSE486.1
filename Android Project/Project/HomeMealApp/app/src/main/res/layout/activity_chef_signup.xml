@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChefSignupActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/chefSignup_Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:titleTextAppearance="@style/CommonToolbarTitleTheme" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chefSignup_Toolbar"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/chefSignupWelcome_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="16dp"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                android:text="@string/chefSignupWelcome_Textview"
+                android:textColor="@color/theme_dark_color"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:drawableRightCompat="@drawable/ic_cook_icon" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/editTextPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFF3E0"
+                    android:drawableRight="@drawable/ic_action_phone"
+                    android:ems="10"
+                    android:importantForAutofill="no"
+                    android:inputType="phone"
+                    android:padding="16dp"
+                    android:text="@string/phoneCode_Text"
+                    android:textColor="@color/theme_dark_color" />
+
+                <TextView
+                    android:id="@+id/phoneNumberHint_TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="@string/phoneNumberHint_TextView"
+                    android:textColor="@color/theme_dark_color" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/address_EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFF3E0"
+                    android:drawableRight="@drawable/ic_action_location"
+                    android:ems="10"
+                    android:hint="@string/address_EditTextHint"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:padding="16dp"
+                    android:textColor="@color/theme_dark_color" />
+
+                <TextView
+                    android:id="@+id/addressHint_TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="@string/addressHint_Textview"
+                    android:textColor="@color/theme_dark_color" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/chefSignupEmail_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="#FFF3E0"
+                android:drawableRight="@drawable/ic_action_user"
+                android:ems="10"
+                android:hint="@string/email_EditTextHint"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:padding="16dp"
+                android:textColor="@color/theme_dark_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/editTextTextPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:background="#FFF3E0"
+                    android:drawableRight="@drawable/ic_action_lock"
+                    android:ems="10"
+                    android:hint="@string/password_editTextHint"
+                    android:inputType="textPassword"
+                    android:padding="16dp"
+                    android:textColor="@color/theme_dark_color" />
+
+                <TextView
+                    android:id="@+id/passwordHint_TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="@string/passwordHint_TextView"
+                    android:textColor="@color/theme_dark_color" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/editTextTextPassword2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:autofillHints=""
+                android:background="#FFF3E0"
+                android:drawableRight="@drawable/ic_action_lock"
+                android:ems="10"
+                android:hint="@string/confirmPassword_EditTextHint"
+                android:inputType="textPassword"
+                android:padding="16dp"
+                android:textColor="@color/theme_dark_color" />
+
+            <Button
+                android:id="@+id/chefSignup_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                android:text="@string/signup_ButtonLabel"
+                android:textAllCaps="false" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

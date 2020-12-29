@@ -104,6 +104,7 @@
             android:layout_margin="8dp"
             android:foregroundGravity="center"
             android:gravity="center"
+            android:onClick="dontHaveAnAccountClicked"
             android:text="@string/noAccount_TextView"
             android:textColor="@color/theme_dark_color"
             android:textSize="14sp" />
