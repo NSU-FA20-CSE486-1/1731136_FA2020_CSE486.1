@@ -7,4 +7,12 @@
     <string name="customer_ButtonLabel">A Customer</string>
     <string name="houseCook_ButtonLabel">A House Cook</string>
     <string name="deliveryGuy_ButtonLabel">A Delivery Guy</string>
+
+    <string name="login_ButtonLabel">Login</string>
+    <string name="email_EditTextHint">Email</string>
+    <string name="forgotPassword_TextView">forgot password?</string>
+    <string name="password_editTextHint">Password</string>
+    <string name="noAccount_TextView">Don\'t have and account? Sign up.</string>
+    <string name="loginWelcome_TextView">Login with an existing account</string>
+
 </resources>

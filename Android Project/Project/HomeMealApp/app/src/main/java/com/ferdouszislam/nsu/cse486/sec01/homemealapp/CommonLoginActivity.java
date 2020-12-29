@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 public class CommonLoginActivity extends AppCompatActivity {
 
@@ -43,5 +44,11 @@ public class CommonLoginActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         // don't show default(app_name) title
         ab.setDisplayShowTitleEnabled(false);
+    }
+
+    /*
+    "Login" button click listener
+     */
+    public void loginClick(View view) {
     }
 }
