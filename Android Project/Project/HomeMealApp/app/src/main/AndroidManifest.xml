@@ -20,6 +20,15 @@
 
         <activity android:name=".UserTypeChoiceActivity" />
 
+        <activity
+            android:name=".CommonLoginActivity"
+            android:parentActivityName=".UserTypeChoiceActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".UserTypeChoiceActivity"
+                />
+        </activity>
+
     </application>
 
 </manifest>

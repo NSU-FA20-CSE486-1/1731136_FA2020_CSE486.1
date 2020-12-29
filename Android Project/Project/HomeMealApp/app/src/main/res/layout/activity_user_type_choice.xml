@@ -34,6 +34,7 @@
             android:layout_height="72dp"
             android:layout_marginBottom="24dp"
             android:drawableLeft="@drawable/ic_customer_icon"
+            android:onClick="customerUserClick"
             android:text="@string/customer_ButtonLabel" />
 
         <Button
@@ -42,6 +43,7 @@
             android:layout_height="72dp"
             android:layout_marginBottom="24dp"
             android:drawableLeft="@drawable/ic_cook_icon"
+            android:onClick="chefUserClick"
             android:text="@string/houseCook_ButtonLabel" />
 
         <Button
@@ -50,6 +52,7 @@
             android:layout_height="72dp"
             android:layout_marginBottom="24dp"
             android:drawableLeft="@drawable/ic_rider_icon"
+            android:onClick="deliveryUserClick"
             android:text="@string/deliveryGuy_ButtonLabel" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
