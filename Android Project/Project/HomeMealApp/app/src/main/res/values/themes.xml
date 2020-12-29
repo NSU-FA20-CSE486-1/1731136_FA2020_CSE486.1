@@ -6,7 +6,7 @@
 
         <!--not used-->
         <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/theme_light_color</item>
         <!--not used-->
 
         <!-- Secondary brand color. -->

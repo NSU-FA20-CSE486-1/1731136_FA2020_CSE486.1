@@ -3,4 +3,8 @@
     <string name="getStarted_ButtonLabel">Get started</string>
     <string name="welcome_Textview">Your one stop destination to order, sell, and/or deliver home-cooked meals.</string>
     <string name="appLogo_ImageViewAltText">app logo</string>
+    <string name="usertype_TextView">WHO ARE YOU?</string>
+    <string name="customer_ButtonLabel">A Customer</string>
+    <string name="houseCook_ButtonLabel">A House Cook</string>
+    <string name="deliveryGuy_ButtonLabel">A Delivery Guy</string>
 </resources>
