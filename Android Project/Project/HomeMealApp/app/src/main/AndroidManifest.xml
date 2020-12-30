@@ -32,6 +32,14 @@
                 android:value=".UserTypeChoiceActivity" />
         </activity>
         <activity android:name=".chef.ChefHomeActivity" />
+
+        <activity
+            android:name=".chef.ChefMenuActivity"
+            android:parentActivityName=".chef.ChefHomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".chef.ChefHomeActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -24,5 +24,21 @@
     <string name="confirmPassword_EditTextHint">Confirm Password</string>
     <string name="addButton_label">add</string>
     <string name="foodItemsEmpty_TextView">No food items listed yet.</string>
+    <string name="servicePayment_TextView">Service Charge Payment</string>
+    <string name="servicePaymentSubtitle_Textview">Pay service fee for successful orders</string>
+    <string name="placedOrders_TextView">Placed Orders</string>
+    <string name="placedOrderSubtitle_TextView">view list of placed orders by customers</string>
+    <string name="updateProfile_TextView">Update Profile</string>
+    <string name="updateProfileUSubtitle_TextView">update provided personal information</string>
+    <string name="settings_TextView">Settings</string>
+    <string name="settingsSubtitle_TextView">modify default app behaviour</string>
+    <string name="logout_TextView">Logout</string>
+    <string name="logoutSubtitle_TextView">logout from this chef user account</string>
+    <string name="payment_icon_Alt">payment</string>
+    <string name="placeOrder_icon_Alt">placed-orders</string>
+    <string name="profile_icon_Alt">profile-icon</string>
+    <string name="settings_icon_Alt">settings-icon</string>
+    <string name="logout_icon_Alt">logour-icon</string>
+    <string name="menu_title">Menu</string>
 
 </resources>
