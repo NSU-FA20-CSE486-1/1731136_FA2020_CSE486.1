@@ -22,5 +22,7 @@
     <string name="phoneCode_Text">+880 </string>
     <string name="address_EditTextHint">Home Address</string>
     <string name="confirmPassword_EditTextHint">Confirm Password</string>
+    <string name="addButton_label">add</string>
+    <string name="foodItemsEmpty_TextView">No food items listed yet.</string>
 
 </resources>

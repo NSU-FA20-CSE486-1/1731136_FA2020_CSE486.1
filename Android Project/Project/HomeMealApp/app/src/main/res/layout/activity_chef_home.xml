@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".chef.ChefHomeActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/chefHome_Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/theme_light_color"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:buttonGravity="bottom"
+        app:menu="@menu/chef_menu" />
+
+    <ImageButton
+        android:id="@+id/addFoodItem_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/chefHome_Toolbar"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="-24dp"
+        android:background="@drawable/round_button"
+        android:contentDescription="@string/addButton_label"
+        android:onClick="addFoodItemClick"
+        android:padding="16dp"
+        android:src="@drawable/ic_action_add" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="@string/foodItemsEmpty_TextView"
+        android:textColor="@color/theme_dark_color"
+        android:textSize="18sp" />
+
+</RelativeLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/chef_menu_option"
+        android:title=""
+        android:icon="@drawable/ic_action_menu"
+        app:showAsAction="always"
+        android:orderInCategory="10"/>
+
+    <item
+        android:id="@+id/notificationOption"
+        android:title=""
+        android:icon="@drawable/ic_action_notification"
+        app:showAsAction="always"
+        android:orderInCategory="20"/>
+
+</menu>

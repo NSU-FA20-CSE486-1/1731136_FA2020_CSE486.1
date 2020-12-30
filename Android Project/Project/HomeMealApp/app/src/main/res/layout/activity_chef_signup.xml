@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChefSignupActivity">
+    tools:context=".chef.ChefSignupActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/chefSignup_Toolbar"
@@ -66,6 +66,7 @@
                     android:importantForAutofill="no"
                     android:inputType="phone"
                     android:padding="16dp"
+                    android:hint="(+880) phone number"
                     android:text="@string/phoneCode_Text"
                     android:textColor="@color/theme_dark_color" />
 
@@ -169,6 +170,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="16dp"
                 android:gravity="center"
+                android:onClick="signupClick"
                 android:text="@string/signup_ButtonLabel"
                 android:textAllCaps="false" />
         </LinearLayout>

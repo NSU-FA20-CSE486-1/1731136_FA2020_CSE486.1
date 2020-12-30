@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.ChefSignupActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.UserType;
 
 public class CommonLoginActivity extends AppCompatActivity {

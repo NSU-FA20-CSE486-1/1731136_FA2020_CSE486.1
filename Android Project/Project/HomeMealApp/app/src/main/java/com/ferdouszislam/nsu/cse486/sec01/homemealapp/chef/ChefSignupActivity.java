@@ -1,10 +1,14 @@
-package com.ferdouszislam.nsu.cse486.sec01.homemealapp;
+package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 
 public class ChefSignupActivity extends AppCompatActivity {
 
@@ -36,5 +40,16 @@ public class ChefSignupActivity extends AppCompatActivity {
             // don't show default(app_name) title
             ab.setDisplayShowTitleEnabled(false);
         }
+    }
+
+    public void signupClick(View view) {
+
+        Intent intent = new Intent(this, ChefHomeActivity.class);
+
+        // clear out all activities on the back stack
+        // so that back press from this point on closes the app
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        startActivity(intent);
     }
 }
