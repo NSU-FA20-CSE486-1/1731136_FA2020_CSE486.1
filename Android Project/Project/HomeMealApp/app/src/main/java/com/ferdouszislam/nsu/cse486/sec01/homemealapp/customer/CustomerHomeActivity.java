@@ -1,4 +1,4 @@
-package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef;
+package com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -9,16 +9,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.ChefMenuActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.ChefPlacedOrdersActivity;
 
-public class ChefHomeActivity extends AppCompatActivity {
+public class CustomerHomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chef_home);
+        setContentView(R.layout.activity_customer_home);
 
         init();
     }
@@ -30,11 +31,14 @@ public class ChefHomeActivity extends AppCompatActivity {
 
     private void setupToolbar() {
 
-        Toolbar myChildToolbar = findViewById(R.id.chefHome_Toolbar);
+        Toolbar myChildToolbar = findViewById(R.id.customerHome_Toolbar);
         setSupportActionBar(myChildToolbar);
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
         if(ab!=null) {
+            // show menu(home/back button) icon on the left
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setHomeAsUpIndicator(R.drawable.ic_action_menu);
             // don't show default(app_name) title
             ab.setDisplayShowTitleEnabled(false);
         }
@@ -46,7 +50,7 @@ public class ChefHomeActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.chef_menu, menu);
+        getMenuInflater().inflate(R.menu.customer_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -60,14 +64,12 @@ public class ChefHomeActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
 
-            case R.id.chef_menu_option:
+            case R.id.customer_notification_option:
 
-                startActivity(new Intent(this, ChefMenuActivity.class));
                 break;
 
-            case R.id.chef_notification_option:
+            case R.id.customer_search_option:
 
-                startActivity(new Intent(this, ChefPlacedOrdersActivity.class));
                 break;
 
             default:
@@ -75,13 +77,5 @@ public class ChefHomeActivity extends AppCompatActivity {
         }
 
         return returnValue;
-    }
-
-    /*
-    "addFoodItem_Button" click listener
-     */
-    public void addFoodItemClick(View view) {
-
-        startActivity(new Intent(this, ChefAddFoodOfferActivity.class));
     }
 }

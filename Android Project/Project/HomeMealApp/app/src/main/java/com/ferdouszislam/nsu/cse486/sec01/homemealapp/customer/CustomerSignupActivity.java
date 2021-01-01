@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -41,6 +42,11 @@ public class CustomerSignupActivity extends AppCompatActivity {
         }
     }
 
+    /*
+    "Sign up" button click listener
+     */
     public void signupClick(View view) {
+
+        startActivity(new Intent(this, CustomerHomeActivity.class));
     }
 }

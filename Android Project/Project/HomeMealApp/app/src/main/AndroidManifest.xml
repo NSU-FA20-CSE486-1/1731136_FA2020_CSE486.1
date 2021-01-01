@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HomeMealApp">
+        <activity android:name=".customer.CustomerHomeActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -77,9 +78,9 @@
         <activity
             android:name=".customer.CustomerSignupActivity"
             android:parentActivityName=".CommonLoginActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".CommonLoginActivity" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CommonLoginActivity" />
         </activity>
     </application>
 
