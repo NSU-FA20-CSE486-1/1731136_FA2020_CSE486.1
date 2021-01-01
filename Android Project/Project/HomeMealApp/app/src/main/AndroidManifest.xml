@@ -82,12 +82,14 @@
                 android:value=".CommonLoginActivity" />
         </activity>
         <activity android:name=".customer.CustomerHomeActivity" />
-        <activity android:name=".customer.CustomerMenuActivity"
+        <activity
+            android:name=".customer.CustomerMenuActivity"
             android:parentActivityName=".customer.CustomerHomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".customer.CustomerHomeActivity" />
         </activity>
+        <activity android:name=".customer.CustomerPlaceOrderActivity"></activity>
     </application>
 
 </manifest>

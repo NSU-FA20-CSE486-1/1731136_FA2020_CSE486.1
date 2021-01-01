@@ -93,5 +93,14 @@
     <string name="monthlyPlan_TextView">Monthly Meal Plan</string>
     <string name="monthlyPlanSubtitle_Textview">feature coming soon</string>
     <string name="customerMenuPlacedOrderSubtitle_TextView">view list of your placed orders</string>
+    <string name="customerPlaceOrderTitle_TextView">Place your order for Food Name</string>
+    <string name="quantityHint_TextView">1 unit = (quantity specified by vendor)</string>
+    <string name="bKashPhoneHint_customerPlaceOrder_TextView">Bkash payment phone number</string>
+    <string name="callPhoneHint_customerPlaceOrder_TextView">Phone number for delivery guy to contact you</string>
+    <string name="address_customerPlaceOrder_EditTextHint">full address of your current location</string>
+    <string name="addressHint_customerPlaceOrder_TextView">Press the location icon to detect your current location</string>
+    <string name="placeOrder_ButtonLabel">Place Order</string>
+    <string name="customer_place_order_title">Place Order</string>
+    <string name="minus_icon_Alt">minus_icon</string>
 
 </resources>
