@@ -89,5 +89,9 @@
     <string name="searchFilters_TextView">Search filters:</string>
     <string name="searchFilterTags_TextViewPlaceHolder">Tag1, Tag2</string>
     <string name="close_icon_Alt">close</string>
+    <string name="monthlyPlan_icon_Alt">schedule-icon</string>
+    <string name="monthlyPlan_TextView">Monthly Meal Plan</string>
+    <string name="monthlyPlanSubtitle_Textview">feature coming soon</string>
+    <string name="customerMenuPlacedOrderSubtitle_TextView">view list of your placed orders</string>
 
 </resources>

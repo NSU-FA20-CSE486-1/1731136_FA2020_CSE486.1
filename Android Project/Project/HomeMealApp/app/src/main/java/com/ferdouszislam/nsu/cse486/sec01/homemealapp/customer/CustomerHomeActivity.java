@@ -37,11 +37,8 @@ public class CustomerHomeActivity extends AppCompatActivity {
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
         if(ab!=null) {
-            // show menu(home/back button) icon on the left
-            ab.setDisplayHomeAsUpEnabled(true);
-            ab.setHomeAsUpIndicator(R.drawable.ic_action_menu);
             // don't show default(app_name) title
-            ab.setDisplayShowTitleEnabled(false);
+            ab.setTitle("Home");
         }
     }
 
@@ -65,14 +62,14 @@ public class CustomerHomeActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
 
-            case R.id.customer_notification_option:
+            case R.id.customer_menu_option:
 
+                startActivity(new Intent(this, CustomerMenuActivity.class));
                 break;
 
             case R.id.customer_search_option:
 
                 findViewById(R.id.searchFilter_View).setVisibility(View.VISIBLE);
-
                 break;
 
             default:
