@@ -80,4 +80,7 @@
     <string name="reject">Reject</string>
     <string name="accept">Accept</string>
 
+    <string name="create_variant_title">Create a Variant</string>
+    <string name="update_profile_title">Update Profile</string>
+
 </resources>

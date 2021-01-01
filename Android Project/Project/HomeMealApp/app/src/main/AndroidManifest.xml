@@ -46,9 +46,21 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".chef.ChefHomeActivity" />
         </activity>
-
         <activity
             android:name=".chef.ChefAddFoodOfferActivity"
+            android:parentActivityName=".chef.ChefHomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".chef.ChefHomeActivity" />
+        </activity>
+        <activity
+            android:name=".chef.ChefUpdateProfileActivity"
+            android:parentActivityName=".chef.ChefHomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".chef.ChefHomeActivity" />
+        </activity>
+        <activity android:name=".chef.ChefCreateFoodVariantActivity"
             android:parentActivityName=".chef.ChefHomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
