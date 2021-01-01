@@ -68,5 +68,16 @@
     <string name="addFoodOffer_title">Add food offering</string>
     <string name="foodItemNotConfirmed_ButtonLabel">Not Confirmed</string>
     <string name="foodItemConfirmed_ButtonLabel">Confirmed</string>
+    <string name="foodName_listItem_TextView">Food Name</string>
+    <string name="price_listItem_TextView">100 TK</string>
+    <string name="quantity_listItem_TextView">quantity specified by vendor</string>
+    <string name="tag_listItem_TextView">Tag1, Tag2</string>
+    <string name="createVariant_button_Alt">create-variant</string>
+    <string name="delete_button_Alt">delete-icon</string>
+    <string name="quantity_orders_TextView">1 X (amount specified/unit)</string>
+    <string name="address_placeHolder">provided, full, Address</string>
+    <string name="phone_placeHolder">+880 12345678910</string>
+    <string name="reject">Reject</string>
+    <string name="accept">Accept</string>
 
 </resources>
