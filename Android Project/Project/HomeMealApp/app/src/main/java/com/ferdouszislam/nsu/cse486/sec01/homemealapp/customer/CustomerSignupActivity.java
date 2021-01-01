@@ -47,6 +47,12 @@ public class CustomerSignupActivity extends AppCompatActivity {
      */
     public void signupClick(View view) {
 
-        startActivity(new Intent(this, CustomerHomeActivity.class));
+        Intent intent = new Intent(this, CustomerHomeActivity.class);
+
+        // clear out all activities on the back stack
+        // so that back press from this point on closes the app
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        startActivity(intent);
     }
 }
