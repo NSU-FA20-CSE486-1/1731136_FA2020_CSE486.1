@@ -81,5 +81,7 @@ public class ChefHomeActivity extends AppCompatActivity {
     "addFoodItem_Button" click listener
      */
     public void addFoodItemClick(View view) {
+
+        startActivity(new Intent(this, ChefAddFoodOfferActivity.class));
     }
 }

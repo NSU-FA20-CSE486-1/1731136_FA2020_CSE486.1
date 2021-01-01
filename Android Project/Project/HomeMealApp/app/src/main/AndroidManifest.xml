@@ -39,7 +39,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".chef.ChefHomeActivity" />
         </activity>
-        <activity android:name=".chef.ChefSCPaymentActivity"
+        <activity
+            android:name=".chef.ChefSCPaymentActivity"
+            android:parentActivityName=".chef.ChefHomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".chef.ChefHomeActivity" />
+        </activity>
+
+        <activity
+            android:name=".chef.ChefAddFoodOfferActivity"
             android:parentActivityName=".chef.ChefHomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

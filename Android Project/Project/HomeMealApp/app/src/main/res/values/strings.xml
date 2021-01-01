@@ -51,5 +51,20 @@
     <string name="confirmPayment_ButtonLabel">Confirm Payment</string>
     <string name="service_charge_payment_title">Service Charge Payment</string>
     <string name="transactionCode_hint">transaction code</string>
+    <string name="addPhoto_Alt">Add Photo</string>
+    <string name="foodName_EditTextHint">food name</string>
+    <string name="foodNameExplanation_TextView">make the name clear and understandable</string>
+    <string name="price_EditTextHint">price (TK)</string>
+    <string name="priceExplanation_TextView">price per unit quantity</string>
+    <string name="descriptionLabel_TextView">Description</string>
+    <string name="description_EditTextHint">brief description of maximun 50 words</string>
+    <string name="itemsLabel_TextView">Items</string>
+    <string name="items_EditTextHint">ingredients of the food separated by comma</string>
+    <string name="tags_EditTextHint">tags separated by comma(eg. veggie, snacks)</string>
+    <string name="quantityLabel_TextView">Quantity</string>
+    <string name="quantity_EditTextHint">quantity per unit of order</string>
+    <string name="offerFood_ButtonLabel">Offer Food</string>
+    <string name="tagsLabel_TextView">Tags</string>
+    <string name="addFoodOffer_title">Add food offering</string>
 
 </resources>
