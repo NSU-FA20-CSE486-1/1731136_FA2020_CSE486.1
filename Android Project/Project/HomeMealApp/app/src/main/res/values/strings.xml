@@ -66,5 +66,7 @@
     <string name="offerFood_ButtonLabel">Offer Food</string>
     <string name="tagsLabel_TextView">Tags</string>
     <string name="addFoodOffer_title">Add food offering</string>
+    <string name="foodItemNotConfirmed_ButtonLabel">Not Confirmed</string>
+    <string name="foodItemConfirmed_ButtonLabel">Confirmed</string>
 
 </resources>
