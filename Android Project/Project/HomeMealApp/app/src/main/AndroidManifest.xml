@@ -33,6 +33,20 @@
         </activity>
         <activity android:name=".chef.ChefHomeActivity" />
         <activity
+            android:name=".chef.ChefAddFoodOfferActivity"
+            android:parentActivityName=".chef.ChefHomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".chef.ChefHomeActivity" />
+        </activity>
+        <activity
+            android:name=".chef.ChefCreateFoodVariantActivity"
+            android:parentActivityName=".chef.ChefHomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".chef.ChefHomeActivity" />
+        </activity>
+        <activity
             android:name=".chef.ChefMenuActivity"
             android:parentActivityName=".chef.ChefHomeActivity">
             <meta-data
@@ -47,24 +61,18 @@
                 android:value=".chef.ChefMenuActivity" />
         </activity>
         <activity
-            android:name=".chef.ChefAddFoodOfferActivity"
-            android:parentActivityName=".chef.ChefHomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".chef.ChefHomeActivity" />
-        </activity>
-        <activity
             android:name=".chef.ChefUpdateProfileActivity"
             android:parentActivityName=".chef.ChefMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".chef.ChefMenuActivity" />
         </activity>
-        <activity android:name=".chef.ChefCreateFoodVariantActivity"
-            android:parentActivityName=".chef.ChefHomeActivity">
+        <activity
+            android:name=".chef.ChefPlacedOrdersActivity"
+            android:parentActivityName=".chef.ChefMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".chef.ChefHomeActivity" />
+                android:value=".chef.ChefMenuActivity" />
         </activity>
     </application>
 

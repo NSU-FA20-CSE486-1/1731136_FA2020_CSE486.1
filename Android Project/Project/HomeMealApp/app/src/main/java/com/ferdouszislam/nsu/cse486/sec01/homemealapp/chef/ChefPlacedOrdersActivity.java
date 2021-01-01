@@ -4,18 +4,16 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 
-public class ChefMenuActivity extends AppCompatActivity {
+public class ChefPlacedOrdersActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chef_menu);
+        setContentView(R.layout.activity_chef_placed_orders);
 
         init();
     }
@@ -30,7 +28,7 @@ public class ChefMenuActivity extends AppCompatActivity {
      */
     private void setupToolbar() {
 
-        Toolbar myChildToolbar = findViewById(R.id.chefMenu_Toolbar);
+        Toolbar myChildToolbar = findViewById(R.id.chefPlacedOrders_Toolbar);
         setSupportActionBar(myChildToolbar);
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
@@ -38,21 +36,7 @@ public class ChefMenuActivity extends AppCompatActivity {
             // Enable the Up button
             ab.setDisplayHomeAsUpEnabled(true);
             // set toolbar title
-            ab.setTitle(R.string.menu_title);
+            ab.setTitle(R.string.placed_orders_title);
         }
-    }
-
-    /*
-    Menu option click listeners
-     */
-
-    public void serviceChargePaymentClick(View view) {
-
-        startActivity(new Intent(this, ChefSCPaymentActivity.class));
-    }
-
-    public void placedOrdersClick(View view) {
-
-        startActivity(new Intent(this, ChefPlacedOrdersActivity.class));
     }
 }

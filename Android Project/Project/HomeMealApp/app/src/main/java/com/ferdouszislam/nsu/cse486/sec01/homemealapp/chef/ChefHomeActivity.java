@@ -67,7 +67,7 @@ public class ChefHomeActivity extends AppCompatActivity {
 
             case R.id.notificationOption:
 
-
+                startActivity(new Intent(this, ChefPlacedOrdersActivity.class));
                 break;
 
             default:
