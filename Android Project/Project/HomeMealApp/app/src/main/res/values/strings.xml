@@ -84,5 +84,6 @@
     <string name="update_profile_title">Update Profile</string>
     <string name="noPlacedOrders_TextView">No orders placed.</string>
     <string name="placed_orders_title">Placed Orders</string>
+    <string name="customerSignupWelcome_Textview">Register as a customer</string>
 
 </resources>

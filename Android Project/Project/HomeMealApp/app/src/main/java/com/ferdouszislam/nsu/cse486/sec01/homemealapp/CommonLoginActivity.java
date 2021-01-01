@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.ChefSignupActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerSignupActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.UserType;
 
 public class CommonLoginActivity extends AppCompatActivity {
@@ -62,7 +63,7 @@ public class CommonLoginActivity extends AppCompatActivity {
 
         if(mUserType.equals(UserType.CUSTOMER)){
 
-
+            startActivity(new Intent(this, CustomerSignupActivity.class));
         }
 
         else if(mUserType.equals(UserType.CHEF)){
