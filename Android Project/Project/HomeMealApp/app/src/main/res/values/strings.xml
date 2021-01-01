@@ -86,5 +86,8 @@
     <string name="placed_orders_title">Placed Orders</string>
     <string name="customerSignupWelcome_Textview">Register as a customer</string>
     <string name="noFoodOffersFound_TextView">No food offers found.</string>
+    <string name="searchFilters_TextView">Search filters:</string>
+    <string name="searchFilterTags_TextViewPlaceHolder">Tag1, Tag2</string>
+    <string name="close_icon_Alt">close</string>
 
 </resources>

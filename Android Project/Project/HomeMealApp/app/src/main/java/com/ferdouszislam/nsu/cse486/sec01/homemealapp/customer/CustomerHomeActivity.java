@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.ChefMenuActivity;
@@ -70,6 +71,8 @@ public class CustomerHomeActivity extends AppCompatActivity {
 
             case R.id.customer_search_option:
 
+                findViewById(R.id.searchFilter_View).setVisibility(View.VISIBLE);
+
                 break;
 
             default:
@@ -77,5 +80,13 @@ public class CustomerHomeActivity extends AppCompatActivity {
         }
 
         return returnValue;
+    }
+
+    /*
+    search filter close click listener
+     */
+    public void closeSearchFilterClick(View view) {
+
+        findViewById(R.id.searchFilter_View).setVisibility(View.GONE);
     }
 }
