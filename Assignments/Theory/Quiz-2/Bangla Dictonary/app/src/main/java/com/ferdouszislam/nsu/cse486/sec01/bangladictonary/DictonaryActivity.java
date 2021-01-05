@@ -26,7 +26,6 @@ public class DictonaryActivity extends AppCompatActivity {
 
         mDictonaryItems = (ArrayList<DictonaryItem>) getIntent().getSerializableExtra(MainActivity.DICT_ITEM_LIST_KEY);
 
-        Toast.makeText(this, mDictonaryItems.size()+"", Toast.LENGTH_SHORT)
-                .show();
+
     }
 }
