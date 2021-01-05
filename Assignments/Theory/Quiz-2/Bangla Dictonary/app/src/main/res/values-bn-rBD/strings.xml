@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">বাংলা ডিক্টোনারি</string>
+    <string name="addWordsTitle_TextView">নতুন শব্দ যোগ করুন</string>
+    <string name="englishWord_EditText_hint">ইংরেজি শব্দ</string>
+    <string name="banglaWord_EditText_hint">বাংলা অর্থ</string>
+    <string name="save_Button_label">সেভ</string>
+    <string name="viewDictonary_Button_label">ডিক্টোনারি দেখান</string>
+    <string name="dictonaryViewTitle_TextView">আপনার ডিক্টোনারি</string>
+    <string name="saved_toast">সেভড</string>
+    <string name="not_bangla_word">এটি বাংলা শব্দ নয়</string>
+    <string name="not_english_word">এটি ইংরেজি শব্দ নয়</string>
+    <string name="delete">মুছে ফেলুন</string>
+</resources>
