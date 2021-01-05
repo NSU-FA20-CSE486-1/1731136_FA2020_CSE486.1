@@ -1,5 +1,6 @@
 package com.ferdouszislam.nsu.cse486.sec01.bangladictonary;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,7 +15,11 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    // key to pass user input arraylist to 'DictonaryActivity'
     public static final String DICT_ITEM_LIST_KEY = "com.ferdouszislam.nsu.cse486.sec01.bangladictonary-dict_item_list";
+
+    // to track of which data were deleted in 'DictonaryActivity'
+    private static final int DICT_ITEMS_STATE_REQUEST_CODE = 76;
 
     // ui
     private EditText mEnglishWordTextView, mBanglaMeaningTextView;
@@ -65,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private DictonaryItem readUserInput() {
 
-        String wordInEnglish = mEnglishWordTextView.getText().toString();
-        String wordInBangla = mBanglaMeaningTextView.getText().toString();
+        String wordInEnglish = mEnglishWordTextView.getText().toString().trim();
+        String wordInBangla = mBanglaMeaningTextView.getText().toString().trim()    ;
 
         return new DictonaryItem(wordInEnglish, wordInBangla);
     }
@@ -101,6 +106,25 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DictonaryActivity.class);
         intent.putExtra(DICT_ITEM_LIST_KEY, mAddedDictonaryItems);
 
-        startActivity(intent);
+        startActivityForResult(intent, DICT_ITEMS_STATE_REQUEST_CODE);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode!=RESULT_OK) return;
+
+        switch (requestCode){
+
+            case DICT_ITEMS_STATE_REQUEST_CODE:
+
+                if (data != null) {
+                    mAddedDictonaryItems = (ArrayList<DictonaryItem>) data.getSerializableExtra(DictonaryActivity.MODIFIED_DICT_ITEMS_KEY);
+                }
+
+                break;
+        }
+    }
+
 }

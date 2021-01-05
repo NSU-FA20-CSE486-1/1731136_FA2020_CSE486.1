@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    android:background="#fafafa"
     android:padding="4dp">
 
     <TextView
@@ -33,7 +34,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="4"
+        android:background="#fafafa"
+        android:contentDescription="@string/delete"
         android:padding="10dp"
-        app:srcCompat="@drawable/ic_action_delete"
-        android:contentDescription="@string/delete" />
+        app:srcCompat="@drawable/ic_action_delete" />
 </LinearLayout>
