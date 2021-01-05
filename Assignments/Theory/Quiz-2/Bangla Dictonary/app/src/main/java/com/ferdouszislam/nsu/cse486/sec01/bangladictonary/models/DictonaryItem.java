@@ -1,6 +1,12 @@
 package com.ferdouszislam.nsu.cse486.sec01.bangladictonary.models;
 
-public class DictonaryItem {
+import java.io.Serializable;
+
+/**
+ * Model class for each dictonary item
+ * MUST be serializable so it can be passed from activity as Arraylist
+ */
+public class DictonaryItem implements Serializable {
 
     private String wordInEnglish;
     private String wordInBangla;

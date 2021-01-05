@@ -2,6 +2,7 @@ package com.ferdouszislam.nsu.cse486.sec01.bangladictonary;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -12,6 +13,8 @@ import com.ferdouszislam.nsu.cse486.sec01.bangladictonary.models.DictonaryItem;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String DICT_ITEM_LIST_KEY = "com.ferdouszislam.nsu.cse486.sec01.bangladictonary-dict_item_list";
 
     // ui
     private EditText mEnglishWordTextView, mBanglaMeaningTextView;
@@ -95,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
      */
     public void showDictonaryClick(View view) {
 
-        // TODO: open DictonaryActivity and send the list of inputs
+        Intent intent = new Intent(this, DictonaryActivity.class);
+        intent.putExtra(DICT_ITEM_LIST_KEY, mAddedDictonaryItems);
+
+        startActivity(intent);
     }
 }
