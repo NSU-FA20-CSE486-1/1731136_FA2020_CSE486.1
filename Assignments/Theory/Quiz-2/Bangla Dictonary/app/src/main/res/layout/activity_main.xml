@@ -67,6 +67,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:gravity="center"
+            android:onClick="saveClick"
             android:text="@string/save_Button_label"
             android:textAllCaps="false" />
     </LinearLayout>
@@ -77,6 +78,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:contentDescription="@string/viewDictonary_Button_label"
+        android:onClick="showDictonaryClick"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

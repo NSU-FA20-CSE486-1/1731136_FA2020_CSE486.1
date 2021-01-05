@@ -6,4 +6,7 @@
     <string name="save_Button_label">save</string>
     <string name="viewDictonary_Button_label">View Dictionary</string>
     <string name="dictonaryViewTitle_TextView">Your Dictionary</string>
+    <string name="saved_toast">saved</string>
+    <string name="not_bangla_word">not bangla word</string>
+    <string name="not_english_word">not english word</string>
 </resources>
