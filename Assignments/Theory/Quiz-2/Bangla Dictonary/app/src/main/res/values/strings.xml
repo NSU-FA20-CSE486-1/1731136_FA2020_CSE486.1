@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">Bangla Dictonary</string>
+    <string name="app_name">Bangla Dictionary</string>
+    <string name="addWordsTitle_TextView">Add words to you dictonary</string>
+    <string name="englishWord_EditText_hint">English word</string>
+    <string name="banglaWord_EditText_hint">Bangla meaning</string>
+    <string name="save_Button_label">save</string>
+    <string name="viewDictonary_Button_label">View Dictionary</string>
+    <string name="dictonaryViewTitle_TextView">Your Dictionary</string>
 </resources>
