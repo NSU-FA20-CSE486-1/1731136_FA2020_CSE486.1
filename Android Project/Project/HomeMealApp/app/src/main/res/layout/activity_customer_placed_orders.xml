@@ -4,24 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chef.ChefPlacedOrdersActivity">
+    tools:context=".customer.CustomerPlacedOrdersActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/chefPlacedOrders_Toolbar"
+        android:id="@+id/customerPlacedOrders_Toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="@color/white"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:titleTextAppearance="@style/CommonToolbarTitleTheme"/>
 
     <TextView
-        android:id="@+id/chef_noPlacedOrders_TextView"
+        android:id="@+id/customer_noPlacedOrders_TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="@string/noPlacedOrders_TextView"
         android:textColor="@color/theme_dark_color"
         android:textSize="18sp" />
+
 </RelativeLayout>
