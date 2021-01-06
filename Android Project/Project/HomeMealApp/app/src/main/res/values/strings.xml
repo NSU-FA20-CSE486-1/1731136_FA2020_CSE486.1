@@ -108,5 +108,7 @@
     <string name="customer_paymentHint_TextView">excluding any bKash transaction fee</string>
     <string name="vendorBkash_TextView">Vendor bKash</string>
     <string name="vendorBkashHint_TextView">bKash the payment money to this number</string>
+    <string name="confirmOrder_ButtonLabel">Confirm Order</string>
+    <string name="meal_details">Meal Details</string>
 
 </resources>
