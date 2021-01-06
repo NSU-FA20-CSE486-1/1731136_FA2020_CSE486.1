@@ -13,7 +13,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/foodName_orders_TextView"
+            android:id="@+id/chef_foodName_orders_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="70"
@@ -24,7 +24,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/foodPrice_orders_TextView"
+            android:id="@+id/chef_foodPrice_orders_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="30"
@@ -36,7 +36,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/quantity_orders_TextView"
+        android:id="@+id/chef_quantity_orders_TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
@@ -47,7 +47,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/orderLocation_orders_TextView"
+        android:id="@+id/chef_orderLocation_orders_TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -61,7 +61,7 @@
         app:drawableLeftCompat="@drawable/ic_action_location" />
 
     <TextView
-        android:id="@+id/orderPhone_orders_TextView"
+        android:id="@+id/chef_orderPhone_orders_TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -78,7 +78,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/rejectOrder_orders_Button"
+            android:id="@+id/chef_rejectOrder_orders_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -91,7 +91,7 @@
             app:iconPadding="0dp" />
 
         <Button
-            android:id="@+id/acceptOrder_orders_Button"
+            android:id="@+id/chef_acceptOrder_orders_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
