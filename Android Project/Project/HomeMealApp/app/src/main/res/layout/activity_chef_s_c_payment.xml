@@ -165,7 +165,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:background="@color/theme_light_color"
+                    android:background="@drawable/rounded_edit_text"
                     android:drawableRight="@drawable/ic_action_payment"
                     android:ems="10"
                     android:hint="@string/transactionCode_hint"

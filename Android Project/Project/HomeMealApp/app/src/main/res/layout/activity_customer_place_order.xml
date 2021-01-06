@@ -62,11 +62,11 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:background="@color/theme_light_color"
+                        android:background="@drawable/rounded_edit_text"
                         android:ems="10"
+                        android:importantForAutofill="no"
                         android:inputType="number"
-                        android:padding="8dp"
-                        android:importantForAutofill="no" />
+                        android:padding="8dp" />
 
                     <ImageButton
                         android:id="@+id/addQuantity_Button"
@@ -147,13 +147,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:background="@color/theme_light_color"
+                    android:background="@drawable/rounded_edit_text"
                     android:drawableRight="@drawable/ic_action_payment"
                     android:ems="10"
+                    android:importantForAutofill="no"
                     android:inputType="phone"
                     android:padding="8dp"
-                    android:text="@string/phoneCode_Text"
-                    android:importantForAutofill="no" />
+                    android:text="@string/phoneCode_Text" />
 
                 <TextView
                     android:id="@+id/bKashPhoneHint_customerPlaceOrder_TextView"
@@ -175,13 +175,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:background="@color/theme_light_color"
+                    android:background="@drawable/rounded_edit_text"
                     android:drawableRight="@drawable/ic_action_phone"
                     android:ems="10"
+                    android:importantForAutofill="no"
                     android:inputType="phone"
                     android:padding="8dp"
-                    android:text="@string/phoneCode_Text"
-                    android:importantForAutofill="no" />
+                    android:text="@string/phoneCode_Text" />
 
                 <TextView
                     android:id="@+id/callPhoneHint_customerPlaceOrder_TextView"
@@ -203,13 +203,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:background="@color/theme_light_color"
+                    android:background="@drawable/rounded_edit_text"
                     android:drawableRight="@drawable/ic_action_location"
                     android:ems="10"
                     android:hint="@string/address_customerPlaceOrder_EditTextHint"
+                    android:importantForAutofill="no"
                     android:inputType="textPersonName"
-                    android:padding="8dp"
-                    android:importantForAutofill="no" />
+                    android:padding="8dp" />
 
                 <TextView
                     android:id="@+id/addressHint_customerPlaceOrder_TextView"
