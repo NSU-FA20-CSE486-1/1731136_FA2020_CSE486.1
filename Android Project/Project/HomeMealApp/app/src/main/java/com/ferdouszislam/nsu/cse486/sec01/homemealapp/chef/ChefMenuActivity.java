@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerUpdateProfileActivity;
 
 public class ChefMenuActivity extends AppCompatActivity {
 
@@ -54,5 +55,11 @@ public class ChefMenuActivity extends AppCompatActivity {
     public void placedOrdersClick(View view) {
 
         startActivity(new Intent(this, ChefPlacedOrdersActivity.class));
+    }
+
+    public void updateProfileClick(View view) {
+
+        //TODO: pass chef user's profile information in this intent
+        startActivity(new Intent(this, ChefUpdateProfileActivity.class));
     }
 }

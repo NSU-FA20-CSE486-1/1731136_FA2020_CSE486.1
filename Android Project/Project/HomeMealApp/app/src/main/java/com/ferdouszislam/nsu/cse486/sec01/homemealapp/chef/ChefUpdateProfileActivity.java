@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 
@@ -23,6 +25,10 @@ public class ChefUpdateProfileActivity extends AppCompatActivity {
     private void init() {
 
         setupToolbar();
+
+        findViewById(R.id.chefSignupWelcome_TextView).setVisibility(View.GONE);
+        Button btn = findViewById(R.id.customerSignup_Button);
+        btn.setText(getString(R.string.save));
 
         populateInputFields();
     }

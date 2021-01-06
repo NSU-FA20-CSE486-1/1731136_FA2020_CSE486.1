@@ -4,18 +4,20 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 
-public class CustomerMenuActivity extends AppCompatActivity {
+public class CustomerUpdateProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_menu);
+
+        // use the same layout as "Customer Sign-up"
+        setContentView(R.layout.activity_customer_signup);
 
         init();
     }
@@ -23,14 +25,30 @@ public class CustomerMenuActivity extends AppCompatActivity {
     private void init() {
 
         setupToolbar();
+
+        findViewById(R.id.customerSignupWelcome_TextView).setVisibility(View.GONE);
+        Button btn = findViewById(R.id.customerSignup_Button);
+        btn.setText(getString(R.string.save));
+
+        populateInputFields();
     }
+
+
+    /**
+     * populate the input fields with data of the
+     * customer user's existing profile information
+     * (the data should be downloaded from database)
+     */
+    private void populateInputFields() {
+    }
+
 
     /*
     setup the toolbar with back button
      */
     private void setupToolbar() {
 
-        Toolbar myChildToolbar = findViewById(R.id.customerMenu_Toolbar);
+        Toolbar myChildToolbar = findViewById(R.id.customerSignup_Toolbar);
         setSupportActionBar(myChildToolbar);
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
@@ -38,23 +56,7 @@ public class CustomerMenuActivity extends AppCompatActivity {
             // Enable the Up button
             ab.setDisplayHomeAsUpEnabled(true);
             // set toolbar title
-            ab.setTitle(R.string.menu_title);
+            ab.setTitle(R.string.update_profile_title);
         }
-    }
-
-
-    /*
-    Menu option click listeners
-     */
-
-    public void placedOrdersClick(View view) {
-
-        startActivity(new Intent(this, CustomerPlacedOrdersActivity.class));
-    }
-
-    public void updateProfileClick(View view) {
-
-        //TODO: pass customer user's profile information in this intent
-        startActivity(new Intent(this, CustomerUpdateProfileActivity.class));
     }
 }

@@ -104,5 +104,6 @@
     <string name="minus_icon_Alt">minus_icon</string>
     <string name="customer_foodOfferSeeMore_listItem_ButtonLabel">See more</string>
     <string name="customer_payNow_orders_ButtonLabel">Pay now</string>
+    <string name="save">Save</string>
 
 </resources>
