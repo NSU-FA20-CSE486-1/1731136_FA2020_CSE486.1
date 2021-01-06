@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HomeMealApp">
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -105,6 +104,13 @@
                 android:value=".customer.CustomerMenuActivity" />
         </activity>
         <activity android:name=".customer.CustomerPlaceOrderActivity" />
+        <activity
+            android:name=".customer.CustomerPaymentActivity"
+            android:parentActivityName=".customer.CustomerPlacedOrdersActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".customer.CustomerPlacedOrdersActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -105,5 +105,8 @@
     <string name="customer_foodOfferSeeMore_listItem_ButtonLabel">See more</string>
     <string name="customer_payNow_orders_ButtonLabel">Pay now</string>
     <string name="save">Save</string>
+    <string name="customer_paymentHint_TextView">excluding any bKash transaction fee</string>
+    <string name="vendorBkash_TextView">Vendor bKash</string>
+    <string name="vendorBkashHint_TextView">bKash the payment money to this number</string>
 
 </resources>

@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chef.ChefSCPaymentActivity">
+    tools:context=".customer.CustomerPaymentActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/chefSCPayment_Toolbar"
+        android:id="@+id/customerPayment_Toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -19,7 +19,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/chefSCPayment_Toolbar"
+        android:layout_below="@+id/customerPayment_Toolbar"
         android:layout_margin="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
@@ -45,7 +45,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/chef_payment_TextView"
+                        android:id="@+id/customer_payment_TextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center_vertical"
@@ -58,7 +58,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/chef_paymentAmount_TextView"
+                        android:id="@+id/customer_paymentAmount_TextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left|center_vertical"
@@ -73,12 +73,12 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/chef_paymentHint_TextView"
+                    android:id="@+id/customer_paymentHint_TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="@string/paymentHint_TextView"
+                    android:text="@string/customer_paymentHint_TextView"
                     android:textColor="@color/theme_dark_color"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -98,20 +98,20 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/companyBkash_TextView"
+                        android:id="@+id/vendorBkash_TextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center_vertical"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="right|center_vertical"
-                        android:text="@string/companyBkash_TextView"
+                        android:text="@string/vendorBkash_TextView"
                         android:textColor="@color/theme_dark_color"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/companyBkashNumber_TextView"
+                        android:id="@+id/vendorBkashNumber_TextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left|center_vertical"
@@ -126,18 +126,18 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/companyBkashHint_TextView"
+                    android:id="@+id/vendorBkashHint_TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="@string/companyBkashHint_TextView"
+                    android:text="@string/vendorBkashHint_TextView"
                     android:textColor="@color/theme_dark_color"
                     android:textSize="12sp" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/paymentProcess_TextView"
+                android:id="@+id/customer_paymentProcess_TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -161,7 +161,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/chef_transactionCode_EditText"
+                    android:id="@+id/customer_transactionCode_EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
@@ -175,7 +175,7 @@
                     android:textColor="@color/theme_dark_color" />
 
                 <TextView
-                    android:id="@+id/chef_transactionCodeHint_TextView"
+                    android:id="@+id/customer_transactionCodeHint_TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
@@ -185,7 +185,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/chef_confirmPayment_Button"
+                android:id="@+id/customer_confirmPayment_Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
