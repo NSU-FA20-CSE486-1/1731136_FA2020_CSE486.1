@@ -103,5 +103,6 @@
     <string name="customer_place_order_title">Place Order</string>
     <string name="minus_icon_Alt">minus_icon</string>
     <string name="customer_foodOfferSeeMore_listItem_ButtonLabel">See more</string>
+    <string name="customer_payNow_orders_ButtonLabel">Pay now</string>
 
 </resources>

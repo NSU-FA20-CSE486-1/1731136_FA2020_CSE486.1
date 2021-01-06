@@ -36,7 +36,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/chef_quantity_orders_TextView"
+        android:id="@+id/customer_price_orders_TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
@@ -47,7 +47,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/chef_orderLocation_orders_TextView"
+        android:id="@+id/customer_quantity_orders_TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <TextView
+            android:id="@+id/customer_foodName_orders_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="70"
+            android:padding="4dp"
+            android:text="@string/foodName_listItem_TextView"
+            android:textColor="@color/theme_dark_color"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/customer_deliveryStatus_orders_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="70"
+            android:drawableStart="@drawable/ic_action_location"
+            android:gravity="center_vertical"
+            android:text="TextView"
+            android:textColor="@color/theme_dark_color"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/customer_price_orders_TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:padding="4dp"
+        android:text="@string/price_listItem_TextView"
+        android:textColor="@color/theme_dark_color"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/customer_quantity_orders_TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="@string/quantity_orders_TextView"
+        android:textColor="@color/theme_dark_color" />
+
+    <TextView
+        android:id="@+id/customer_orderPhone_orders_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:text="@string/phone_placeHolder"
+        android:textColor="@color/theme_dark_color"
+        app:drawableLeftCompat="@drawable/ic_action_call" />
+
+    <Button
+        android:id="@+id/customer_payNow_orders_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/ic_action_payment_light"
+        android:drawablePadding="4dp"
+        android:gravity="center"
+        android:text="@string/customer_payNow_orders_ButtonLabel"
+        app:iconPadding="4dp" />
+
+</LinearLayout>
