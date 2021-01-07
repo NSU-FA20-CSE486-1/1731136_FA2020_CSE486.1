@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "879868824064",
+    "project_id": "home-meal-app",
+    "storage_bucket": "home-meal-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879868824064:android:439c7f6c706457e0aaa6e5",
+        "android_client_info": {
+          "package_name": "com.ferdouszislam.nsu.cse486.sec01.homemealapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "879868824064-9mougshc4880e1v3q895be2ot9padga8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq7zSDPzJgkrr2-n6g30noYMgi-naD77E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "879868824064-9mougshc4880e1v3q895be2ot9padga8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
