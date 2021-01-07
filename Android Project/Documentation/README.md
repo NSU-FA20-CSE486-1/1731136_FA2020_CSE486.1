@@ -134,4 +134,10 @@ https://lucid.app/invitations/accept/6b9bb266-a47c-4394-a7a1-6f76b722b633
 
 12. Keep track of delivered orders. **[S]**  
 
-13. <span style="color:red">Record payments for every order.<span> **[S]**
+13. <span style="color:red">Record payments for every order.<span> **[S]**  
+
+## Database Structure  
+
+Nosql json database structure (the design only contains structure for customer and chef app features for noe)
+
+![database_structure](./database_structure.png)
