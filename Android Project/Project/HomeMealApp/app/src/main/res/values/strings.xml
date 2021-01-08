@@ -111,5 +111,11 @@
     <string name="confirmOrder_ButtonLabel">Confirm Order</string>
     <string name="meal_details">Meal Details</string>
     <string name="registration_error">Authentication Failed! Check your internet and/or provided email</string>
+    <string name="email_input_error">invalid email</string>
+    <string name="phone_input_error">invalid phone (must include +880)</string>
+    <string name="address_input_error">invalid address</string>
+    <string name="password_input_error">invalid password</string>
+    <string name="confirm_password_error">passwords dont match</string>
+    <string name="signup_button_label_signing_up">Signing up…</string>
 
 </resources>

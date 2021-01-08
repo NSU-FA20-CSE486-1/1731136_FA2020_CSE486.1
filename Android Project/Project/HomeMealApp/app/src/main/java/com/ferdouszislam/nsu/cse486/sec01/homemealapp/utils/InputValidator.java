@@ -16,13 +16,13 @@ public class InputValidator {
 
     public static boolean isValidHomeAddress(String homeAddress){
 
-        return homeAddress!=null && homeAddress.isEmpty();
+        return homeAddress!=null && !homeAddress.isEmpty();
     }
 
     /*
     courtesy- <https://www.geeksforgeeks.org/check-email-address-valid-not-java/>
      */
-    public static boolean isEmailValid(String email){
+    public static boolean isValidEmail(String email){
 
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
                 "[a-zA-Z0-9_+&*-]+)*@" +
