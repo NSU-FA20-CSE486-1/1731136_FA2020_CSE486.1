@@ -3,16 +3,16 @@ package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models;
 /**
  * Model class for a chef user
  */
-public class chefUser {
+public class ChefUser {
 
     private String mPhoneNumber;
     private String mEmail;
     private String mHomeAddress;
 
-    public chefUser() {
+    public ChefUser() {
     }
 
-    public chefUser(String mPhoneNumber, String mEmail, String mHomeAddress) {
+    public ChefUser(String mPhoneNumber, String mEmail, String mHomeAddress) {
         this.mPhoneNumber = mPhoneNumber;
         this.mEmail = mEmail;
         this.mHomeAddress = mHomeAddress;

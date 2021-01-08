@@ -57,7 +57,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/editTextPhone"
+                    android:id="@+id/chefSignup_PhoneNumber_EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_edit_text"
@@ -86,7 +86,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/address_EditText"
+                    android:id="@+id/chefSignup_address_EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_edit_text"
@@ -108,7 +108,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/chefSignupEmail_EditText"
+                android:id="@+id/chefSignup_email_EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
@@ -128,7 +128,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/editTextTextPassword"
+                    android:id="@+id/chefSignup_password_EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autofillHints=""
@@ -150,7 +150,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/editTextTextPassword2"
+                android:id="@+id/chefSignup_confirmPassword_EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
@@ -164,7 +164,7 @@
                 android:textColor="@color/theme_dark_color" />
 
             <Button
-                android:id="@+id/customerSignup_Button"
+                android:id="@+id/chefSignup_Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

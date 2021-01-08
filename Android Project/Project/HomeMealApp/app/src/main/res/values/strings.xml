@@ -110,5 +110,6 @@
     <string name="vendorBkashHint_TextView">bKash the payment money to this number</string>
     <string name="confirmOrder_ButtonLabel">Confirm Order</string>
     <string name="meal_details">Meal Details</string>
+    <string name="registration_error">Authentication Failed! Check your internet and/or provided email</string>
 
 </resources>
