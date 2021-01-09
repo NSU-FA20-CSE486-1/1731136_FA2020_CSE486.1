@@ -21,7 +21,9 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.ChefUserDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.ChefUserFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.ChefUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.UserAuthSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidator;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.UserType;
 
 public class ChefSignupActivity extends AppCompatActivity {
 
@@ -44,6 +46,7 @@ public class ChefSignupActivity extends AppCompatActivity {
                 public void onRegistrationSuccess(AuthenticationUser user) {
 
                     mChefUser.setmUid(user.getmUid());
+
                     storeUserInformationInDatabase();
                 }
 
@@ -61,6 +64,11 @@ public class ChefSignupActivity extends AppCompatActivity {
 
     // variables to store user sign up info to database
     private ChefUserDao mChefUserDao;
+
+
+    // shared preference to store user type
+    private UserAuthSharedPref mUserAuthSharedPref;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,6 +187,8 @@ public class ChefSignupActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void successResponse) {
 
+                storeUserTypeInSharedPrefs();
+
                 openChefHomeActivity();
             }
 
@@ -189,6 +199,15 @@ public class ChefSignupActivity extends AppCompatActivity {
                 Log.d(TAG, "onFailed: store signup info error -> "+failedResponse);
             }
         });
+    }
+
+    /*
+    save usertype as "chef_user" in shared pref
+     */
+    private void storeUserTypeInSharedPrefs() {
+
+        mUserAuthSharedPref = UserAuthSharedPref.build(this);
+        mUserAuthSharedPref.setUserType(UserType.CHEF);
     }
 
     private void openChefHomeActivity() {
