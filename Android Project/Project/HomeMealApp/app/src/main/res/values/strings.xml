@@ -123,5 +123,6 @@
     <string name="hard_logout">Sorry, you need to login again!</string>
     <string name="loading">Loading…</string>
     <string name="data_load_error">An unexpected error occurred!</string>
+    <string name="saved">Saved!</string>
 
 </resources>

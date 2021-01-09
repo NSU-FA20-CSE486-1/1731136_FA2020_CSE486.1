@@ -20,6 +20,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.ChefUserFirebase
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.ChefUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.SingleDataChangeListener;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
 
 public class ChefUpdateProfileActivity extends AppCompatActivity {
@@ -87,7 +88,7 @@ public class ChefUpdateProfileActivity extends AppCompatActivity {
                     @Override
                     public void onFailed(String failedResponse) {
 
-                        failedToDownloadDataUI();
+                        failedToPerformDatabaseActionUI();
 
                         Log.d(TAG, "onFailed: user data read error -> "+failedResponse);
                     }
@@ -179,6 +180,80 @@ public class ChefUpdateProfileActivity extends AppCompatActivity {
     "save" button click listener
      */
     private void updateButtonClick() {
+
+        String phoneNumber = mPhoneNumberEditText.getText().toString().trim();
+        String homeAddress = mHomeAddressEditText.getText().toString().trim();
+
+        if(validateInputs(phoneNumber, homeAddress) && dataWasUpdated(phoneNumber, homeAddress)){
+
+            mChefUser.setmPhoneNumber(phoneNumber);
+            mChefUser.setmHomeAddress(homeAddress);
+
+            inProgressUI();
+
+            updateUserDataInDatabase(mChefUser, mChefUserDao);
+        }
+    }
+
+    /**
+     * update chef user's data in database
+     * @param chefUser updated chef user object
+     * @param chefUserDao dao object
+     */
+    private void updateUserDataInDatabase(ChefUser chefUser, ChefUserDao chefUserDao) {
+
+        chefUserDao.updateWithId(chefUser, chefUser.getmUid(), new DatabaseOperationStatusListener<Void, String>() {
+            @Override
+            public void onSuccess(Void successResponse) {
+
+                progressCompleteUI();
+                updateSuccessUI();
+            }
+
+            @Override
+            public void onFailed(String failedResponse) {
+
+                progressCompleteUI();
+                failedToPerformDatabaseActionUI();
+            }
+        });
+    }
+
+
+    /**
+     * validate user inputs and show UI for invalid ones
+     * @param phoneNumber updated phone number
+     * @param homeAddress update home address
+     * @return if inputs are valid
+     */
+    private boolean validateInputs(String phoneNumber, String homeAddress) {
+
+        boolean isValid = true;
+
+        if(!InputValidatorUtil.isValidPhoneNumber(phoneNumber)){
+
+            mPhoneNumberEditText.setError(getString(R.string.phone_input_error));
+            isValid = false;
+        }
+
+        if(!InputValidatorUtil.isValidHomeAddress(homeAddress)){
+
+            mHomeAddressEditText.setError(getString(R.string.address_input_error));
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    /**
+     * check whether data was updated or not
+     * @param phoneNumber phone number input
+     * @param homeAddress home address input
+     * @return if data was changed or not
+     */
+    private boolean dataWasUpdated(String phoneNumber, String homeAddress) {
+
+        return !mChefUser.getmPhoneNumber().equals(phoneNumber) || !mChefUser.getmHomeAddress().equals(homeAddress);
     }
 
     /*
@@ -200,11 +275,20 @@ public class ChefUpdateProfileActivity extends AppCompatActivity {
     }
 
     /*
-    UI event for when downloading user existing data fails
+    UI event for update/download failure
      */
-    private void failedToDownloadDataUI() {
+    private void failedToPerformDatabaseActionUI() {
 
         Toast.makeText(this, R.string.data_load_error, Toast.LENGTH_SHORT)
+                .show();
+    }
+
+    /*
+    UI event for update success
+     */
+    private void updateSuccessUI() {
+
+        Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT)
                 .show();
     }
 }
