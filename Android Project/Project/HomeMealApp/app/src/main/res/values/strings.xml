@@ -117,5 +117,8 @@
     <string name="password_input_error">invalid password</string>
     <string name="confirm_password_error">passwords dont match</string>
     <string name="signup_button_label_signing_up">Signing up…</string>
+    <string name="login_button_label_logging_in">Logging In…</string>
+    <string name="login_failed">No such user exists</string>
+    <string name="login_attempt_failed">An unexpected error occurred! please check your internet</string>
 
 </resources>
