@@ -1,5 +1,7 @@
 package com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.regex.Pattern;
 
 /**
@@ -68,5 +70,17 @@ public abstract class InputValidatorUtil {
     public static boolean isFoodQuantityValid(String quantity){
 
         return quantity!=null && quantity.length()>0;
+    }
+
+    public static boolean isFoodImageUrlValid(String foodImageUrl){
+
+        if(foodImageUrl==null) return false;
+
+        try {
+            new URL(foodImageUrl);
+            return true;
+        } catch (MalformedURLException e) {
+            return false;
+        }
     }
 }
