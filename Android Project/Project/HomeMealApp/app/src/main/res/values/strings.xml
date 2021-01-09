@@ -126,5 +126,12 @@
     <string name="saved">Saved!</string>
     <string name="an_unexpected_error_occurred">An unexpected error occurred</string>
     <string name="image_upload_failed">Image upload failed!</string>
+    <string name="food_name_error">invalid food name</string>
+    <string name="food_price_error">invalid price</string>
+    <string name="food_description_error">invalid food description</string>
+    <string name="food_items_error">inavlid items</string>
+    <string name="food_tags_error">invalid tags</string>
+    <string name="food_quantity_error">invalid quantity</string>
+    <string name="add_food_photo_please">Add photo of the food please</string>
 
 </resources>

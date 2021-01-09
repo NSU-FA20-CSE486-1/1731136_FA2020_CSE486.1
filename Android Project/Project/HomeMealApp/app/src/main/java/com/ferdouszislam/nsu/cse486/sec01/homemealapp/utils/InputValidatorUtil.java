@@ -40,4 +40,33 @@ public abstract class InputValidatorUtil {
         return password!=null && password.length() >= 8;
     }
 
+    public static boolean isFoodNameValid(String foodName){
+
+        return foodName!=null && foodName.length()>0;
+    }
+
+    public static boolean isFoodPriceValid(String price){
+
+        return price!=null && price.length()>0 && price.matches("[0-9]+");
+    }
+
+    public static boolean isFoodDescriptionValid(String description){
+
+        return description!=null && description.length()>0;
+    }
+
+    public static boolean isFoodItemsValid(String items){
+
+        return items!=null && items.length()>0;
+    }
+
+    public static boolean isFoodTagsValid(String tags){
+
+        return tags!=null && tags.length()>0;
+    }
+
+    public static boolean isFoodQuantityValid(String quantity){
+
+        return quantity!=null && quantity.length()>0;
+    }
 }

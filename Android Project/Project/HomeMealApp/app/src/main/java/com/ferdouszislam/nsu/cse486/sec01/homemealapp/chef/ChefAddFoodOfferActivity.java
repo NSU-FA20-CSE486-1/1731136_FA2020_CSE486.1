@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -19,6 +20,8 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.imageUpload.CapturedImage;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.imageUpload.FileUploader;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.imageUpload.firebaseImageUpload.FirebaseStorageFileUploader;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.FoodOffer;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.RemoteStoragePathsUtil;
 
 import java.io.File;
@@ -38,6 +41,11 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
 
     // ui
     private ImageView mFoodImageView;
+    private EditText mFoodNameEditText, mPriceEditText, mDescriptionEditText;
+    private EditText mItemsEditText, mTagsEditText, mQuantityEditText;
+
+    // model
+    private FoodOffer mFoodOffer;
 
     // model for captured image
     private CapturedImage mImage;
@@ -83,6 +91,14 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
         setupToolbar();
 
         mFoodImageView = findViewById(R.id.chef_addFoodOffer_foodOffer_ImageView);
+        mFoodNameEditText = findViewById(R.id.chef_addFoodOffer_foodName_EditText);
+        mPriceEditText = findViewById(R.id.chef_addFoodOffer_price_EditText);
+        mDescriptionEditText = findViewById(R.id.chef_addFoodOffer_description_EditText);
+        mItemsEditText = findViewById(R.id.chef_addFoodOffer_items_EditText);
+        mTagsEditText = findViewById(R.id.chef_addFoodOffer_tags_EditText);
+        mQuantityEditText = findViewById(R.id.chef_addFoodOffer_quantity_EditText);
+
+        mFoodOffer = new FoodOffer();
 
         mFileUploader = new FirebaseStorageFileUploader(mFileUploadCallbacks);
     }
@@ -117,9 +133,6 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
                 mImageWasTaken = true;
 
                 mFoodImageView.setImageURI(mImage.getmPhotoUri());
-
-                // TODO: upload after user presses 'Offer' button, not here
-                uploadImage(mFileUploader, mImage);
 
                 break;
         }
@@ -188,6 +201,66 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
     "offerFood" button click listener
      */
     public void offerFoodClick(View view) {
+
+        String foodName = mFoodNameEditText.getText().toString().trim();
+        String price = mPriceEditText.getText().toString().trim();
+        String description = mDescriptionEditText.getText().toString().trim();
+        String items = mItemsEditText.getText().toString().trim();
+        String tags = mTagsEditText.getText().toString().trim();
+        String quantity = mQuantityEditText.getText().toString().trim();
+
+        if(validateInputs(foodName, price, description, items, tags, quantity)){
+
+            mFoodOffer.setmFoodName(foodName);
+            mFoodOffer.setmPrice(price);
+            mFoodOffer.setmDescription(description);
+            mFoodOffer.setmItems(items);
+            mFoodOffer.setmTags(tags);
+            mFoodOffer.setmQuantity(quantity);
+
+            // TODO: send to database
+        }
+    }
+
+    private boolean validateInputs(String foodName, String price, String description,
+                                   String items, String tags, String quantity) {
+
+        boolean isValid = true;
+
+        if(!InputValidatorUtil.isFoodNameValid(foodName)){
+            mFoodNameEditText.setError(getString(R.string.food_name_error));
+            isValid = false;
+        }
+        if(!InputValidatorUtil.isFoodPriceValid(price)){
+            mPriceEditText.setError(getString(R.string.food_price_error));
+            isValid = false;
+        }
+        if(!InputValidatorUtil.isFoodDescriptionValid(description)){
+            mDescriptionEditText.setError(getString(R.string.food_description_error));
+            isValid = false;
+        }
+        if(!InputValidatorUtil.isFoodItemsValid(items)){
+            mItemsEditText.setError(getString(R.string.food_items_error));
+            isValid = false;
+        }
+        if(!InputValidatorUtil.isFoodTagsValid(tags)){
+            mTagsEditText.setError(getString(R.string.food_tags_error));
+            isValid = false;
+        }
+        if(!InputValidatorUtil.isFoodQuantityValid(quantity)){
+            mQuantityEditText.setError(getString(R.string.food_quantity_error));
+            isValid = false;
+        }
+
+        if(!mImageWasTaken){
+
+            Toast.makeText(this, R.string.add_food_photo_please, Toast.LENGTH_SHORT)
+                    .show();
+
+            isValid = false;
+        }
+
+        return isValid;
     }
 
     /*
