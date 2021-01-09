@@ -160,7 +160,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:layout_weight="1"
                     android:text="@string/itemsLabel_TextView"
                     android:textColor="@color/theme_dark_color" />
 
@@ -169,14 +168,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:layout_weight="1"
                     android:background="@drawable/rounded_edit_text"
                     android:ems="10"
                     android:hint="@string/items_EditTextHint"
                     android:importantForAutofill="no"
                     android:inputType="textPersonName"
-                    android:padding="8dp"
-                    android:textSize="14sp" />
+                    android:padding="8dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -193,7 +190,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:layout_weight="1"
                     android:text="@string/tagsLabel_TextView"
                     android:textColor="@color/theme_dark_color" />
 
@@ -202,14 +198,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:layout_weight="1"
                     android:background="@drawable/rounded_edit_text"
                     android:ems="10"
                     android:hint="@string/tags_EditTextHint"
                     android:importantForAutofill="no"
                     android:inputType="textPersonName"
-                    android:padding="8dp"
-                    android:textSize="14sp" />
+                    android:padding="8dp" />
             </LinearLayout>
 
             <LinearLayout
