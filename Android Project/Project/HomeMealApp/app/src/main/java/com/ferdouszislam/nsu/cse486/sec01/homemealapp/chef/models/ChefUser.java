@@ -5,10 +5,10 @@ package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models;
  */
 public class ChefUser {
 
-    private String mUid;
-    private String mPhoneNumber;
-    private String mEmail;
-    private String mHomeAddress;
+    private String mUid = "";
+    private String mPhoneNumber = "";
+    private String mEmail = "";
+    private String mHomeAddress = "";
 
     public ChefUser() {
     }
