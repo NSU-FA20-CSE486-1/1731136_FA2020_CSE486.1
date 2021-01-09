@@ -12,30 +12,23 @@ import com.google.firebase.storage.StorageReference;
  */
 public class FirebaseStorageFileUploader extends FileUploader<CapturedImage, String, String> {
 
-    private FileUploadCallbacks<Uri> mFileUploadCallbacks;
-    private FileDownloadCallbacks<Uri> mFileDownloadCallbacks;
-
     private StorageReference mFirebaseStorageRef;
 
-    public FirebaseStorageFileUploader(FileUploadCallbacks<Uri> mFileUploadCallbacks) {
-        this.mFileUploadCallbacks = mFileUploadCallbacks;
+    public FirebaseStorageFileUploader() {
+
         mFirebaseStorageRef = FirebaseStorage.getInstance().getReference();
     }
 
-    public FirebaseStorageFileUploader(FileDownloadCallbacks<Uri> mFileDownloadCallbacks) {
-        this.mFileDownloadCallbacks = mFileDownloadCallbacks;
-        mFirebaseStorageRef = FirebaseStorage.getInstance().getReference();
-    }
 
     @Override
-    public void uploadFile(CapturedImage image, String path) {
+    public void uploadFile(CapturedImage image, String path, FileUploadCallbacks fileUploadCallbacks) {
 
         StorageReference ref = mFirebaseStorageRef.child(path);
 
         ref.putFile(image.getmPhotoUri()).continueWithTask(task -> {
             if (!task.isSuccessful()) {
 
-                mFileUploadCallbacks.onUploadFailed("failed to upload -> "+task.getException().getMessage());
+                fileUploadCallbacks.onUploadFailed("failed to upload -> "+task.getException().getMessage());
                 throw task.getException();
             }
 
@@ -46,24 +39,24 @@ public class FirebaseStorageFileUploader extends FileUploader<CapturedImage, Str
             if (task.isSuccessful()) {
 
                 Uri downloadUri = task.getResult();
-                mFileUploadCallbacks.onUploadComplete(downloadUri);
+                fileUploadCallbacks.onUploadComplete(downloadUri);
             }
 
             else{
 
-                mFileUploadCallbacks.onUploadFailed("failed to fetch uploaded image url -> "
+                fileUploadCallbacks.onUploadFailed("failed to fetch uploaded image url -> "
                         + task.getException().getMessage());
             }
         });
     }
 
     @Override
-    public void downloadFile(String downloadPath) {
+    public void downloadFile(String downloadPath, FileDownloadCallbacks fileDownloadCallbacks) {
 
         mFirebaseStorageRef.child(downloadPath).getDownloadUrl()
 
-                .addOnSuccessListener(uri -> mFileDownloadCallbacks.onDownloadComplete(uri))
+                .addOnSuccessListener(fileDownloadCallbacks::onDownloadComplete)
 
-                .addOnFailureListener(e -> mFileDownloadCallbacks.onDownloadFailed(e.getMessage()));
+                .addOnFailureListener(e -> fileDownloadCallbacks.onDownloadFailed(e.getMessage()));
     }
 }
