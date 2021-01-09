@@ -5,9 +5,9 @@ package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.imageUpload;
  * @param <UploadFileType> file type that is to be directly uploaded
  * @param <DownloadLinkType> link type that can be directly downloaded from
  */
-public abstract class FileUploader<UploadFileType, DownloadLinkType> {
+public abstract class FileUploader<UploadFileType, DownloadLinkType, UploadPathType> {
 
-    public abstract void uploadFile(UploadFileType file);
+    public abstract void uploadFile(UploadFileType file, UploadPathType path);
     public abstract void downloadFile(DownloadLinkType downloadLink);
 
     public interface FileUploadCallbacks<UploadedImageLinkType>{

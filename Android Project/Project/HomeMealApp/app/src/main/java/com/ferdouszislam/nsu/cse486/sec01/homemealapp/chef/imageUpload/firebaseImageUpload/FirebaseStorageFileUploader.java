@@ -10,30 +10,27 @@ import com.google.firebase.storage.StorageReference;
 /**
  * Class for firestore upload image implementation
  */
-public class FirebaseStorageFileUploader extends FileUploader<CapturedImage, String> {
+public class FirebaseStorageFileUploader extends FileUploader<CapturedImage, String, String> {
 
     private FileUploadCallbacks<Uri> mFileUploadCallbacks;
     private FileDownloadCallbacks<Uri> mFileDownloadCallbacks;
 
     private StorageReference mFirebaseStorageRef;
-    private String mDBPath;
 
-    public FirebaseStorageFileUploader(FileUploadCallbacks<Uri> mFileUploadCallbacks, String mDBPath) {
+    public FirebaseStorageFileUploader(FileUploadCallbacks<Uri> mFileUploadCallbacks) {
         this.mFileUploadCallbacks = mFileUploadCallbacks;
-        this.mDBPath = mDBPath;
         mFirebaseStorageRef = FirebaseStorage.getInstance().getReference();
     }
 
-    public FirebaseStorageFileUploader(FileDownloadCallbacks<Uri> mFileDownloadCallbacks, String mDBPath) {
+    public FirebaseStorageFileUploader(FileDownloadCallbacks<Uri> mFileDownloadCallbacks) {
         this.mFileDownloadCallbacks = mFileDownloadCallbacks;
-        this.mDBPath = mDBPath;
         mFirebaseStorageRef = FirebaseStorage.getInstance().getReference();
     }
 
     @Override
-    public void uploadFile(CapturedImage image) {
+    public void uploadFile(CapturedImage image, String path) {
 
-        StorageReference ref = mFirebaseStorageRef.child(mDBPath);
+        StorageReference ref = mFirebaseStorageRef.child(path);
 
         ref.putFile(image.getmPhotoUri()).continueWithTask(task -> {
             if (!task.isSuccessful()) {
@@ -68,13 +65,5 @@ public class FirebaseStorageFileUploader extends FileUploader<CapturedImage, Str
                 .addOnSuccessListener(uri -> mFileDownloadCallbacks.onDownloadComplete(uri))
 
                 .addOnFailureListener(e -> mFileDownloadCallbacks.onDownloadFailed(e.getMessage()));
-    }
-
-    public String getmDBPath() {
-        return mDBPath;
-    }
-
-    public void setmDBPath(String mDBPath) {
-        this.mDBPath = mDBPath;
     }
 }
