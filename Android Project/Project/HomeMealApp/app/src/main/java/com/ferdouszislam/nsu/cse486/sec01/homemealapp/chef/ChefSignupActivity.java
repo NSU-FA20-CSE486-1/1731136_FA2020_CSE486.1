@@ -37,6 +37,7 @@ public class ChefSignupActivity extends AppCompatActivity {
                 @Override
                 public void onRegistrationSuccess(AuthenticationUser user) {
 
+                    mChefUser.setmUid(user.getmUid());
                     storeUserInformationInDatabase();
                 }
 
@@ -68,9 +69,6 @@ public class ChefSignupActivity extends AppCompatActivity {
         mConfirmPasswordEditText = findViewById(R.id.chefSignup_confirmPassword_EditText);
         mSignupButton = findViewById(R.id.chefSignup_Button);
 
-        mChefUser = new ChefUser();
-        mAuth = new FirebaseEmailPasswordAuthentication();
-        mEmailPasswordAuthUser = new EmailPasswordAuthUser();
     }
 
     /*
@@ -100,15 +98,17 @@ public class ChefSignupActivity extends AppCompatActivity {
 
         if(validateInputs(email, phoneNumber, homeAddress, password, confirmPassword)){
 
-            // TODO: remove toast
-            showToast("inputs valid!");
-
+            mChefUser = new ChefUser();
             mChefUser.setmEmail(email);
             mChefUser.setmHomeAddress(homeAddress);
             mChefUser.setmPhoneNumber(phoneNumber);
 
+            mEmailPasswordAuthUser = new EmailPasswordAuthUser();
             mEmailPasswordAuthUser.setmEmail(email);
             mEmailPasswordAuthUser.setmPassword(password);
+
+            inProgressUI();
+
             registerUser();
         }
     }
@@ -118,7 +118,8 @@ public class ChefSignupActivity extends AppCompatActivity {
      */
     private void registerUser() {
 
-        // TODO: implement
+        mAuth = new FirebaseEmailPasswordAuthentication(mRegistrationAuthCallbacks, mEmailPasswordAuthUser);
+        mAuth.registerUserAuthentication();
     }
 
     private boolean validateInputs(String email, String phoneNumber, String homeAddress, String password, String confirmPassword) {
@@ -176,6 +177,9 @@ public class ChefSignupActivity extends AppCompatActivity {
     authentication/database upload progress finished UI event
      */
     private void progressCompleteUI() {
+
+        mSignupButton.setText(getString(R.string.signup_ButtonLabel));
+        mSignupButton.setEnabled(true);
     }
 
     /*
@@ -184,6 +188,8 @@ public class ChefSignupActivity extends AppCompatActivity {
     private void storeUserInformationInDatabase() {
 
         // TODO: implement
+        showToast("starting to store in database...");
+        progressCompleteUI();
     }
 
     private void showToast(String message){

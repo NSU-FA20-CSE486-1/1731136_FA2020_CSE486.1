@@ -5,6 +5,7 @@ package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models;
  */
 public class ChefUser {
 
+    private String mUid;
     private String mPhoneNumber;
     private String mEmail;
     private String mHomeAddress;
@@ -12,10 +13,19 @@ public class ChefUser {
     public ChefUser() {
     }
 
-    public ChefUser(String mPhoneNumber, String mEmail, String mHomeAddress) {
+    public ChefUser(String mUid, String mPhoneNumber, String mEmail, String mHomeAddress) {
+        this.mUid = mUid;
         this.mPhoneNumber = mPhoneNumber;
         this.mEmail = mEmail;
         this.mHomeAddress = mHomeAddress;
+    }
+
+    public String getmUid() {
+        return mUid;
+    }
+
+    public void setmUid(String mUid) {
+        this.mUid = mUid;
     }
 
     public String getmPhoneNumber() {

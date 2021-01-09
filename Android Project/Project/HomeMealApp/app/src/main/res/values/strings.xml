@@ -18,7 +18,7 @@
     <string name="phoneNumberHint_TextView">Enter your valid 11 digit phone number</string>
     <string name="addressHint_Textview">Your orders will get picked up from this address</string>
     <string name="passwordHint_TextView">Password must be 8 characters long</string>
-    <string name="signup_ButtonLabel">Signup</string>
+    <string name="signup_ButtonLabel">Sign up</string>
     <string name="phoneCode_Text">+880 </string>
     <string name="address_EditTextHint">Home Address</string>
     <string name="confirmPassword_EditTextHint">Confirm Password</string>
