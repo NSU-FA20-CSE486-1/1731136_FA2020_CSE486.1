@@ -128,20 +128,19 @@ public class ChefSignupActivity extends AppCompatActivity {
 
             inProgressUI();
 
-            registerUser(mRegistrationAuthCallbacks, mEmailPasswordAuthUser);
+            mAuth = new FirebaseEmailPasswordAuthentication(mRegistrationAuthCallbacks, mEmailPasswordAuthUser);
+
+            registerUser(mAuth);
         }
     }
 
     /**
      * start the user registration authentication process
-     * @param registerUserAuthenticationCallbacks callback to notify registration status
-     * @param emailPasswordAuthUser authentication user model formed from user inputs
+     * @param auth authenticator object
      */
-    private void registerUser(Authentication.RegisterUserAuthenticationCallbacks registerUserAuthenticationCallbacks,
-                              EmailPasswordAuthUser emailPasswordAuthUser) {
+    private void registerUser(Authentication auth) {
 
-        mAuth = new FirebaseEmailPasswordAuthentication(registerUserAuthenticationCallbacks, emailPasswordAuthUser);
-        mAuth.registerUserAuthentication();
+        auth.registerUserAuthentication();
     }
 
     private boolean validateInputs(String email, String phoneNumber, String homeAddress, String password, String confirmPassword) {

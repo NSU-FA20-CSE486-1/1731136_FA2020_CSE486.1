@@ -5,6 +5,6 @@ package com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils;
  */
 public class NosqlDatabasePaths {
 
-    public static final String CHEF_USER_NODE = "chefUser";
+    public static final String CHEF_USER_NODE = "chefUsers";
 
 }
