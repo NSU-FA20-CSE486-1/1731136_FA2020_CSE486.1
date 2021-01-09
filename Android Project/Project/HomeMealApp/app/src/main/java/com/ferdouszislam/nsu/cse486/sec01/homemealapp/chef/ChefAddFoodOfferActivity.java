@@ -17,9 +17,14 @@ import android.widget.Toast;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.imageUpload.CapturedImage;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.imageUpload.FileUploader;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.imageUpload.firebaseImageUpload.FirebaseStorageFileUploader;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.RemoteStoragePathsUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class ChefAddFoodOfferActivity extends AppCompatActivity {
 
@@ -38,6 +43,33 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
     private CapturedImage mImage;
     private boolean mImageWasTaken;
 
+    // variables to upload photo to firebase storage
+    private FirebaseStorageFileUploader mFileUploader;
+    private FileUploader.FileUploadCallbacks<Uri> mFileUploadCallbacks = new FileUploader.FileUploadCallbacks<Uri>() {
+        @Override
+        public void onUploadComplete(Uri uploadedImageLink) {
+
+            try {
+
+                URL link = new URL(uploadedImageLink.toString());
+
+            } catch (MalformedURLException e) {
+
+                Log.d(TAG, "onUploadComplete: image upload error->"+e.getStackTrace());
+
+                commonErrorUI();
+            }
+        }
+
+        @Override
+        public void onUploadFailed(String message) {
+
+            imageUploadFailedUI();
+
+            Log.d(TAG, "onUploadFailed: error->" + message);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +84,7 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
 
         mFoodImageView = findViewById(R.id.chef_addFoodOffer_foodOffer_ImageView);
 
+        mFileUploader = new FirebaseStorageFileUploader(mFileUploadCallbacks);
     }
 
     /*
@@ -71,11 +104,46 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode!=RESULT_OK) return;
+
+        switch (requestCode){
+
+            case REQUEST_IMAGE_CAPTURE:
+
+                mImageWasTaken = true;
+
+                mFoodImageView.setImageURI(mImage.getmPhotoUri());
+
+                // TODO: upload after user presses 'Offer' button, not here
+                uploadImage(mFileUploader, mImage);
+
+                break;
+        }
+    }
+
+    /**
+     * upload captured food image to remote data storage
+     * @param fileUploader file uploader object
+     * @param image object for image to be uploaded
+     */
+    private void uploadImage(FirebaseStorageFileUploader fileUploader, CapturedImage image){
+
+        fileUploader.uploadFile(image, RemoteStoragePathsUtil.FOOD_OFFER_IMAGE_NODE + "/" + image.getmPhotoFileName());
+    }
+
+    /*
+    "addFoodPhoto" click listener
+     */
     public void addFoodPhotoClick(View view) {
 
         try {
 
-            mImage = CapturedImage.build(this);
+            // initialize an mImage object only the first time 'addFoodPhoto' button was pressed
+            if(mImage==null || !mImageWasTaken) mImage = CapturedImage.build(this);
 
             dispatchTakePictureIntent(mImage);
 
@@ -116,25 +184,10 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(resultCode!=RESULT_OK) return;
-
-        switch (requestCode){
-
-            case REQUEST_IMAGE_CAPTURE:
-
-                mImageWasTaken = true;
-
-                mFoodImageView.setImageURI(mImage.getmPhotoUri());
-
-                // TODO: remove toast
-                Toast.makeText(this, "image taken!", Toast.LENGTH_SHORT).show();
-
-                break;
-        }
+    /*
+    "offerFood" button click listener
+     */
+    public void offerFoodClick(View view) {
     }
 
     /*
@@ -146,6 +199,12 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
                 .show();
     }
 
-    public void offerFoodClick(View view) {
+    /*
+    UI event for image upload failed
+     */
+    private void imageUploadFailedUI(){
+
+        Toast.makeText(this, R.string.image_upload_failed, Toast.LENGTH_SHORT)
+                .show();
     }
 }
