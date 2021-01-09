@@ -23,7 +23,7 @@ public class ChefUserFirebaseRealtimeDao implements ChefUserDao {
     @Override
     public void createWithId(ChefUser chefUser, DatabaseOperationStatusListener<Void, String> listener) {
 
-        mDatabase.getReference().child(NosqlDatabasePathsUtil.CHEF_USER_NODE + "/" + chefUser.getmUid())
+        mDatabase.getReference().child(NosqlDatabasePathsUtil.CHEF_USERS_NODE + "/" + chefUser.getmUid())
                 .setValue(chefUser)
 
                 .addOnSuccessListener(listener::onSuccess)
@@ -38,7 +38,7 @@ public class ChefUserFirebaseRealtimeDao implements ChefUserDao {
     @Override
     public void updateWithId(ChefUser chefUser, String id, DatabaseOperationStatusListener<Void, String> listener) {
 
-        mDatabase.getReference().child(NosqlDatabasePathsUtil.CHEF_USER_NODE + "/" + id)
+        mDatabase.getReference().child(NosqlDatabasePathsUtil.CHEF_USERS_NODE + "/" + id)
                 .setValue(chefUser)
 
                 .addOnCompleteListener(task -> listener.onSuccess(null))
@@ -55,7 +55,7 @@ public class ChefUserFirebaseRealtimeDao implements ChefUserDao {
     public void readWithId(String id, SingleDataChangeListener<ChefUser> dataListener,
                            DatabaseOperationStatusListener<Void, String> statusListener) {
 
-        mDatabase.getReference().child(NosqlDatabasePathsUtil.CHEF_USER_NODE + "/" + id)
+        mDatabase.getReference().child(NosqlDatabasePathsUtil.CHEF_USERS_NODE + "/" + id)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
