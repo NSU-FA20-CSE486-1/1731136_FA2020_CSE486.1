@@ -120,5 +120,8 @@
     <string name="login_button_label_logging_in">Logging In…</string>
     <string name="login_failed">No such user exists</string>
     <string name="login_attempt_failed">An unexpected error occurred! please check your internet</string>
+    <string name="hard_logout">Sorry, you need to login again!</string>
+    <string name="loading">Loading…</string>
+    <string name="data_load_error">An unexpected error occurred!</string>
 
 </resources>
