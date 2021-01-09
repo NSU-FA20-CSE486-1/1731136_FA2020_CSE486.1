@@ -78,11 +78,20 @@ public class CommonLoginActivity extends AppCompatActivity {
      */
     private void openUserChoiceBasedHomeActivity(String userType) {
 
-        if(userType.equals(UserType.CHEF)) startActivity(new Intent(this, ChefHomeActivity.class));
+        Intent intent;
 
-        else if(userType.equals(UserType.CUSTOMER)) startActivity(new Intent(this, CustomerHomeActivity.class));
+        if(userType.equals(UserType.CHEF)) intent = new Intent(this, ChefHomeActivity.class);
+
+        else if(userType.equals(UserType.CUSTOMER)) intent = new Intent(this, CustomerHomeActivity.class);
 
         //else if(userType.equals(UserType.DELIVERY_GUY)) ;
+
+        else return;
+
+        // clear out all activities on the back stack
+        // so that back press from this point on closes the app
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     @Override
