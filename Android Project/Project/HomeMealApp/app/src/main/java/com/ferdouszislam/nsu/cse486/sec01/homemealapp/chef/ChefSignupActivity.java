@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,10 +17,15 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.EmailPasswordAuthUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.ChefUserDao;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.ChefUserFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.ChefUser;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidator;
 
 public class ChefSignupActivity extends AppCompatActivity {
+
+    private static final String TAG = "CSA-debug";
 
     // ui
     private EditText mEmailEditText, mPasswordEditText, mConfirmPasswordEditText;
@@ -29,7 +35,7 @@ public class ChefSignupActivity extends AppCompatActivity {
     // model
     private ChefUser mChefUser;
 
-    // signup authentication variables
+    // sign up authentication variables
     private Authentication mAuth;
     private EmailPasswordAuthUser mEmailPasswordAuthUser;
     private Authentication.RegisterUserAuthenticationCallbacks mRegistrationAuthCallbacks =
@@ -47,8 +53,14 @@ public class ChefSignupActivity extends AppCompatActivity {
                     progressCompleteUI();
 
                     showToast(getString(R.string.registration_error));
+
+                    Log.d(TAG, "onRegistrationFailure: signup registration failed -> "+message);
                 }
             };
+
+
+    // variables to store user sign up info to database
+    private ChefUserDao mChefUserDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +80,6 @@ public class ChefSignupActivity extends AppCompatActivity {
         mPasswordEditText = findViewById(R.id.chefSignup_password_EditText);
         mConfirmPasswordEditText = findViewById(R.id.chefSignup_confirmPassword_EditText);
         mSignupButton = findViewById(R.id.chefSignup_Button);
-
     }
 
     /*
@@ -109,16 +120,19 @@ public class ChefSignupActivity extends AppCompatActivity {
 
             inProgressUI();
 
-            registerUser();
+            registerUser(mRegistrationAuthCallbacks, mEmailPasswordAuthUser);
         }
     }
 
-    /*
-    start the user registration authentication process
+    /**
+     * start the user registration authentication process
+     * @param registerUserAuthenticationCallbacks callback to notify registration status
+     * @param emailPasswordAuthUser authentication user model formed from user inputs
      */
-    private void registerUser() {
+    private void registerUser(Authentication.RegisterUserAuthenticationCallbacks registerUserAuthenticationCallbacks,
+                              EmailPasswordAuthUser emailPasswordAuthUser) {
 
-        mAuth = new FirebaseEmailPasswordAuthentication(mRegistrationAuthCallbacks, mEmailPasswordAuthUser);
+        mAuth = new FirebaseEmailPasswordAuthentication(registerUserAuthenticationCallbacks, emailPasswordAuthUser);
         mAuth.registerUserAuthentication();
     }
 
@@ -155,6 +169,28 @@ public class ChefSignupActivity extends AppCompatActivity {
         return isValid;
     }
 
+    /*
+    upload user information taken in signup form to the database
+     */
+    private void storeUserInformationInDatabase() {
+
+        mChefUserDao = new ChefUserFirebaseRealtimeDao();
+        mChefUserDao.createWithId(mChefUser, new DatabaseOperationStatusListener<Void, String>() {
+            @Override
+            public void onSuccess(Void successResponse) {
+
+                openChefHomeActivity();
+            }
+
+            @Override
+            public void onFailed(String failedResponse) {
+
+                progressCompleteUI();
+                Log.d(TAG, "onFailed: store signup info error -> "+failedResponse);
+            }
+        });
+    }
+
     private void openChefHomeActivity() {
 
         Intent intent = new Intent(this, ChefHomeActivity.class);
@@ -180,16 +216,6 @@ public class ChefSignupActivity extends AppCompatActivity {
 
         mSignupButton.setText(getString(R.string.signup_ButtonLabel));
         mSignupButton.setEnabled(true);
-    }
-
-    /*
-    upload user information taken in signup form to the database
-     */
-    private void storeUserInformationInDatabase() {
-
-        // TODO: implement
-        showToast("starting to store in database...");
-        progressCompleteUI();
     }
 
     private void showToast(String message){
