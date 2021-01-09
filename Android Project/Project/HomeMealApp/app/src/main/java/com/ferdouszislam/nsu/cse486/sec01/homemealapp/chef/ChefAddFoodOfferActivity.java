@@ -12,17 +12,25 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.FoodOfferDao;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.firebaseDaos.FoodOfferFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.imageUpload.CapturedImage;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.imageUpload.FileUploader;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.imageUpload.firebaseImageUpload.FirebaseStorageFileUploader;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.FoodOffer;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.RemoteStoragePathsUtil;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,6 +51,7 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
     private ImageView mFoodImageView;
     private EditText mFoodNameEditText, mPriceEditText, mDescriptionEditText;
     private EditText mItemsEditText, mTagsEditText, mQuantityEditText;
+    private Button mOfferFoodButton;
 
     // model
     private FoodOffer mFoodOffer;
@@ -51,15 +60,37 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
     private CapturedImage mImage;
     private boolean mImageWasTaken;
 
+    // variables to authenticate user login state, because uid is needed here
+    private Authentication mAuth;
+    private Authentication.AuthenticationCallbacks mAuthenticationCallbacks = new Authentication.AuthenticationCallbacks() {
+        @Override
+        public void onAuthenticationSuccess(AuthenticationUser user) {
+
+            mFoodOffer.setmChefUid(user.getmUid());
+
+            authentionSuccessUI();
+        }
+
+        @Override
+        public void onAuthenticationFailure(String message) {
+
+            SessionUtil.doHardLogout(ChefAddFoodOfferActivity.this, mAuth);
+        }
+    };
+
     // variables to upload photo to firebase storage
     private FirebaseStorageFileUploader mFileUploader;
-    private FileUploader.FileUploadCallbacks<Uri> mFileUploadCallbacks = new FileUploader.FileUploadCallbacks<Uri>() {
+    private FileUploader.FileUploadCallbacks mFileUploadCallbacks = new FileUploader.FileUploadCallbacks() {
         @Override
         public void onUploadComplete(Uri uploadedImageLink) {
 
             try {
 
                 URL link = new URL(uploadedImageLink.toString());
+
+                mFoodOffer.setmFoodPhotoUrl(link.toString());
+
+                saveFoodOfferToDatabase(mFoodOffer, mFoodOfferDao);
 
             } catch (MalformedURLException e) {
 
@@ -74,9 +105,39 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
 
             imageUploadFailedUI();
 
+            foodOfferSaveCompleteUI();
+
             Log.d(TAG, "onUploadFailed: error->" + message);
         }
     };
+
+    /**
+     * store food offer to database
+     * @param foodOffer food offere to be stored to database
+     * @param foodOfferDao dao for food offer model
+     */
+    private void saveFoodOfferToDatabase(FoodOffer foodOffer, FoodOfferDao foodOfferDao) {
+
+        foodOfferDao.createFoodOfferForChef(foodOffer, foodOffer.getmChefUid(), new DatabaseOperationStatusListener<Void, String>() {
+            @Override
+            public void onSuccess(Void successResponse) {
+
+                saveFoodOfferToDatabaseSuccessUI();
+            }
+
+            @Override
+            public void onFailed(String failedResponse) {
+
+                foodOfferSaveCompleteUI();
+                saveFoodOfferToDatabaseFailureUI();
+            }
+        });
+    }
+
+
+    // variables to store food offer to database
+    private FoodOfferDao mFoodOfferDao;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,10 +158,25 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
         mItemsEditText = findViewById(R.id.chef_addFoodOffer_items_EditText);
         mTagsEditText = findViewById(R.id.chef_addFoodOffer_tags_EditText);
         mQuantityEditText = findViewById(R.id.chef_addFoodOffer_quantity_EditText);
+        mOfferFoodButton = findViewById(R.id.offerFood_Button);
 
         mFoodOffer = new FoodOffer();
 
-        mFileUploader = new FirebaseStorageFileUploader(mFileUploadCallbacks);
+        mFileUploader = new FirebaseStorageFileUploader();
+
+        mFoodOfferDao = new FoodOfferFirebaseRealtimeDao();
+
+        mAuth = new FirebaseEmailPasswordAuthentication();
+        authenticateUser(mAuth, mAuthenticationCallbacks);
+    }
+
+    /*
+    authenticate user to get the uid
+     */
+    private void authenticateUser(Authentication auth, Authentication.AuthenticationCallbacks authCallbacks) {
+
+        auth.setmAuthenticationCallbacks(authCallbacks);
+        auth.authenticateUser();
     }
 
     /*
@@ -136,16 +212,6 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
 
                 break;
         }
-    }
-
-    /**
-     * upload captured food image to remote data storage
-     * @param fileUploader file uploader object
-     * @param image object for image to be uploaded
-     */
-    private void uploadImage(FirebaseStorageFileUploader fileUploader, CapturedImage image){
-
-        fileUploader.uploadFile(image, RemoteStoragePathsUtil.FOOD_OFFER_IMAGE_NODE + "/" + image.getmPhotoFileName());
     }
 
     /*
@@ -209,7 +275,7 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
         String tags = mTagsEditText.getText().toString().trim();
         String quantity = mQuantityEditText.getText().toString().trim();
 
-        if(validateInputs(foodName, price, description, items, tags, quantity)){
+        if(validateInputs(foodName, price, description, items, tags, quantity, mImageWasTaken)){
 
             mFoodOffer.setmFoodName(foodName);
             mFoodOffer.setmPrice(price);
@@ -218,12 +284,17 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
             mFoodOffer.setmTags(tags);
             mFoodOffer.setmQuantity(quantity);
 
-            // TODO: send to database
+            foodOfferSaveInProgressUI();
+
+            saveFoodOffer();
         }
     }
 
-    private boolean validateInputs(String foodName, String price, String description,
-                                   String items, String tags, String quantity) {
+    /*
+    validate user inputs
+     */
+    private boolean validateInputs(String foodName, String price, String description, String items,
+                                   String tags, String quantity, boolean imageTaken) {
 
         boolean isValid = true;
 
@@ -252,15 +323,56 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
             isValid = false;
         }
 
-        if(!mImageWasTaken){
+        if(!imageTaken){
 
             Toast.makeText(this, R.string.add_food_photo_please, Toast.LENGTH_SHORT)
                     .show();
-
             isValid = false;
         }
 
         return isValid;
+    }
+
+    /*
+    start the food offer info uploading process
+     */
+    private void saveFoodOffer() {
+
+        // start the image uploading,
+        // once the image uploading is done 'mFoodOffer' will be saved to database
+        uploadImage(mFileUploader, mFileUploadCallbacks, mImage);
+    }
+
+    /**
+     * upload captured food image to remote data storage
+     * @param fileUploader file uploader object
+     * @param image object for image to be uploaded
+     */
+    private void uploadImage(FirebaseStorageFileUploader fileUploader, FileUploader.FileUploadCallbacks fileUploadCallbacks,
+                             CapturedImage image){
+
+        fileUploader.uploadFile(
+                image,
+                RemoteStoragePathsUtil.FOOD_OFFER_IMAGE_NODE + "/" + image.getmPhotoFileName(),
+                fileUploadCallbacks
+        );
+    }
+
+
+    /*
+    UI event for when authentication is undergoing
+     */
+    private void authenticatingUI(){
+
+        mOfferFoodButton.setEnabled(false);
+    }
+
+    /*
+    UI event for when authentication is undergoing
+     */
+    private void authentionSuccessUI(){
+
+        mOfferFoodButton.setEnabled(true);
     }
 
     /*
@@ -278,6 +390,44 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
     private void imageUploadFailedUI(){
 
         Toast.makeText(this, R.string.image_upload_failed, Toast.LENGTH_SHORT)
+                .show();
+    }
+
+    /*
+    UI event for while waiting for food offer to get saved
+     */
+    private void foodOfferSaveInProgressUI(){
+
+        mOfferFoodButton.setText(getString(R.string.saving));
+        mOfferFoodButton.setEnabled(false);
+    }
+
+    /*
+    UI event for when food offer saving process is complete (success or failed)
+     */
+    private void foodOfferSaveCompleteUI(){
+
+        mOfferFoodButton.setText(getString(R.string.offerFood_ButtonLabel));
+        mOfferFoodButton.setEnabled(true);
+    }
+
+    /*
+    UI event for food offer save to database success
+     */
+    private void saveFoodOfferToDatabaseSuccessUI(){
+
+        Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT)
+                .show();
+
+        finish();
+    }
+
+    /*
+    UI event for food offer save to database failure
+     */
+    private void saveFoodOfferToDatabaseFailureUI(){
+
+        Toast.makeText(this, R.string.food_offer_save_failed, Toast.LENGTH_SHORT)
                 .show();
     }
 }

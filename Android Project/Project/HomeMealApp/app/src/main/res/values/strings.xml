@@ -133,5 +133,7 @@
     <string name="food_tags_error">invalid tags</string>
     <string name="food_quantity_error">invalid quantity</string>
     <string name="add_food_photo_please">Add photo of the food please</string>
+    <string name="food_offer_save_failed">Failed to save food offer! please try again</string>
+    <string name="saving">Saving…</string>
 
 </resources>
