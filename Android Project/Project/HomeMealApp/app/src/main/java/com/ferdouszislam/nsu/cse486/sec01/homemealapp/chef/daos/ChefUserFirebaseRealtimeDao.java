@@ -8,8 +8,10 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.ChefUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.SingleDataChangeListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.NosqlDatabasePaths;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -34,7 +36,22 @@ public class ChefUserFirebaseRealtimeDao implements ChefUserDao {
                     listener.onFailed(e.getMessage());
                     Log.d(TAG, "onFailure: failed to create chefuser -> "+e.getStackTrace());
                 });
+    }
 
+    @Override
+    public void updateWithId(ChefUser chefUser, String id, DatabaseOperationStatusListener<Void, String> listener) {
+
+        mDatabase.getReference().child(NosqlDatabasePaths.CHEF_USER_NODE + "/" + id)
+                .setValue(chefUser)
+
+                .addOnCompleteListener(task -> listener.onSuccess(null))
+
+                .addOnFailureListener(e -> {
+
+                    Log.d(TAG, "onFailure: user update failed -> "+e.getStackTrace());
+
+                    listener.onFailed(e.getMessage());
+                });
     }
 
     @Override
@@ -64,6 +81,6 @@ public class ChefUserFirebaseRealtimeDao implements ChefUserDao {
                         Log.d(TAG, "onCancelled: user with id read->"+error.getDetails());
                     }
                 });
-
     }
+
 }

@@ -8,7 +8,8 @@ public interface ChefUserDao {
 
     void createWithId(ChefUser chefUser, DatabaseOperationStatusListener<Void, String> listener);
 
+    void updateWithId(ChefUser chefUser, String id, DatabaseOperationStatusListener<Void, String> listener);
+
     void readWithId(String uid, SingleDataChangeListener<ChefUser> dataListener,
                     DatabaseOperationStatusListener<Void, String> statusListener);
-
 }
