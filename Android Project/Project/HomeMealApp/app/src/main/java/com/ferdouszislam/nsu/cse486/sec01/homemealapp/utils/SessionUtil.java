@@ -12,7 +12,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
  * Class to manage user session
  * like: logout immediately
  */
-public class SessionUtil {
+public abstract class SessionUtil {
 
     /*
      Authentication failed, logout immediately

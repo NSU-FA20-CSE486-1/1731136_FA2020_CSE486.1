@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
  * Class to contain static validation methods
  * for various user inputs like- email, password, phone numbers etc.
  */
-public class InputValidatorUtil {
+public abstract class InputValidatorUtil {
 
     public static boolean isValidPhoneNumber(String phoneNumber){
 
