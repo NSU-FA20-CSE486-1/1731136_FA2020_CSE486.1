@@ -22,7 +22,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.ChefUserFirebase
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.ChefUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.UserAuthSharedPref;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidator;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.UserType;
 
 public class ChefSignupActivity extends AppCompatActivity {
@@ -147,22 +147,22 @@ public class ChefSignupActivity extends AppCompatActivity {
 
         boolean isValid = true;
 
-        if(!InputValidator.isValidEmail(email)){
+        if(!InputValidatorUtil.isValidEmail(email)){
 
             mEmailEditText.setError(getString(R.string.email_input_error));
             isValid = false;
         }
-        if(!InputValidator.isValidPhoneNumber(phoneNumber)){
+        if(!InputValidatorUtil.isValidPhoneNumber(phoneNumber)){
 
             mPhoneNumberEditText.setError(getString(R.string.phone_input_error));
             isValid = false;
         }
-        if(!InputValidator.isValidHomeAddress(homeAddress)){
+        if(!InputValidatorUtil.isValidHomeAddress(homeAddress)){
 
             mHomeAddressEditText.setError(getString(R.string.address_input_error));
             isValid = false;
         }
-        if(!InputValidator.isValidPassword(password)){
+        if(!InputValidatorUtil.isValidPassword(password)){
 
             mPasswordEditText.setError(getString(R.string.password_input_error));
             isValid = false;

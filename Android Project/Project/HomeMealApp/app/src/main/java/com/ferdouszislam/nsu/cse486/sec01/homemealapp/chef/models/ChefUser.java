@@ -1,5 +1,7 @@
 package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models;
 
+import java.util.Objects;
+
 /**
  * Model class for a chef user
  */
@@ -50,5 +52,21 @@ public class ChefUser {
 
     public void setmHomeAddress(String mHomeAddress) {
         this.mHomeAddress = mHomeAddress;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChefUser chefUser = (ChefUser) o;
+        return Objects.equals(mUid, chefUser.mUid) &&
+                Objects.equals(mPhoneNumber, chefUser.mPhoneNumber) &&
+                Objects.equals(mEmail, chefUser.mEmail) &&
+                Objects.equals(mHomeAddress, chefUser.mHomeAddress);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mUid, mPhoneNumber, mEmail, mHomeAddress);
     }
 }

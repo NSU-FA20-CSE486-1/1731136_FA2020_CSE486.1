@@ -7,11 +7,7 @@ import androidx.annotation.NonNull;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.ChefUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.SingleDataChangeListener;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.NosqlDatabasePaths;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.NosqlDatabasePathsUtil;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -26,7 +22,7 @@ public class ChefUserFirebaseRealtimeDao implements ChefUserDao {
     @Override
     public void createWithId(ChefUser chefUser, DatabaseOperationStatusListener<Void, String> listener) {
 
-        mDatabase.getReference().child(NosqlDatabasePaths.CHEF_USER_NODE + "/" + chefUser.getmUid())
+        mDatabase.getReference().child(NosqlDatabasePathsUtil.CHEF_USER_NODE + "/" + chefUser.getmUid())
                 .setValue(chefUser)
 
                 .addOnSuccessListener(listener::onSuccess)
@@ -41,7 +37,7 @@ public class ChefUserFirebaseRealtimeDao implements ChefUserDao {
     @Override
     public void updateWithId(ChefUser chefUser, String id, DatabaseOperationStatusListener<Void, String> listener) {
 
-        mDatabase.getReference().child(NosqlDatabasePaths.CHEF_USER_NODE + "/" + id)
+        mDatabase.getReference().child(NosqlDatabasePathsUtil.CHEF_USER_NODE + "/" + id)
                 .setValue(chefUser)
 
                 .addOnCompleteListener(task -> listener.onSuccess(null))
@@ -58,7 +54,7 @@ public class ChefUserFirebaseRealtimeDao implements ChefUserDao {
     public void readWithId(String id, SingleDataChangeListener<ChefUser> dataListener,
                            DatabaseOperationStatusListener<Void, String> statusListener) {
 
-        mDatabase.getReference().child(NosqlDatabasePaths.CHEF_USER_NODE + "/" + id)
+        mDatabase.getReference().child(NosqlDatabasePathsUtil.CHEF_USER_NODE + "/" + id)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

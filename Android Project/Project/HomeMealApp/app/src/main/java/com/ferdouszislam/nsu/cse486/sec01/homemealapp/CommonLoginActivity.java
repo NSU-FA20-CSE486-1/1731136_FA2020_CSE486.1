@@ -19,9 +19,8 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPassword
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.ChefHomeActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.ChefSignupActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerHomeActivity;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerSignupActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.UserAuthSharedPref;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidator;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.UserType;
 
 public class CommonLoginActivity extends AppCompatActivity {
@@ -145,6 +144,8 @@ public class CommonLoginActivity extends AppCompatActivity {
 
             mAuth = new FirebaseEmailPasswordAuthentication(mAuthCallbacks, mEmailPasswordAuthUser);
 
+            inProgressUI();
+
             loginUser(mAuth);
         }
 
@@ -168,7 +169,7 @@ public class CommonLoginActivity extends AppCompatActivity {
      */
     private boolean validateInputs(String email, String password) {
 
-        return InputValidator.isValidEmail(email) && InputValidator.isValidPassword(password);
+        return InputValidatorUtil.isValidEmail(email) && InputValidatorUtil.isValidPassword(password);
     }
 
     public void dontHaveAnAccountClicked(View view) {
