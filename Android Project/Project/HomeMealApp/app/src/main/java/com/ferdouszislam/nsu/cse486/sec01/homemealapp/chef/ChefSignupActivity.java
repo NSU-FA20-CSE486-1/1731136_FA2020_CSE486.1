@@ -18,7 +18,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.EmailPasswordAuthUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.ChefUserDao;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.ChefUserFirebaseRealtimeDao;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.firebaseDaos.ChefUserFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.ChefUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.UserAuthSharedPref;
