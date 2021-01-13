@@ -8,8 +8,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
@@ -33,6 +36,7 @@ public class ChefSignupActivity extends AppCompatActivity {
     private EditText mEmailEditText, mPasswordEditText, mConfirmPasswordEditText;
     private EditText mPhoneNumberEditText, mHomeAddressEditText;
     private Button mSignupButton;
+    private Spinner mRegionSpinner;
 
     // model
     private ChefUser mChefUser;
@@ -82,6 +86,8 @@ public class ChefSignupActivity extends AppCompatActivity {
 
         setupToolbar();
 
+        setupSpinner();
+
         mPhoneNumberEditText = findViewById(R.id.chefSignup_PhoneNumber_EditText);
         mHomeAddressEditText = findViewById(R.id.chefSignup_address_EditText);
         mEmailEditText = findViewById(R.id.chefSignup_email_EditText);
@@ -105,6 +111,33 @@ public class ChefSignupActivity extends AppCompatActivity {
             // don't show default(app_name) title
             ab.setDisplayShowTitleEnabled(false);
         }
+    }
+
+    /*
+    setup the region selector spinner
+     */
+    private void setupSpinner() {
+
+        mRegionSpinner = findViewById(R.id.chefSignup_region_Spinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.regions_array, R.layout.region_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(R.layout.region_spinner_dropdown);
+        // Apply the adapter to the spinner
+        mRegionSpinner.setAdapter(adapter);
+
+        mRegionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                showToast(parent.getItemAtPosition(position)+"");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
     public void signupClick(View view) {

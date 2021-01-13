@@ -135,5 +135,14 @@
     <string name="add_food_photo_please">Add photo of the food please</string>
     <string name="food_offer_save_failed">Failed to save food offer! please try again</string>
     <string name="saving">Saving…</string>
+    <string name="spinner_item_TextView">region option</string>
+    <string name="chefSignup_PhoneNumber_EditText_hint">(+880) phone number</string>
+
+    <string-array name="regions_array">
+        <item>Mirpur</item>
+        <item>Uttora</item>
+        <item>Bashundhara R/A</item>
+        <item>Badda</item>
+    </string-array>
 
 </resources>

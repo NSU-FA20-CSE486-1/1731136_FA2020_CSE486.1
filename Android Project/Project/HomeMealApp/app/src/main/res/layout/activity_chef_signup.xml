@@ -63,7 +63,7 @@
                     android:background="@drawable/rounded_edit_text"
                     android:drawableRight="@drawable/ic_action_phone"
                     android:ems="10"
-                    android:hint="(+880) phone number"
+                    android:hint="@string/chefSignup_PhoneNumber_EditText_hint"
                     android:importantForAutofill="no"
                     android:inputType="phone"
                     android:padding="16dp"
@@ -89,8 +89,8 @@
                     android:id="@+id/chefSignup_address_EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
                     android:background="@drawable/rounded_edit_text"
-                    android:drawableRight="@drawable/ic_action_location"
                     android:ems="10"
                     android:hint="@string/address_EditTextHint"
                     android:importantForAutofill="no"
@@ -98,13 +98,23 @@
                     android:padding="16dp"
                     android:textColor="@color/theme_dark_color" />
 
+                <Spinner
+                    android:id="@+id/chefSignup_region_Spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_edit_text"
+                    android:padding="16dp" />
+
                 <TextView
                     android:id="@+id/addressHint_TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
                     android:text="@string/addressHint_Textview"
-                    android:textColor="@color/theme_dark_color" />
+                    android:textColor="@color/theme_dark_color"
+                    app:drawableStartCompat="@drawable/ic_action_location" />
             </LinearLayout>
 
             <EditText
