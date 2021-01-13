@@ -138,6 +138,7 @@ public class ChefUpdateProfileActivity extends AppCompatActivity {
 
         inProgressUI();
 
+        mAuth = new FirebaseEmailPasswordAuthentication();
         authenticateUser(mAuth, mAuthCallbacks);
 
         mChefUserProfileSharedPref = ChefUserProfileSharedPref.build(this);
@@ -149,7 +150,7 @@ public class ChefUpdateProfileActivity extends AppCompatActivity {
         findViewById(R.id.chefSignup_email_EditText).setVisibility(View.GONE);
         findViewById(R.id.chefSignup_password_EditText).setVisibility(View.GONE);
         findViewById(R.id.chefSignup_confirmPassword_EditText).setVisibility(View.GONE);
-        findViewById(R.id.passwordHint_TextView).setVisibility(View.GONE);
+        findViewById(R.id.chefSignUpPasswordHint_TextView).setVisibility(View.GONE);
     }
 
     /**

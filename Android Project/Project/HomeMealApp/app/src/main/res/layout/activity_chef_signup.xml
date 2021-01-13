@@ -74,7 +74,7 @@
                     android:id="@+id/phoneNumberHint_TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
                     android:text="@string/phoneNumberHint_TextView"
                     android:textColor="@color/theme_dark_color" />
             </LinearLayout>
@@ -165,7 +165,7 @@
                     android:textColor="@color/theme_dark_color" />
 
                 <TextView
-                    android:id="@+id/passwordHint_TextView"
+                    android:id="@+id/chefSignUpPasswordHint_TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"

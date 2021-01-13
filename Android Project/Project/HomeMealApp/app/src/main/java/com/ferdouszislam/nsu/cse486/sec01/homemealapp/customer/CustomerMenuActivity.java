@@ -56,7 +56,6 @@ public class CustomerMenuActivity extends AppCompatActivity {
 
     public void updateProfileClick(View view) {
 
-        //TODO: pass customer user's profile information in this intent
         startActivity(new Intent(this, CustomerUpdateProfileActivity.class));
     }
 

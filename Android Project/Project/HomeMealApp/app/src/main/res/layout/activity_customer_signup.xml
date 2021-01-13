@@ -127,7 +127,7 @@
                     android:textColor="@color/theme_dark_color" />
 
                 <TextView
-                    android:id="@+id/passwordHint_TextView"
+                    android:id="@+id/customerSignUpPasswordHint_TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
