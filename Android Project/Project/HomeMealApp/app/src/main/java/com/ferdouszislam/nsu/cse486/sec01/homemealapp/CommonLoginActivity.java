@@ -23,9 +23,13 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.firebaseDaos.Che
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.ChefUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerHomeActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerSignupActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.daos.CustomerUserDao;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.daos.firebaseDaos.CustomerUserFirebaseRealtimeDao;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.models.CustomerUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.SingleDataChangeListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.ChefUserProfileSharedPref;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.CustomerUserProfileSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.UserAuthSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.UserType;
@@ -53,29 +57,38 @@ public class CommonLoginActivity extends AppCompatActivity {
         @Override
         public void onAuthenticationSuccess(AuthenticationUser user) {
 
-            progressCompleteUI();
-
             storeUserTypeToSharedPref(mUserType);
 
-            mChefUserDao = new ChefUserFirebaseRealtimeDao();
             loadUserProfileBasedHomeActivity(mUserType, user.getmUid());
         }
 
         @Override
         public void onAuthenticationFailure(String message) {
 
-            progressCompleteUI();
             loginAuthenticationFailedUI();
+            progressCompleteUI();
         }
     };
 
     // variable to read chef user profile from database
     private ChefUserDao mChefUserDao;
-    private SingleDataChangeListener<ChefUser> mSingleDataChangeListener = new SingleDataChangeListener<ChefUser>() {
+    private SingleDataChangeListener<ChefUser> mChefSingleDataChangeListener = new SingleDataChangeListener<ChefUser>() {
         @Override
         public void onDataChange(ChefUser data) {
 
             ChefUserProfileSharedPref.build(CommonLoginActivity.this).setChefUser(data);
+
+            openActivityBasedHomeActivity(mUserType);
+        }
+    };
+
+    // variable to read customer user profile from database
+    private CustomerUserDao mCustomerUserDao;
+    private SingleDataChangeListener<CustomerUser> mCustomerSingleDataChangeListener = new SingleDataChangeListener<CustomerUser>() {
+        @Override
+        public void onDataChange(CustomerUser data) {
+
+            CustomerUserProfileSharedPref.build(CommonLoginActivity.this).setCustomerUser(data);
 
             openActivityBasedHomeActivity(mUserType);
         }
@@ -98,23 +111,35 @@ public class CommonLoginActivity extends AppCompatActivity {
      */
     private void loadUserProfileBasedHomeActivity(String userType, String uid) {
 
+        DatabaseOperationStatusListener<Void, String> statusListener =
+                new DatabaseOperationStatusListener<Void, String>() {
+                    @Override
+                    public void onSuccess(Void successResponse) {
+                        // do nothing
+                    }
+
+                    @Override
+                    public void onFailed(String failedResponse) {
+
+                        // MUST CALL SIGN OUT HERE BECAUSE AUTHENTICATION PASSED BUT USER TYPE DID NOT
+                        // THIS IS OCCURRING BECAUSE BOTH USERS USE THE SAME AUTHENTICATION SYSTEM
+                        mAuth.signOut();
+
+                        progressCompleteUI();
+                        loginAuthenticationFailedUI();
+                    }
+                };
+
         if(userType.equals(UserType.CHEF)){
 
-            mChefUserDao.readWithId(uid, mSingleDataChangeListener,
-                    new DatabaseOperationStatusListener<Void, String>() {
-                        @Override
-                        public void onSuccess(Void successResponse) {
-                            // do nothing
-                        }
-
-                        @Override
-                        public void onFailed(String failedResponse) {
-                            loginAuthenticationFailedUI();
-                        }
-                    });
+            mChefUserDao.readWithId(uid, mChefSingleDataChangeListener, statusListener);
         }
 
-        else if(userType.equals(UserType.CUSTOMER)) ;
+        else if(userType.equals(UserType.CUSTOMER)){
+
+            mCustomerUserDao.readWithId(uid, mCustomerSingleDataChangeListener, statusListener);
+
+        }
         //else if(userType.equals(UserType.DELIVERY_GUY)) ;
     }
 
@@ -160,6 +185,8 @@ public class CommonLoginActivity extends AppCompatActivity {
         Log.d(TAG, "init: user type = "+mUserType);
 
         mChefUserDao = new ChefUserFirebaseRealtimeDao();
+
+        mCustomerUserDao = new CustomerUserFirebaseRealtimeDao();
     }
 
     /*
