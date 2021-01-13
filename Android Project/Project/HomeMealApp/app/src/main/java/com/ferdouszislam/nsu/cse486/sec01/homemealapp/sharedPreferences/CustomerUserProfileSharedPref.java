@@ -6,22 +6,22 @@ import android.util.Log;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.models.CustomerUser;
 import com.google.gson.Gson;
 
-public class CustomerUserSharedPref extends SharedPrefsUtil {
+public class CustomerUserProfileSharedPref extends SharedPrefsUtil {
 
     private static final String TAG = "CusUSP-debug";
 
     private Gson gson = new Gson();
 
-    public static CustomerUserSharedPref build(Context context){
+    public static CustomerUserProfileSharedPref build(Context context){
 
-        return new CustomerUserSharedPref(SharedPrefKeysUtil.CUSTOMER_USER_PROFILE_PREF_ID, context);
+        return new CustomerUserProfileSharedPref(SharedPrefKeysUtil.CUSTOMER_USER_PROFILE_PREF_ID, context);
     }
 
-    private CustomerUserSharedPref(String mSharedPreferenceId, Context mContext) {
+    private CustomerUserProfileSharedPref(String mSharedPreferenceId, Context mContext) {
         super(mSharedPreferenceId, mContext);
     }
 
-    public CustomerUser getChefUser(){
+    public CustomerUser getCustomerUser(){
 
         String customerUserJson = loadStringData(SharedPrefKeysUtil.CUSTOMER_USER_PROFILE_KEY);
 
@@ -30,7 +30,7 @@ public class CustomerUserSharedPref extends SharedPrefsUtil {
         return gson.fromJson(customerUserJson, CustomerUser.class);
     }
 
-    public void setChefUser(CustomerUser customerUser){
+    public void setCustomerUser(CustomerUser customerUser){
 
         String customerUserJson = gson.toJson(customerUser);
 

@@ -22,6 +22,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.ChefUserDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.firebaseDaos.ChefUserFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.ChefUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerHomeActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerSignupActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.SingleDataChangeListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.ChefUserProfileSharedPref;
@@ -224,8 +225,7 @@ public class CommonLoginActivity extends AppCompatActivity {
 
         if(mUserType.equals(UserType.CUSTOMER)){
 
-            // TODO: implement
-            //startActivity(new Intent(this, CustomerSignupActivity.class));
+            startActivity(new Intent(this, CustomerSignupActivity.class));
         }
 
         else if(mUserType.equals(UserType.CHEF)){
