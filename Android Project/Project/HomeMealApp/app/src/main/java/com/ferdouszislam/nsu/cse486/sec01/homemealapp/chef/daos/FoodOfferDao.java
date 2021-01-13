@@ -5,7 +5,6 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperatio
 
 public interface FoodOfferDao {
 
-    void createFoodOfferForChef(FoodOffer foodOffer, String chefId,
-                                DatabaseOperationStatusListener<Void, String> statusListener);
+    void createFoodOffer(FoodOffer foodOffer, DatabaseOperationStatusListener<Void, String> statusListener);
 
 }

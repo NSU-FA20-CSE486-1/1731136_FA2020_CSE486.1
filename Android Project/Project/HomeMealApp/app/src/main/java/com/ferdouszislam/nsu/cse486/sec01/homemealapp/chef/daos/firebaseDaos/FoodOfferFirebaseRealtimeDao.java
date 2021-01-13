@@ -17,10 +17,9 @@ public class FoodOfferFirebaseRealtimeDao implements FoodOfferDao {
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
 
     @Override
-    public void createFoodOfferForChef(FoodOffer foodOffer, String chefId,
-                                       DatabaseOperationStatusListener<Void, String> statusListener) {
+    public void createFoodOffer(FoodOffer foodOffer, DatabaseOperationStatusListener<Void, String> statusListener) {
 
-        DatabaseReference ref = mDatabase.getReference().child(NosqlDatabasePathsUtil.CHEF_FOOD_OFFERS_NODE + "/" + chefId);
+        DatabaseReference ref = mDatabase.getReference().child(NosqlDatabasePathsUtil.FOOD_OFFERS_NODE);
 
         String foodOfferId = ref.push().getKey();
 

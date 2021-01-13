@@ -14,12 +14,15 @@ public class FoodOffer {
     private String mDescription;
     private String mItems, mTags;
     private String mQuantity;
+    private String mAddress;
+    private String mRegion;
 
     public FoodOffer() {
     }
 
     public FoodOffer(String mChefUid, String id, String mFoodPhotoUrl, String mFoodName,
-                     String mPrice, String mDescription, String mItems, String mTags, String mQuantity) {
+                     String mPrice, String mDescription, String mItems, String mTags, String mQuantity,
+                     String mAddress, String mRegion) {
         this.mChefUid = mChefUid;
         this.id = id;
         this.mFoodPhotoUrl = mFoodPhotoUrl;
@@ -29,6 +32,8 @@ public class FoodOffer {
         this.mItems = mItems;
         this.mTags = mTags;
         this.mQuantity = mQuantity;
+        this.mAddress = mAddress;
+        this.mRegion = mRegion;
     }
 
     public String getmChefUid() {
@@ -101,5 +106,21 @@ public class FoodOffer {
 
     public void setmQuantity(String mQuantity) {
         this.mQuantity = mQuantity;
+    }
+
+    public String getmAddress() {
+        return mAddress;
+    }
+
+    public void setmAddress(String mAddress) {
+        this.mAddress = mAddress;
+    }
+
+    public String getmRegion() {
+        return mRegion;
+    }
+
+    public void setmRegion(String mRegion) {
+        this.mRegion = mRegion;
     }
 }

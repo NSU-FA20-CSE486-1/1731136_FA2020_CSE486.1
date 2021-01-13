@@ -28,6 +28,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.imageUpload.FileUploa
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.imageUpload.firebaseImageUpload.FirebaseStorageFileUploader;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.FoodOffer;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.ChefUserProfileSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.RemoteStoragePathsUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
@@ -114,6 +115,10 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
         }
     };
 
+    // shared preference variable for updating local chef user profile
+    private ChefUserProfileSharedPref mChefUserProfileSharedPref;
+
+
     /**
      * store food offer to database
      * @param foodOffer food offere to be stored to database
@@ -121,7 +126,7 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
      */
     private void saveFoodOfferToDatabase(FoodOffer foodOffer, FoodOfferDao foodOfferDao) {
 
-        foodOfferDao.createFoodOfferForChef(foodOffer, foodOffer.getmChefUid(), new DatabaseOperationStatusListener<Void, String>() {
+        foodOfferDao.createFoodOffer(foodOffer, new DatabaseOperationStatusListener<Void, String>() {
             @Override
             public void onSuccess(Void successResponse) {
 
@@ -168,6 +173,8 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
         mFileUploader = new FirebaseStorageFileUploader();
 
         mFoodOfferDao = new FoodOfferFirebaseRealtimeDao();
+
+        mChefUserProfileSharedPref = ChefUserProfileSharedPref.build(this);
 
         mAuth = new FirebaseEmailPasswordAuthentication();
         authenticateUser(mAuth, mAuthenticationCallbacks);
@@ -286,6 +293,10 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
             mFoodOffer.setmItems(items);
             mFoodOffer.setmTags(tags);
             mFoodOffer.setmQuantity(quantity);
+
+            // load address and region from chef user profile information
+            mFoodOffer.setmAddress(mChefUserProfileSharedPref.getChefUser().getmHomeAddress());
+            mFoodOffer.setmRegion(mChefUserProfileSharedPref.getChefUser().getmRegion());
 
             foodOfferSaveInProgressUI();
 
