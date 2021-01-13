@@ -8,5 +8,6 @@ public abstract class NosqlDatabasePathsUtil {
     public static final String CHEF_USERS_NODE = "chefUsers";
 
     public static final String FOOD_OFFERS_NODE = "foodOffers";
+    public static final String FOOD_OFFERS_CHEF_UID = "mChefUid";
 
 }

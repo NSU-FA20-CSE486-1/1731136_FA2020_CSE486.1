@@ -3,12 +3,21 @@ package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.firebaseDaos;
 import android.util.Log;
 
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.FoodOfferDao;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.ChefUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.FoodOffer;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.ListDataChangeListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.NosqlDatabasePathsUtil;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 public class FoodOfferFirebaseRealtimeDao implements FoodOfferDao {
 
@@ -33,5 +42,56 @@ public class FoodOfferFirebaseRealtimeDao implements FoodOfferDao {
                     statusListener.onFailed(e.getMessage());
                     Log.d(TAG, "onFailure: create food offer error -> "+e.getStackTrace());
                 });
+    }
+
+    @Override
+    public void readFoodOffersForChef(String chefUid, DatabaseOperationStatusListener<Void, String> statusListener,
+                                      ListDataChangeListener<FoodOffer> dataChangeListener) {
+
+        Query query = mDatabase.getReference().child(NosqlDatabasePathsUtil.FOOD_OFFERS_NODE)
+                .orderByChild(NosqlDatabasePathsUtil.FOOD_OFFERS_CHEF_UID).equalTo(chefUid);
+
+        final boolean[] dataReadSuccess = {false};
+
+        query.getRef().addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                if(!dataReadSuccess[0]){
+                    dataReadSuccess[0] = true;
+                    statusListener.onSuccess(null);
+                }
+
+                FoodOffer foodOffer = snapshot.getValue(FoodOffer.class);
+
+                dataChangeListener.onDataAdded(foodOffer);
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                dataChangeListener.onDataUpdated(snapshot.getValue(FoodOffer.class));
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+                dataChangeListener.onDataRemoved(snapshot.getValue(FoodOffer.class));
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+                Log.d(TAG, "onCancelled: read chef food offers error -> "+error.getDetails());
+
+                statusListener.onFailed(error.getMessage());
+            }
+        });
+
     }
 }
