@@ -128,4 +128,11 @@ public class ChefHomeActivity extends AppCompatActivity implements ChefFoodOffer
         Toast.makeText(this, R.string.an_unexpected_error_occurred, Toast.LENGTH_LONG)
                 .show();
     }
+
+    @Override
+    public void onFailedToDeleteFoodOffer() {
+
+        Toast.makeText(this, R.string.failed_to_delete_food_offer, Toast.LENGTH_LONG)
+                .show();
+    }
 }

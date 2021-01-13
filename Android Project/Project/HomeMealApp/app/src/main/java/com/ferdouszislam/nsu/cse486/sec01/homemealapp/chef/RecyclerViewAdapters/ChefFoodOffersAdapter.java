@@ -173,7 +173,17 @@ public class ChefFoodOffersAdapter extends RecyclerView.Adapter<ChefFoodOffersAd
      */
     private void deleteFoodOffer(FoodOfferDao foodOfferDao, FoodOffer foodOffer) {
 
-        // TODO: implement
+        foodOfferDao.deleteFoodItem(foodOffer.getId(), new DatabaseOperationStatusListener<Void, String>() {
+            @Override
+            public void onSuccess(Void successResponse) {
+                // kept blank intentionally
+            }
+
+            @Override
+            public void onFailed(String failedResponse) {
+                mCaller.onFailedToDeleteFoodOffer();
+            }
+        });
     }
 
     @Override
@@ -186,6 +196,7 @@ public class ChefFoodOffersAdapter extends RecyclerView.Adapter<ChefFoodOffersAd
         void onCreateVariantClick(FoodOffer foodOffer);
         void onFoodOffersListNotEmpty();
         void onFailedToLoadFoodOffers();
+        void onFailedToDeleteFoodOffer();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
