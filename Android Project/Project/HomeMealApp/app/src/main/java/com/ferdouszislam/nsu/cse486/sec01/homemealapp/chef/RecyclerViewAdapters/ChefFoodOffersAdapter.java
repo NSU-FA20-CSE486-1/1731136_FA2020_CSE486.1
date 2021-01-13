@@ -1,5 +1,6 @@
 package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.RecyclerViewAdapters;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,12 +19,16 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.FoodOffer;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.ListDataChangeListener;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 public class ChefFoodOffersAdapter extends RecyclerView.Adapter<ChefFoodOffersAdapter.ViewHolder> {
 
     private static final String TAG = "CFOAd-debug";
 
+    // caller activity/fragment
+    WeakReference<Context> mContext;
+    
     // caller activity/fragment callbacks
     private ChefFoodOffersAdapter.CallerCallback mCaller;
 
@@ -84,10 +89,11 @@ public class ChefFoodOffersAdapter extends RecyclerView.Adapter<ChefFoodOffersAd
                 }
             };
 
-    public ChefFoodOffersAdapter(CallerCallback mCaller, String mChefUid, ArrayList<FoodOffer> mFoodOffers) {
+    public ChefFoodOffersAdapter(Context mContext, CallerCallback mCaller, String mChefUid) {
+        this.mContext = new WeakReference<>(mContext);
         this.mCaller = mCaller;
         this.mChefUid = mChefUid;
-        this.mFoodOffers = mFoodOffers;
+        this.mFoodOffers = new ArrayList<>();
 
         loadChefFoodOffers();
     }
@@ -141,7 +147,23 @@ public class ChefFoodOffersAdapter extends RecyclerView.Adapter<ChefFoodOffersAd
         holder.tagsTextView.setText(foodOffer.getmTags());
 
         holder.createVariationButton.setOnClickListener( v -> mCaller.onCreateVariantClick(foodOffer) );
-        holder.deleteButton.setOnClickListener( v -> mCaller.onDeleteFoodOfferClick(foodOffer) );
+
+        holder.deleteButton.setOnClickListener(v -> {
+
+            mFoodOfferDao = new FoodOfferFirebaseRealtimeDao();
+
+            deleteFoodOffer(mFoodOfferDao, foodOffer);
+        });
+    }
+
+    /**
+     * delete food offer from database
+     * @param foodOfferDao dao object
+     * @param foodOffer foodOffer to be deleted
+     */
+    private void deleteFoodOffer(FoodOfferDao foodOfferDao, FoodOffer foodOffer) {
+
+        // TODO: implement
     }
 
     @Override
@@ -152,7 +174,6 @@ public class ChefFoodOffersAdapter extends RecyclerView.Adapter<ChefFoodOffersAd
     public interface CallerCallback{
 
         void onCreateVariantClick(FoodOffer foodOffer);
-        void onDeleteFoodOfferClick(FoodOffer foodOffer);
         void onFoodOffersListNotEmpty();
         void onFailedToLoadFoodOffers();
     }
