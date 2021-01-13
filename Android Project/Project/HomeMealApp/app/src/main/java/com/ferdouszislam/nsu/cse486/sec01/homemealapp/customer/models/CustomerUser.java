@@ -1,6 +1,8 @@
 package com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.models;
 
-public class CustomerUser {
+import java.io.Serializable;
+
+public class CustomerUser implements Serializable {
 
     private String mUid;
     private String mPhoneNumber;

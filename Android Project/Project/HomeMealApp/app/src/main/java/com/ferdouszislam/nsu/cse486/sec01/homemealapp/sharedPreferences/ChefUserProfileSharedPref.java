@@ -18,7 +18,7 @@ public class ChefUserProfileSharedPref extends SharedPrefsUtil {
 
     public static ChefUserProfileSharedPref build(Context context){
 
-        return new ChefUserProfileSharedPref(SharedPrefKeysUtil.CHEF_USER_LOCATION_SHARED_PREF_ID, context);
+        return new ChefUserProfileSharedPref(SharedPrefKeysUtil.CHEF_USER_PROFILE_PREF_ID, context);
     }
 
     private ChefUserProfileSharedPref(String mSharedPreferenceId, Context mContext) {
