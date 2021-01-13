@@ -50,6 +50,8 @@ public class ChefFoodOffersAdapter extends RecyclerView.Adapter<ChefFoodOffersAd
                         mCaller.onFoodOffersListNotEmpty();
                     }
 
+                    Log.d(TAG, "onDataAdded: new data -> "+data.toString());
+
                     mFoodOffers.add(0, data);
                     notifyItemInserted(0);
                 }

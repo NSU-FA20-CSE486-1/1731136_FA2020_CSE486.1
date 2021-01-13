@@ -6,26 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".chef.ChefHomeActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/chefHome_Toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/theme_light_color"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:buttonGravity="bottom"
-        app:menu="@menu/chef_menu" />
-
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/chefHome_noFoodOffers_TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
         android:text="@string/foodItemsEmpty_TextView"
         android:textColor="@color/theme_dark_color"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:visibility="visible" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chefHome_foodOffers_RecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addFoodItem_Button"
@@ -40,5 +36,16 @@
         android:onClick="addFoodItemClick"
         app:srcCompat="@drawable/ic_action_add"
         android:focusable="true" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/chefHome_Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/theme_light_color"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:buttonGravity="bottom"
+        app:menu="@menu/chef_menu" />
 
 </RelativeLayout>

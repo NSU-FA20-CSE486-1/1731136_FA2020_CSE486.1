@@ -123,4 +123,21 @@ public class FoodOffer {
     public void setmRegion(String mRegion) {
         this.mRegion = mRegion;
     }
+
+    @Override
+    public String toString() {
+        return "FoodOffer{" +
+                "mChefUid='" + mChefUid + '\'' +
+                ", id='" + id + '\'' +
+                ", mFoodPhotoUrl='" + mFoodPhotoUrl + '\'' +
+                ", mFoodName='" + mFoodName + '\'' +
+                ", mPrice='" + mPrice + '\'' +
+                ", mDescription='" + mDescription + '\'' +
+                ", mItems='" + mItems + '\'' +
+                ", mTags='" + mTags + '\'' +
+                ", mQuantity='" + mQuantity + '\'' +
+                ", mAddress='" + mAddress + '\'' +
+                ", mRegion='" + mRegion + '\'' +
+                '}';
+    }
 }
