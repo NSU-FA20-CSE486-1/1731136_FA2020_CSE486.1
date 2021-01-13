@@ -139,6 +139,8 @@
     <string name="chefSignup_PhoneNumber_EditText_hint">(+880) phone number</string>
     <string name="no_region_selected">select a region please!</string>
     <string name="failed_to_delete_food_offer">Failed to delete food offer!</string>
+    <string name="customerSignUpEmailHint_TextView">Must use different email than your chef account (if any)</string>
+    <string name="chefSignup_emailHintTextView">Must be different than your customer account (if any)</string>
 
     <string-array name="regions_array">
         <item>Mirpur</item>
