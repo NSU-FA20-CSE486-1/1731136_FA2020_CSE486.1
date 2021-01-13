@@ -74,7 +74,10 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
         @Override
         public void onAuthenticationFailure(String message) {
 
-            SessionUtil.doHardLogout(ChefAddFoodOfferActivity.this, mAuth);
+            Toast.makeText(ChefAddFoodOfferActivity.this, R.string.hard_logout, Toast.LENGTH_SHORT)
+                    .show();
+
+            SessionUtil.logoutNow(ChefAddFoodOfferActivity.this, mAuth);
         }
     };
 

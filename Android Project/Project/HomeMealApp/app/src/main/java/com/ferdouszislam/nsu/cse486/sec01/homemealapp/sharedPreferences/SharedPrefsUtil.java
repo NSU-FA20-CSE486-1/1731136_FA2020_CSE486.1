@@ -37,6 +37,14 @@ public abstract class SharedPrefsUtil {
         return getSharedPreference().getString(key, null);
     }
 
+    /*
+    Clears out all shared pref data associated with this object's "mSharedPreferenceId"
+     */
+    public void clearAllSharedPreferences(){
+
+        getSharedPreference().edit().clear().apply();
+    }
+
     private SharedPreferences getSharedPreference(){
 
         return mContext.getSharedPreferences(mSharedPreferenceId, Context.MODE_PRIVATE);

@@ -2,11 +2,16 @@ package com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.CommonLoginActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.MainActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.UserTypeChoiceActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.ChefUserProfileSharedPref;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.UserAuthSharedPref;
 
 /**
  * Class to manage user session
@@ -14,23 +19,31 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
  */
 public abstract class SessionUtil {
 
-    /*
-     Authentication failed, logout immediately
-     */
-    public static void doHardLogout(Context context, Authentication auth) {
+    private static final String TAG = "SessU-debug";
 
-        Toast.makeText(context, R.string.hard_logout, Toast.LENGTH_SHORT)
-                .show();
+    /*
+     logout
+     */
+    public static void logoutNow(Context context, Authentication auth) {
+
+        clearSharedPreferences(context);
 
         auth.signOut();
 
-        Intent intent = new Intent(context, CommonLoginActivity.class);
+        Intent intent = new Intent(context, UserTypeChoiceActivity.class);
 
         // clear out all activities on the back stack and open LoginActivity
         // so that back press from this point on closes the app
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         context.startActivity(intent);
+    }
+
+    private static void clearSharedPreferences(Context context) {
+
+        ChefUserProfileSharedPref.build(context).clearAllSharedPreferences();
+
+        UserAuthSharedPref.build(context).clearAllSharedPreferences();
     }
 
 }

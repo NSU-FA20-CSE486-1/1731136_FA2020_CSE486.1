@@ -7,7 +7,6 @@ import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +22,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.firebaseDaos.Che
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.ChefUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.SingleDataChangeListener;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.ChefUserProfileSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
 
@@ -45,6 +45,9 @@ public class ChefUpdateProfileActivity extends AppCompatActivity {
         public void onDataChange(ChefUser data) {
 
             mChefUser = data;
+
+            mChefUserProfileSharedPref.setChefUser(mChefUser);
+
             populateInputFields(mChefUser);
         }
     };
@@ -62,11 +65,18 @@ public class ChefUpdateProfileActivity extends AppCompatActivity {
         @Override
         public void onAuthenticationFailure(String message) {
 
-            SessionUtil.doHardLogout(ChefUpdateProfileActivity.this, mAuth);
+            Toast.makeText(ChefUpdateProfileActivity.this, R.string.hard_logout, Toast.LENGTH_SHORT)
+                    .show();
+
+            SessionUtil.logoutNow(ChefUpdateProfileActivity.this, mAuth);
 
             Log.d(TAG, "onAuthenticationFailure: authentication failed -> "+message);
         }
     };
+
+
+    // shared preference variable for updating local chef user profile
+    private ChefUserProfileSharedPref mChefUserProfileSharedPref;
 
 
     /**
@@ -115,6 +125,8 @@ public class ChefUpdateProfileActivity extends AppCompatActivity {
 
         setupToolbar();
 
+        setupSpinner();
+
         mPhoneNumberEditText = findViewById(R.id.chefSignup_PhoneNumber_EditText);
         mHomeAddressEditText = findViewById(R.id.chefSignup_address_EditText);
 
@@ -127,6 +139,8 @@ public class ChefUpdateProfileActivity extends AppCompatActivity {
         inProgressUI();
 
         authenticateUser(mAuth, mAuthCallbacks);
+
+        mChefUserProfileSharedPref = ChefUserProfileSharedPref.build(this);
     }
 
     private void hideUnnecessaryInputFields() {
@@ -160,6 +174,16 @@ public class ChefUpdateProfileActivity extends AppCompatActivity {
 
         mPhoneNumberEditText.setText(chefUser.getmPhoneNumber());
         mHomeAddressEditText.setText(chefUser.getmHomeAddress());
+
+        int selectedItemPostion = 0;
+        String[] regions = getResources().getStringArray(R.array.regions_array);
+        for(int i=0; i<regions.length; i++){
+            if(regions[i].equals(chefUser.getmRegion())) {
+                selectedItemPostion = i;
+                break;
+            }
+        }
+        mRegionSpinner.setSelection(selectedItemPostion);
     }
 
     /*
@@ -192,18 +216,6 @@ public class ChefUpdateProfileActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(R.layout.region_spinner_dropdown);
         // Apply the adapter to the spinner
         mRegionSpinner.setAdapter(adapter);
-
-        mRegionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                String selectedItem = parent.getItemAtPosition(position)+"";
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
     }
 
 
@@ -214,28 +226,34 @@ public class ChefUpdateProfileActivity extends AppCompatActivity {
 
         String phoneNumber = mPhoneNumberEditText.getText().toString().trim();
         String homeAddress = mHomeAddressEditText.getText().toString().trim();
+        String region = mRegionSpinner.getSelectedItem()+"";
 
-        if(validateInputs(phoneNumber, homeAddress) && dataWasUpdated(phoneNumber, homeAddress)){
+        if(validateInputs(phoneNumber, homeAddress) && dataWasUpdated(phoneNumber, homeAddress, region)){
 
             mChefUser.setmPhoneNumber(phoneNumber);
             mChefUser.setmHomeAddress(homeAddress);
+            mChefUser.setmRegion(region);
 
             inProgressUI();
 
-            updateUserDataInDatabase(mChefUser, mChefUserDao);
+            updateChefUserProfile(mChefUser, mChefUserDao, mChefUserProfileSharedPref);
         }
     }
 
     /**
-     * update chef user's data in database
+     * update chef user's profile data
      * @param chefUser updated chef user object
      * @param chefUserDao dao object
+     * @param chefUserProfileSharedPref shared pref object for chef user profile info
      */
-    private void updateUserDataInDatabase(ChefUser chefUser, ChefUserDao chefUserDao) {
+    private void updateChefUserProfile(ChefUser chefUser, ChefUserDao chefUserDao,
+                                       ChefUserProfileSharedPref chefUserProfileSharedPref) {
 
         chefUserDao.updateWithId(chefUser, chefUser.getmUid(), new DatabaseOperationStatusListener<Void, String>() {
             @Override
             public void onSuccess(Void successResponse) {
+
+                chefUserProfileSharedPref.setChefUser(chefUser);
 
                 progressCompleteUI();
                 updateSuccessUI();
@@ -282,9 +300,11 @@ public class ChefUpdateProfileActivity extends AppCompatActivity {
      * @param homeAddress home address input
      * @return if data was changed or not
      */
-    private boolean dataWasUpdated(String phoneNumber, String homeAddress) {
+    private boolean dataWasUpdated(String phoneNumber, String homeAddress, String region) {
 
-        return !mChefUser.getmPhoneNumber().equals(phoneNumber) || !mChefUser.getmHomeAddress().equals(homeAddress);
+        return !mChefUser.getmPhoneNumber().equals(phoneNumber)
+                || !mChefUser.getmHomeAddress().equals(homeAddress)
+                || !mChefUser.getmRegion().equals(region);
     }
 
     /*

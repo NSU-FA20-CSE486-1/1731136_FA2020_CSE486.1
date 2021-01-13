@@ -83,4 +83,14 @@ public abstract class InputValidatorUtil {
             return false;
         }
     }
+
+    public static boolean isValidRegion(String region, String[] allowedRegions) {
+
+        for(String s: allowedRegions){
+
+            if(s.equals(region)) return true;
+        }
+
+        return false;
+    }
 }

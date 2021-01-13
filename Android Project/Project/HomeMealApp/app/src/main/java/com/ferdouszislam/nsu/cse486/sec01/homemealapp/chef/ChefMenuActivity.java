@@ -14,6 +14,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.UserTypeChoiceActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerUpdateProfileActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
 
 public class ChefMenuActivity extends AppCompatActivity {
 
@@ -69,14 +70,6 @@ public class ChefMenuActivity extends AppCompatActivity {
 
     public void logoutClick(View view) {
 
-        Authentication auth = new FirebaseEmailPasswordAuthentication();
-
-        auth.signOut();
-
-        Intent intent = new Intent(this, MainActivity.class);
-        // clear out all activities on the back stack
-        // so that back press from this point on closes the app
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        SessionUtil.logoutNow(this, new FirebaseEmailPasswordAuthentication());
     }
 }

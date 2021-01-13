@@ -11,15 +11,17 @@ public class ChefUser {
     private String mPhoneNumber = "";
     private String mEmail = "";
     private String mHomeAddress = "";
+    private String mRegion = "";
 
     public ChefUser() {
     }
 
-    public ChefUser(String mUid, String mPhoneNumber, String mEmail, String mHomeAddress) {
+    public ChefUser(String mUid, String mPhoneNumber, String mEmail, String mHomeAddress, String mRegion) {
         this.mUid = mUid;
         this.mPhoneNumber = mPhoneNumber;
         this.mEmail = mEmail;
         this.mHomeAddress = mHomeAddress;
+        this.mRegion = mRegion;
     }
 
     public String getmUid() {
@@ -52,6 +54,25 @@ public class ChefUser {
 
     public void setmHomeAddress(String mHomeAddress) {
         this.mHomeAddress = mHomeAddress;
+    }
+
+    public String getmRegion() {
+        return mRegion;
+    }
+
+    public void setmRegion(String mRegion) {
+        this.mRegion = mRegion;
+    }
+
+    @Override
+    public String toString() {
+        return "ChefUser{" +
+                "mUid='" + mUid + '\'' +
+                ", mPhoneNumber='" + mPhoneNumber + '\'' +
+                ", mEmail='" + mEmail + '\'' +
+                ", mHomeAddress='" + mHomeAddress + '\'' +
+                ", mRegion='" + mRegion + '\'' +
+                '}';
     }
 
     @Override

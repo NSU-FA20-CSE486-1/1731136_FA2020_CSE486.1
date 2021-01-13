@@ -24,6 +24,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.ChefUserDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.firebaseDaos.ChefUserFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.ChefUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.ChefUserProfileSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.UserAuthSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.UserType;
@@ -72,6 +73,10 @@ public class ChefSignupActivity extends AppCompatActivity {
 
     // shared preference to store user type
     private UserAuthSharedPref mUserAuthSharedPref;
+
+
+    // shared preference to store chef user profile
+    private ChefUserProfileSharedPref mChefUserProfileSharedPref;
 
 
     @Override
@@ -126,34 +131,24 @@ public class ChefSignupActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(R.layout.region_spinner_dropdown);
         // Apply the adapter to the spinner
         mRegionSpinner.setAdapter(adapter);
-
-        mRegionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                showToast(parent.getItemAtPosition(position)+"");
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
     }
 
     public void signupClick(View view) {
 
         String email = mEmailEditText.getText().toString().trim();
         String homeAddress = mHomeAddressEditText.getText().toString().trim();
+        String region = mRegionSpinner.getSelectedItem()+"";
         String phoneNumber = mPhoneNumberEditText.getText().toString().trim();
         String password = mPasswordEditText.getText().toString().trim();
         String confirmPassword = mConfirmPasswordEditText.getText().toString().trim();
 
-        if(validateInputs(email, phoneNumber, homeAddress, password, confirmPassword)){
+        if(validateInputs(email, phoneNumber, homeAddress, region, password, confirmPassword)){
 
             mChefUser = new ChefUser();
             mChefUser.setmEmail(email);
             mChefUser.setmHomeAddress(homeAddress);
             mChefUser.setmPhoneNumber(phoneNumber);
+            mChefUser.setmRegion(region);
 
             mEmailPasswordAuthUser = new EmailPasswordAuthUser();
             mEmailPasswordAuthUser.setmEmail(email);
@@ -176,7 +171,8 @@ public class ChefSignupActivity extends AppCompatActivity {
         auth.registerUserAuthentication();
     }
 
-    private boolean validateInputs(String email, String phoneNumber, String homeAddress, String password, String confirmPassword) {
+    private boolean validateInputs(String email, String phoneNumber, String homeAddress, String region,
+                                   String password, String confirmPassword) {
 
         boolean isValid = true;
 
@@ -193,6 +189,11 @@ public class ChefSignupActivity extends AppCompatActivity {
         if(!InputValidatorUtil.isValidHomeAddress(homeAddress)){
 
             mHomeAddressEditText.setError(getString(R.string.address_input_error));
+            isValid = false;
+        }
+        if(!InputValidatorUtil.isValidRegion(region, getResources().getStringArray(R.array.regions_array))){
+
+            showToast(getString(R.string.no_region_selected));
             isValid = false;
         }
         if(!InputValidatorUtil.isValidPassword(password)){
@@ -219,7 +220,7 @@ public class ChefSignupActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void successResponse) {
 
-                storeUserTypeInSharedPrefs();
+                storeUserInSharedPrefs();
 
                 openChefHomeActivity();
             }
@@ -236,10 +237,13 @@ public class ChefSignupActivity extends AppCompatActivity {
     /*
     save usertype as "chef_user" in shared pref
      */
-    private void storeUserTypeInSharedPrefs() {
+    private void storeUserInSharedPrefs() {
 
         mUserAuthSharedPref = UserAuthSharedPref.build(this);
         mUserAuthSharedPref.setUserType(UserType.CHEF);
+
+        mChefUserProfileSharedPref = ChefUserProfileSharedPref.build(this);
+        mChefUserProfileSharedPref.setChefUser(mChefUser);
     }
 
     private void openChefHomeActivity() {
