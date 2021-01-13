@@ -4,18 +4,27 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.ChefMenuActivity;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.ChefPlacedOrdersActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.FoodOffer;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.recyclerViewAdapters.FoodOffersAdapter;
 
-public class CustomerHomeActivity extends AppCompatActivity {
+public class CustomerHomeActivity extends AppCompatActivity implements FoodOffersAdapter.CallerCallback{
+
+    // ui
+    private TextView mNoFoodOffersTextView;
+    private RecyclerView mFoodOffersRecyclerView;
+    private FoodOffersAdapter mFoodOffersAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +37,13 @@ public class CustomerHomeActivity extends AppCompatActivity {
     private void init() {
 
         setupToolbar();
+
+        mNoFoodOffersTextView = findViewById(R.id.noFoodOffersFound_TextView);
+        mFoodOffersRecyclerView = findViewById(R.id.customerHome_foodOffers_RecyclerView);
+
+        mFoodOffersAdapter = new FoodOffersAdapter(this, this);
+        mFoodOffersRecyclerView.setAdapter(mFoodOffersAdapter);
+        mFoodOffersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void setupToolbar() {
@@ -85,5 +101,24 @@ public class CustomerHomeActivity extends AppCompatActivity {
     public void closeSearchFilterClick(View view) {
 
         findViewById(R.id.searchFilter_View).setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onSeeMoreClick(FoodOffer foodOffer) {
+
+    }
+
+    @Override
+    public void onFoodOffersListNotEmpty() {
+
+        mNoFoodOffersTextView.setVisibility(View.GONE);
+        mFoodOffersRecyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onFailedToLoadFoodOffers() {
+
+        Toast.makeText(this, R.string.an_unexpected_error_occurred, Toast.LENGTH_LONG)
+                .show();
     }
 }
