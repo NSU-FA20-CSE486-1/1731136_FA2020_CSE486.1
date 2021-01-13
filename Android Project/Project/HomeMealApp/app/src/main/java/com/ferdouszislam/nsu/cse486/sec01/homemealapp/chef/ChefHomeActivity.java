@@ -25,6 +25,8 @@ import java.lang.ref.WeakReference;
 
 public class ChefHomeActivity extends AppCompatActivity implements ChefFoodOffersAdapter.CallerCallback {
 
+    public static final String FOOD_VARIANT_KEY = "com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef-createVariant";
+
     // ui
     private TextView mNoFoodOffersTextView;
     private RecyclerView mFoodOffersRecyclerView;
@@ -113,6 +115,11 @@ public class ChefHomeActivity extends AppCompatActivity implements ChefFoodOffer
     @Override
     public void onCreateVariantClick(FoodOffer foodOffer) {
 
+        Intent intent = new Intent(this, ChefCreateFoodVariantActivity.class);
+
+        intent.putExtra(FOOD_VARIANT_KEY, foodOffer);
+
+        startActivity(intent);
     }
 
     @Override

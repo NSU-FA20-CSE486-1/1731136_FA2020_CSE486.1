@@ -43,27 +43,27 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
     private static final String TAG = "CAFOA-debug";
 
     // request code for camera intent
-    private static final int REQUEST_IMAGE_CAPTURE = 589;
+    protected static final int REQUEST_IMAGE_CAPTURE = 589;
 
     // auth to access taken image file
-    private static final String FILE_PROVIDER_AUTHORITY = "com.ferdouszislam.nsu.cse486.sec01.homemealapp.fileprovider";
+    protected static final String FILE_PROVIDER_AUTHORITY = "com.ferdouszislam.nsu.cse486.sec01.homemealapp.fileprovider";
 
     // ui
-    private ImageView mFoodImageView;
-    private EditText mFoodNameEditText, mPriceEditText, mDescriptionEditText;
-    private EditText mItemsEditText, mTagsEditText, mQuantityEditText;
-    private Button mOfferFoodButton;
+    protected ImageView foodImageView;
+    protected EditText foodNameEditText, priceEditText, descriptionEditText;
+    protected EditText itemsEditText, tagsEditText, quantityEditText;
+    protected Button offerFoodButton;
 
     // model
-    private FoodOffer mFoodOffer;
+    protected FoodOffer mFoodOffer;
 
     // model for captured image
-    private CapturedImage mImage;
-    private boolean mImageWasTaken;
+    protected CapturedImage mImage;
+    protected boolean mImageWasTaken;
 
     // variables to authenticate user login state, because uid is needed here
-    private Authentication mAuth;
-    private Authentication.AuthenticationCallbacks mAuthenticationCallbacks = new Authentication.AuthenticationCallbacks() {
+    protected Authentication mAuth;
+    protected Authentication.AuthenticationCallbacks mAuthenticationCallbacks = new Authentication.AuthenticationCallbacks() {
         @Override
         public void onAuthenticationSuccess(AuthenticationUser user) {
 
@@ -83,8 +83,8 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
     };
 
     // variables to upload photo to firebase storage
-    private FirebaseStorageFileUploader mFileUploader;
-    private FileUploader.FileUploadCallbacks mFileUploadCallbacks = new FileUploader.FileUploadCallbacks() {
+    protected FirebaseStorageFileUploader mFileUploader;
+    protected FileUploader.FileUploadCallbacks mFileUploadCallbacks = new FileUploader.FileUploadCallbacks() {
         @Override
         public void onUploadComplete(Uri uploadedImageLink) {
 
@@ -116,7 +116,7 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
     };
 
     // shared preference variable for updating local chef user profile
-    private ChefUserProfileSharedPref mChefUserProfileSharedPref;
+    protected ChefUserProfileSharedPref mChefUserProfileSharedPref;
 
 
     /**
@@ -124,7 +124,7 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
      * @param foodOffer food offere to be stored to database
      * @param foodOfferDao dao for food offer model
      */
-    private void saveFoodOfferToDatabase(FoodOffer foodOffer, FoodOfferDao foodOfferDao) {
+    protected void saveFoodOfferToDatabase(FoodOffer foodOffer, FoodOfferDao foodOfferDao) {
 
         foodOfferDao.createFoodOffer(foodOffer, new DatabaseOperationStatusListener<Void, String>() {
             @Override
@@ -144,7 +144,7 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
 
 
     // variables to store food offer to database
-    private FoodOfferDao mFoodOfferDao;
+    protected FoodOfferDao mFoodOfferDao;
 
 
     @Override
@@ -155,22 +155,23 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
         init();
     }
 
-    private void init() {
+    protected void init() {
 
         setupToolbar();
 
-        mFoodImageView = findViewById(R.id.chef_addFoodOffer_foodOffer_ImageView);
-        mFoodNameEditText = findViewById(R.id.chef_addFoodOffer_foodName_EditText);
-        mPriceEditText = findViewById(R.id.chef_addFoodOffer_price_EditText);
-        mDescriptionEditText = findViewById(R.id.chef_addFoodOffer_description_EditText);
-        mItemsEditText = findViewById(R.id.chef_addFoodOffer_items_EditText);
-        mTagsEditText = findViewById(R.id.chef_addFoodOffer_tags_EditText);
-        mQuantityEditText = findViewById(R.id.chef_addFoodOffer_quantity_EditText);
-        mOfferFoodButton = findViewById(R.id.offerFood_Button);
+        foodImageView = findViewById(R.id.chef_addFoodOffer_foodOffer_ImageView);
+        foodNameEditText = findViewById(R.id.chef_addFoodOffer_foodName_EditText);
+        priceEditText = findViewById(R.id.chef_addFoodOffer_price_EditText);
+        descriptionEditText = findViewById(R.id.chef_addFoodOffer_description_EditText);
+        itemsEditText = findViewById(R.id.chef_addFoodOffer_items_EditText);
+        tagsEditText = findViewById(R.id.chef_addFoodOffer_tags_EditText);
+        quantityEditText = findViewById(R.id.chef_addFoodOffer_quantity_EditText);
+        offerFoodButton = findViewById(R.id.offerFood_Button);
 
         mFoodOffer = new FoodOffer();
 
         mFileUploader = new FirebaseStorageFileUploader();
+        mImageWasTaken = false;
 
         mFoodOfferDao = new FoodOfferFirebaseRealtimeDao();
 
@@ -183,7 +184,7 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
     /*
     authenticate user to get the uid
      */
-    private void authenticateUser(Authentication auth, Authentication.AuthenticationCallbacks authCallbacks) {
+    protected void authenticateUser(Authentication auth, Authentication.AuthenticationCallbacks authCallbacks) {
 
         auth.setmAuthenticationCallbacks(authCallbacks);
         auth.authenticateUser();
@@ -192,7 +193,7 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
     /*
     setup the toolbar with back button
      */
-    private void setupToolbar() {
+    protected void setupToolbar() {
 
         Toolbar myChildToolbar = findViewById(R.id.chefAddFoodOffer_Toolbar);
         setSupportActionBar(myChildToolbar);
@@ -218,7 +219,7 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
 
                 mImageWasTaken = true;
 
-                mFoodImageView.setImageURI(mImage.getmPhotoUri());
+                foodImageView.setImageURI(mImage.getmPhotoUri());
 
                 break;
         }
@@ -248,7 +249,7 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
      * open default camera app to take an image
      * @param image model for image to be capture, with info of temporarily created local file info
      */
-    private void dispatchTakePictureIntent(CapturedImage image) {
+    protected void dispatchTakePictureIntent(CapturedImage image) {
 
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
@@ -278,12 +279,12 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
      */
     public void offerFoodClick(View view) {
 
-        String foodName = mFoodNameEditText.getText().toString().trim();
-        String price = mPriceEditText.getText().toString().trim();
-        String description = mDescriptionEditText.getText().toString().trim();
-        String items = mItemsEditText.getText().toString().trim();
-        String tags = mTagsEditText.getText().toString().trim();
-        String quantity = mQuantityEditText.getText().toString().trim();
+        String foodName = foodNameEditText.getText().toString().trim();
+        String price = priceEditText.getText().toString().trim();
+        String description = descriptionEditText.getText().toString().trim();
+        String items = itemsEditText.getText().toString().trim();
+        String tags = tagsEditText.getText().toString().trim();
+        String quantity = quantityEditText.getText().toString().trim();
 
         if(validateInputs(foodName, price, description, items, tags, quantity, mImageWasTaken)){
 
@@ -307,33 +308,33 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
     /*
     validate user inputs
      */
-    private boolean validateInputs(String foodName, String price, String description, String items,
+    protected boolean validateInputs(String foodName, String price, String description, String items,
                                    String tags, String quantity, boolean imageTaken) {
 
         boolean isValid = true;
 
         if(!InputValidatorUtil.isFoodNameValid(foodName)){
-            mFoodNameEditText.setError(getString(R.string.food_name_error));
+            foodNameEditText.setError(getString(R.string.food_name_error));
             isValid = false;
         }
         if(!InputValidatorUtil.isFoodPriceValid(price)){
-            mPriceEditText.setError(getString(R.string.food_price_error));
+            priceEditText.setError(getString(R.string.food_price_error));
             isValid = false;
         }
         if(!InputValidatorUtil.isFoodDescriptionValid(description)){
-            mDescriptionEditText.setError(getString(R.string.food_description_error));
+            descriptionEditText.setError(getString(R.string.food_description_error));
             isValid = false;
         }
         if(!InputValidatorUtil.isFoodItemsValid(items)){
-            mItemsEditText.setError(getString(R.string.food_items_error));
+            itemsEditText.setError(getString(R.string.food_items_error));
             isValid = false;
         }
         if(!InputValidatorUtil.isFoodTagsValid(tags)){
-            mTagsEditText.setError(getString(R.string.food_tags_error));
+            tagsEditText.setError(getString(R.string.food_tags_error));
             isValid = false;
         }
         if(!InputValidatorUtil.isFoodQuantityValid(quantity)){
-            mQuantityEditText.setError(getString(R.string.food_quantity_error));
+            quantityEditText.setError(getString(R.string.food_quantity_error));
             isValid = false;
         }
 
@@ -350,7 +351,7 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
     /*
     start the food offer info uploading process
      */
-    private void saveFoodOffer() {
+    protected void saveFoodOffer() {
 
         // start the image uploading,
         // once the image uploading is done 'mFoodOffer' will be saved to database
@@ -362,7 +363,7 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
      * @param fileUploader file uploader object
      * @param image object for image to be uploaded
      */
-    private void uploadImage(FirebaseStorageFileUploader fileUploader, FileUploader.FileUploadCallbacks fileUploadCallbacks,
+    protected void uploadImage(FirebaseStorageFileUploader fileUploader, FileUploader.FileUploadCallbacks fileUploadCallbacks,
                              CapturedImage image){
 
         fileUploader.uploadFile(
@@ -376,23 +377,23 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
     /*
     UI event for when authentication is undergoing
      */
-    private void authenticatingUI(){
+    protected void authenticatingUI(){
 
-        mOfferFoodButton.setEnabled(false);
+        offerFoodButton.setEnabled(false);
     }
 
     /*
     UI event for when authentication is undergoing
      */
-    private void authentionSuccessUI(){
+    protected void authentionSuccessUI(){
 
-        mOfferFoodButton.setEnabled(true);
+        offerFoodButton.setEnabled(true);
     }
 
     /*
     UI event for common errors
      */
-    private void commonErrorUI() {
+    protected void commonErrorUI() {
 
         Toast.makeText(this, R.string.an_unexpected_error_occurred, Toast.LENGTH_SHORT)
                 .show();
@@ -401,7 +402,7 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
     /*
     UI event for image upload failed
      */
-    private void imageUploadFailedUI(){
+    protected void imageUploadFailedUI(){
 
         Toast.makeText(this, R.string.image_upload_failed, Toast.LENGTH_SHORT)
                 .show();
@@ -410,25 +411,25 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
     /*
     UI event for while waiting for food offer to get saved
      */
-    private void foodOfferSaveInProgressUI(){
+    protected void foodOfferSaveInProgressUI(){
 
-        mOfferFoodButton.setText(getString(R.string.saving));
-        mOfferFoodButton.setEnabled(false);
+        offerFoodButton.setText(getString(R.string.saving));
+        offerFoodButton.setEnabled(false);
     }
 
     /*
     UI event for when food offer saving process is complete (success or failed)
      */
-    private void foodOfferSaveCompleteUI(){
+    protected void foodOfferSaveCompleteUI(){
 
-        mOfferFoodButton.setText(getString(R.string.offerFood_ButtonLabel));
-        mOfferFoodButton.setEnabled(true);
+        offerFoodButton.setText(getString(R.string.offerFood_ButtonLabel));
+        offerFoodButton.setEnabled(true);
     }
 
     /*
     UI event for food offer save to database success
      */
-    private void saveFoodOfferToDatabaseSuccessUI(){
+    protected void saveFoodOfferToDatabaseSuccessUI(){
 
         Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT)
                 .show();
@@ -439,7 +440,7 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
     /*
     UI event for food offer save to database failure
      */
-    private void saveFoodOfferToDatabaseFailureUI(){
+    protected void saveFoodOfferToDatabaseFailureUI(){
 
         Toast.makeText(this, R.string.food_offer_save_failed, Toast.LENGTH_SHORT)
                 .show();

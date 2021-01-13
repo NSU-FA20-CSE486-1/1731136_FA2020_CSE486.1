@@ -1,9 +1,11 @@
 package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models;
 
+import java.io.Serializable;
+
 /**
  * Model class for a food offer
- */
-public class FoodOffer {
+ */                             // to enable passing object between activities
+public class FoodOffer implements Serializable {
 
     private String mChefUid;
     private String id;

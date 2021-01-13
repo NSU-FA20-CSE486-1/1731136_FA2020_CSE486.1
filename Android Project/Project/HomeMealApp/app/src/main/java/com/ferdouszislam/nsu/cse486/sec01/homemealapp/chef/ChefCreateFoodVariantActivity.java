@@ -5,10 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.FoodOffer;
 
-public class ChefCreateFoodVariantActivity extends AppCompatActivity {
+public class ChefCreateFoodVariantActivity extends ChefAddFoodOfferActivity {
+
+    private static final String TAG = "CCFVA-debug";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,13 +25,10 @@ public class ChefCreateFoodVariantActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chef_add_food_offer);
 
         init();
-    }
 
-    private void init() {
+        mFoodOffer = (FoodOffer) getIntent().getSerializableExtra(ChefHomeActivity.FOOD_VARIANT_KEY);
 
-        setupToolbar();
-
-        populateInputFields();
+        populateInputFields(mFoodOffer);
     }
 
 
@@ -33,14 +37,27 @@ public class ChefCreateFoodVariantActivity extends AppCompatActivity {
      * food item whose variant is being created
      * (the data should be passed from previous Activity)
      */
-    private void populateInputFields() {
+    private void populateInputFields(FoodOffer foodOffer) {
+
+        foodNameEditText.setText(foodOffer.getmFoodName());
+
+        descriptionEditText.setText(foodOffer.getmDescription());
+
+        itemsEditText.setText(foodOffer.getmItems());
+
+        priceEditText.setText(foodOffer.getmPrice());
+
+        quantityEditText.setText(foodOffer.getmQuantity());
+
+        tagsEditText.setText(foodOffer.getmTags());
     }
 
 
     /*
     setup the toolbar with back button
      */
-    private void setupToolbar() {
+    @Override
+    protected void setupToolbar() {
 
         Toolbar myChildToolbar = findViewById(R.id.chefAddFoodOffer_Toolbar);
         setSupportActionBar(myChildToolbar);
