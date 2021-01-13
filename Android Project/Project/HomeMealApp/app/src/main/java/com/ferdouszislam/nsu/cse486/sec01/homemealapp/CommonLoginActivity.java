@@ -18,7 +18,13 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.EmailPasswordAuthUser
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.ChefHomeActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.ChefSignupActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.ChefUserDao;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.firebaseDaos.ChefUserFirebaseRealtimeDao;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.ChefUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerHomeActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.SingleDataChangeListener;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.ChefUserProfileSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.UserAuthSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.UserType;
@@ -50,7 +56,8 @@ public class CommonLoginActivity extends AppCompatActivity {
 
             storeUserTypeToSharedPref(mUserType);
 
-            openUserChoiceBasedHomeActivity(mUserType);
+            mChefUserDao = new ChefUserFirebaseRealtimeDao();
+            loadUserProfileBasedHomeActivity(mUserType, user.getmUid());
         }
 
         @Override
@@ -60,6 +67,19 @@ public class CommonLoginActivity extends AppCompatActivity {
             loginAuthenticationFailedUI();
         }
     };
+
+    // variable to read chef user profile from database
+    private ChefUserDao mChefUserDao;
+    private SingleDataChangeListener<ChefUser> mSingleDataChangeListener = new SingleDataChangeListener<ChefUser>() {
+        @Override
+        public void onDataChange(ChefUser data) {
+
+            ChefUserProfileSharedPref.build(CommonLoginActivity.this).setChefUser(data);
+
+            openActivityBasedHomeActivity(mUserType);
+        }
+    };
+
 
     /**
      * save user type to shared preferences
@@ -72,10 +92,36 @@ public class CommonLoginActivity extends AppCompatActivity {
     }
 
     /**
-     * open user type based home activity
+     * load user profile based on user type
      * @param userType selected user type
      */
-    private void openUserChoiceBasedHomeActivity(String userType) {
+    private void loadUserProfileBasedHomeActivity(String userType, String uid) {
+
+        if(userType.equals(UserType.CHEF)){
+
+            mChefUserDao.readWithId(uid, mSingleDataChangeListener,
+                    new DatabaseOperationStatusListener<Void, String>() {
+                        @Override
+                        public void onSuccess(Void successResponse) {
+                            // do nothing
+                        }
+
+                        @Override
+                        public void onFailed(String failedResponse) {
+                            loginAuthenticationFailedUI();
+                        }
+                    });
+        }
+
+        else if(userType.equals(UserType.CUSTOMER)) ;
+        //else if(userType.equals(UserType.DELIVERY_GUY)) ;
+    }
+
+    /**
+     * open home activity based on user type
+     * @param userType selected user type
+     */
+    private void openActivityBasedHomeActivity(String userType) {
 
         Intent intent;
 
@@ -111,6 +157,8 @@ public class CommonLoginActivity extends AppCompatActivity {
 
         mUserType = getIntent().getStringExtra(UserTypeChoiceActivity.SELECTED_USER_TYPE_KEY);
         Log.d(TAG, "init: user type = "+mUserType);
+
+        mChefUserDao = new ChefUserFirebaseRealtimeDao();
     }
 
     /*
