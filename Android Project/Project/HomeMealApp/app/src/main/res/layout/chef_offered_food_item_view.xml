@@ -66,10 +66,12 @@
 
     <ImageView
         android:id="@+id/chef_foodImage_listItem_ImageView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
         android:layout_margin="8dp"
         android:contentDescription="@string/addPhoto_Alt"
+        android:foregroundGravity="bottom"
         app:srcCompat="@drawable/ic_add_photo" />
 
     <TextView

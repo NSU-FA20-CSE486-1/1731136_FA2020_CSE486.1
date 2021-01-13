@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.FoodOfferDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.firebaseDaos.FoodOfferFirebaseRealtimeDao;
@@ -27,7 +28,7 @@ public class ChefFoodOffersAdapter extends RecyclerView.Adapter<ChefFoodOffersAd
     private static final String TAG = "CFOAd-debug";
 
     // caller activity/fragment
-    WeakReference<Context> mContext;
+    Context mContext;
     
     // caller activity/fragment callbacks
     private ChefFoodOffersAdapter.CallerCallback mCaller;
@@ -92,7 +93,7 @@ public class ChefFoodOffersAdapter extends RecyclerView.Adapter<ChefFoodOffersAd
             };
 
     public ChefFoodOffersAdapter(Context mContext, CallerCallback mCaller, String mChefUid) {
-        this.mContext = new WeakReference<>(mContext);
+        this.mContext = mContext;
         this.mCaller = mCaller;
         this.mChefUid = mChefUid;
         this.mFoodOffers = new ArrayList<>();
@@ -141,10 +142,17 @@ public class ChefFoodOffersAdapter extends RecyclerView.Adapter<ChefFoodOffersAd
         FoodOffer foodOffer = mFoodOffers.get(position);
 
         holder.foodNameTextView.setText(foodOffer.getmFoodName());
-        holder.priceTextView.setText(foodOffer.getmPrice());
+        String price = foodOffer.getmPrice()+ " TK";
+        holder.priceTextView.setText(price);
         holder.quantityTextView.setText(foodOffer.getmQuantity());
 
         // TODO: load the image
+        Glide.with(mContext)
+                .load(foodOffer.getmFoodPhotoUrl())
+                .placeholder(R.drawable.ic_action_loading)
+                .override(300, 300)
+                .fitCenter() // scale to fit entire image within ImageView
+                .into(holder.photoImageView);
 
         holder.tagsTextView.setText(foodOffer.getmTags());
 
