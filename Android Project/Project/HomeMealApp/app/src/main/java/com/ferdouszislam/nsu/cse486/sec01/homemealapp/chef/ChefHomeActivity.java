@@ -7,7 +7,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,11 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.RecyclerViewAdapters.ChefFoodOffersAdapter;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.recyclerViewAdapters.ChefFoodOffersAdapter;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.FoodOffer;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.ChefUserProfileSharedPref;
-
-import java.lang.ref.WeakReference;
 
 public class ChefHomeActivity extends AppCompatActivity implements ChefFoodOffersAdapter.CallerCallback {
 

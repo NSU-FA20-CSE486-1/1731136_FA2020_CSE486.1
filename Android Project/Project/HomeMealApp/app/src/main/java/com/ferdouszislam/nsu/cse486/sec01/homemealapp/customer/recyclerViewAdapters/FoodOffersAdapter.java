@@ -1,10 +1,11 @@
-package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.RecyclerViewAdapters;
+package com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.recyclerViewAdapters;
 
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,26 +18,25 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.FoodOfferDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.firebaseDaos.FoodOfferFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.FoodOffer;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.recyclerViewAdapters.ChefFoodOffersAdapter;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.ListDataChangeListener;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-public class ChefFoodOffersAdapter extends RecyclerView.Adapter<ChefFoodOffersAdapter.ViewHolder> {
+public class FoodOffersAdapter extends RecyclerView.Adapter<FoodOffersAdapter.ViewHolder> {
 
-    private static final String TAG = "CFOAd-debug";
+    private static final String TAG = "CustFOAd-debug";
 
     // caller activity/fragment
     Context mContext;
-    
+
     // caller activity/fragment callbacks
-    private ChefFoodOffersAdapter.CallerCallback mCaller;
+    private FoodOffersAdapter.CallerCallback mCaller;
 
     private boolean isDataListEmpty = true;
 
     // model
-    private String mChefUid;
     private ArrayList<FoodOffer> mFoodOffers;
 
     // variables to read food offers from database
@@ -92,20 +92,19 @@ public class ChefFoodOffersAdapter extends RecyclerView.Adapter<ChefFoodOffersAd
                 }
             };
 
-    public ChefFoodOffersAdapter(Context mContext, CallerCallback mCaller, String mChefUid) {
+
+    public FoodOffersAdapter(Context mContext, FoodOffersAdapter.CallerCallback mCaller) {
         this.mContext = mContext;
         this.mCaller = mCaller;
-        this.mChefUid = mChefUid;
         this.mFoodOffers = new ArrayList<>();
 
-        loadChefFoodOffers();
+        loadFoodOffers();
     }
 
-    private void loadChefFoodOffers() {
+    private void loadFoodOffers() {
 
         mFoodOfferDao = new FoodOfferFirebaseRealtimeDao();
-        mFoodOfferDao.readFoodOffersForChef(
-                mChefUid,
+        mFoodOfferDao.readFoodOffers(
                 new DatabaseOperationStatusListener<Void, String>() {
                     @Override
                     public void onSuccess(Void successResponse) {
@@ -123,30 +122,35 @@ public class ChefFoodOffersAdapter extends RecyclerView.Adapter<ChefFoodOffersAd
                 mFoodOfferListDataChangeListener);
     }
 
+
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FoodOffersAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.chef_offered_food_item_view, parent, false);
+        View contactView = inflater.inflate(R.layout.customer_offered_food_item_view, parent, false);
 
         // Return a new holder instance
-        return new ViewHolder(contactView);
+        return new FoodOffersAdapter.ViewHolder(contactView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FoodOffersAdapter.ViewHolder holder, int position) {
 
         FoodOffer foodOffer = mFoodOffers.get(position);
 
         holder.foodNameTextView.setText(foodOffer.getmFoodName());
+
         String price = foodOffer.getmPrice()+ " TK";
         holder.priceTextView.setText(price);
+
+        String location = foodOffer.getmRegion() + "(" + foodOffer.getmAddress() + ")";
+        holder.locationTextView.setText(location);
+
         holder.quantityTextView.setText(foodOffer.getmQuantity());
 
-        // TODO: load the image
         Glide.with(mContext)
                 .load(foodOffer.getmFoodPhotoUrl())
                 .placeholder(R.drawable.ic_action_loading)
@@ -156,34 +160,7 @@ public class ChefFoodOffersAdapter extends RecyclerView.Adapter<ChefFoodOffersAd
 
         holder.tagsTextView.setText(foodOffer.getmTags());
 
-        holder.createVariationButton.setOnClickListener( v -> mCaller.onCreateVariantClick(foodOffer) );
-
-        holder.deleteButton.setOnClickListener(v -> {
-
-            mFoodOfferDao = new FoodOfferFirebaseRealtimeDao();
-
-            deleteFoodOffer(mFoodOfferDao, foodOffer);
-        });
-    }
-
-    /**
-     * delete food offer from database
-     * @param foodOfferDao dao object
-     * @param foodOffer foodOffer to be deleted
-     */
-    private void deleteFoodOffer(FoodOfferDao foodOfferDao, FoodOffer foodOffer) {
-
-        foodOfferDao.deleteFoodItem(foodOffer.getId(), new DatabaseOperationStatusListener<Void, String>() {
-            @Override
-            public void onSuccess(Void successResponse) {
-                // kept blank intentionally
-            }
-
-            @Override
-            public void onFailed(String failedResponse) {
-                mCaller.onFailedToDeleteFoodOffer();
-            }
-        });
+        holder.seeMoreButton.setOnClickListener(v -> mCaller.onSeeMoreClick(foodOffer));
     }
 
     @Override
@@ -193,28 +170,27 @@ public class ChefFoodOffersAdapter extends RecyclerView.Adapter<ChefFoodOffersAd
 
     public interface CallerCallback{
 
-        void onCreateVariantClick(FoodOffer foodOffer);
+        void onSeeMoreClick(FoodOffer foodOffer);
         void onFoodOffersListNotEmpty();
         void onFailedToLoadFoodOffers();
-        void onFailedToDeleteFoodOffer();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView foodNameTextView, priceTextView, quantityTextView, tagsTextView;
+        public TextView foodNameTextView, priceTextView, quantityTextView, tagsTextView, locationTextView;
         public ImageView photoImageView;
-        public ImageButton createVariationButton, deleteButton;
+        public Button seeMoreButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            foodNameTextView = itemView.findViewById(R.id.chef_foodName_listItem_TextView);
-            priceTextView = itemView.findViewById(R.id.chef_price_listItem_TextView);
-            quantityTextView = itemView.findViewById(R.id.chef_quantity_listItem_TextView);
-            tagsTextView = itemView.findViewById(R.id.chef_tag_listItem_TextView);
-            photoImageView = itemView.findViewById(R.id.chef_foodImage_listItem_ImageView);
-            createVariationButton = itemView.findViewById(R.id.chef_createVariant_ImageButton);
-            deleteButton = itemView.findViewById(R.id.chef_deleteFoodItem_ImageButton);
+            foodNameTextView = itemView.findViewById(R.id.customer_foodName_listItem_TextView);
+            priceTextView = itemView.findViewById(R.id.customer_price_listItem_TextView);
+            quantityTextView = itemView.findViewById(R.id.customer_quantity_listItem_TextView);
+            tagsTextView = itemView.findViewById(R.id.customer_tags_listItem_TextView);
+            photoImageView = itemView.findViewById(R.id.customer_foodImage_listItem_ImageView);
+            locationTextView = itemView.findViewById(R.id.customer_location_listItem_TextView);
+            seeMoreButton = itemView.findViewById(R.id.customer_foodOfferSeeMore_listItem_Button);
         }
     }
 }
