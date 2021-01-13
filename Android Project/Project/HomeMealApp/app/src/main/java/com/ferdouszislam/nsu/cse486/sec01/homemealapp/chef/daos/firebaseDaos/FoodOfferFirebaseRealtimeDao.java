@@ -47,6 +47,56 @@ public class FoodOfferFirebaseRealtimeDao implements FoodOfferDao {
     }
 
     @Override
+    public void readFoodOffers(DatabaseOperationStatusListener<Void, String> statusListener,
+                               ListDataChangeListener<FoodOffer> dataChangeListener) {
+
+        DatabaseReference ref = mDatabase.getReference().child(NosqlDatabasePathsUtil.FOOD_OFFERS_NODE);
+
+        final boolean[] dataReadSuccess = {false};
+
+        ref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                if(!dataReadSuccess[0]){
+                    dataReadSuccess[0] = true;
+                    statusListener.onSuccess(null);
+                }
+
+                FoodOffer foodOffer = snapshot.getValue(FoodOffer.class);
+
+                dataChangeListener.onDataAdded(foodOffer);
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                dataChangeListener.onDataUpdated(snapshot.getValue(FoodOffer.class));
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+                dataChangeListener.onDataRemoved(snapshot.getValue(FoodOffer.class));
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+                Log.d(TAG, "onCancelled: read chef food offers error -> "+error.getDetails());
+
+                statusListener.onFailed(error.getMessage());
+            }
+        });
+
+    }
+
+    @Override
     public void readFoodOffersForChef(String chefUid, DatabaseOperationStatusListener<Void, String> statusListener,
                                       ListDataChangeListener<FoodOffer> dataChangeListener) {
 

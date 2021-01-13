@@ -8,6 +8,9 @@ public interface FoodOfferDao {
 
     void createFoodOffer(FoodOffer foodOffer, DatabaseOperationStatusListener<Void, String> statusListener);
 
+    void readFoodOffers(DatabaseOperationStatusListener<Void, String> statusListener,
+                        ListDataChangeListener<FoodOffer> dataChangeListener);
+
     void readFoodOffersForChef(String chefUid, DatabaseOperationStatusListener<Void, String> statusListener,
                                ListDataChangeListener<FoodOffer> dataChangeListener);
 
