@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
 
 public class CustomerMenuActivity extends AppCompatActivity {
 
@@ -56,5 +58,10 @@ public class CustomerMenuActivity extends AppCompatActivity {
 
         //TODO: pass customer user's profile information in this intent
         startActivity(new Intent(this, CustomerUpdateProfileActivity.class));
+    }
+
+    public void logoutClick(View view) {
+
+        SessionUtil.logoutNow(this, new FirebaseEmailPasswordAuthentication());
     }
 }

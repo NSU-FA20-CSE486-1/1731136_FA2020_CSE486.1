@@ -11,6 +11,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.UserTypeChoiceActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.ChefUserProfileSharedPref;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.CustomerUserProfileSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.UserAuthSharedPref;
 
 /**
@@ -42,6 +43,8 @@ public abstract class SessionUtil {
     private static void clearSharedPreferences(Context context) {
 
         ChefUserProfileSharedPref.build(context).clearAllSharedPreferences();
+
+        CustomerUserProfileSharedPref.build(context).clearAllSharedPreferences();
 
         UserAuthSharedPref.build(context).clearAllSharedPreferences();
     }
