@@ -12,6 +12,8 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.FoodOffer;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.ListDataChangeListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.NosqlDatabasePathsUtil;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -93,5 +95,18 @@ public class FoodOfferFirebaseRealtimeDao implements FoodOfferDao {
             }
         });
 
+    }
+
+    @Override
+    public void deleteFoodItem(String id, DatabaseOperationStatusListener<Void, String> statusListener) {
+
+        mDatabase.getReference().child(NosqlDatabasePathsUtil.FOOD_OFFERS_NODE + "/" + id).setValue(null)
+
+                .addOnSuccessListener(aVoid -> statusListener.onSuccess(null))
+
+                .addOnFailureListener(e -> {
+                    statusListener.onFailed(e.getMessage());
+                    Log.d(TAG, "onFailure: error deleting food item -> "+e.getStackTrace());
+                });
     }
 }

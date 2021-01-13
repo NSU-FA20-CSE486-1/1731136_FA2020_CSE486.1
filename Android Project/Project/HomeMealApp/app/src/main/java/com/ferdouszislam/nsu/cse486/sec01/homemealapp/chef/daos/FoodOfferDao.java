@@ -11,4 +11,5 @@ public interface FoodOfferDao {
     void readFoodOffersForChef(String chefUid, DatabaseOperationStatusListener<Void, String> statusListener,
                                ListDataChangeListener<FoodOffer> dataChangeListener);
 
+    void deleteFoodItem(String id, DatabaseOperationStatusListener<Void, String> statusListener);
 }
