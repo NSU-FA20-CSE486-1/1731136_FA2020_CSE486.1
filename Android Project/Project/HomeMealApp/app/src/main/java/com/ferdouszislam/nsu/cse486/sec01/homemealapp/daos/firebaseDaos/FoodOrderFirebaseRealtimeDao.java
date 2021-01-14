@@ -30,7 +30,7 @@ public class FoodOrderFirebaseRealtimeDao implements FoodOrderDao {
 
         String foodOrderId = ref.push().getKey();
 
-        foodOrder.setmFoodOfferId(foodOrderId);
+        foodOrder.setmFoodOrderId(foodOrderId);
 
         ref.child(foodOrderId).setValue(foodOrder)
 

@@ -27,6 +27,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOffer;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOrder;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.CustomerUserProfileSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.OrderStatus;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
 
 public class CustomerPlaceOrderActivity extends AppCompatActivity {
@@ -192,6 +193,7 @@ public class CustomerPlaceOrderActivity extends AppCompatActivity {
             mFoodOrder.setmCustomerBkashPhone(bkashPhone);
             mFoodOrder.setmCustomerLocation(location);
             mFoodOrder.setmPaymentAmount(paymentAmount);
+            mFoodOrder.setmOrderStatus(OrderStatus.IN_QUEUE);
 
             placeFoodOrder(mFoodOrder);
         }
