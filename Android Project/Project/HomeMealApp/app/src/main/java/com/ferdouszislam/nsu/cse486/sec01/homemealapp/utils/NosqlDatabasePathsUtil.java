@@ -12,4 +12,8 @@ public abstract class NosqlDatabasePathsUtil {
 
     public static final String CUSTOMER_USERS_NODE = "customerUsers";
 
+    public static final String FOOD_ORDERS_NODE = "foodOrders";
+    public static final String FOOD_ORDERS_CUSTOMER_UID = "mCustomerUid";
+    public static final String FOOD_ORDERS_CHEF_UID = "mChefUid";
+
 }
