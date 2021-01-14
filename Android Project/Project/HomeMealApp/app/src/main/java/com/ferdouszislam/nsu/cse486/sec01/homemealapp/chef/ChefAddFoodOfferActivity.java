@@ -289,7 +289,7 @@ public class ChefAddFoodOfferActivity extends AppCompatActivity {
         if(validateInputs(foodName, price, description, items, tags, quantity, mImageWasTaken)){
 
             mFoodOffer.setmFoodName(foodName);
-            mFoodOffer.setmPrice(price);
+            mFoodOffer.setmPrice(Integer.parseInt(price));
             mFoodOffer.setmDescription(description);
             mFoodOffer.setmItems(items);
             mFoodOffer.setmTags(tags);

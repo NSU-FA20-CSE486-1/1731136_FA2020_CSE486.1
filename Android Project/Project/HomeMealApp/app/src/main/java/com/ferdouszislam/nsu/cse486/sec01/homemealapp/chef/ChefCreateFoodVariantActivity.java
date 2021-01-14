@@ -40,7 +40,8 @@ public class ChefCreateFoodVariantActivity extends ChefAddFoodOfferActivity {
 
         itemsEditText.setText(foodOffer.getmItems());
 
-        priceEditText.setText(foodOffer.getmPrice());
+        String price = foodOffer.getmPrice() + "TK";
+        priceEditText.setText(price);
 
         quantityEditText.setText(foodOffer.getmQuantity());
 

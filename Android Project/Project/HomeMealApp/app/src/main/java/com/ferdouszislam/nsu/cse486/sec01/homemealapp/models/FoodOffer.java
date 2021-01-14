@@ -12,7 +12,7 @@ public class FoodOffer implements Serializable {
 
     private String mFoodPhotoUrl;
     private String mFoodName;
-    private String mPrice;
+    private int mPrice;
     private String mDescription;
     private String mItems, mTags;
     private String mQuantity;
@@ -23,7 +23,7 @@ public class FoodOffer implements Serializable {
     }
 
     public FoodOffer(String mChefUid, String id, String mFoodPhotoUrl, String mFoodName,
-                     String mPrice, String mDescription, String mItems, String mTags, String mQuantity,
+                     int mPrice, String mDescription, String mItems, String mTags, String mQuantity,
                      String mAddress, String mRegion) {
         this.mChefUid = mChefUid;
         this.id = id;
@@ -70,11 +70,11 @@ public class FoodOffer implements Serializable {
         this.mFoodName = mFoodName;
     }
 
-    public String getmPrice() {
+    public int getmPrice() {
         return mPrice;
     }
 
-    public void setmPrice(String mPrice) {
+    public void setmPrice(int mPrice) {
         this.mPrice = mPrice;
     }
 
