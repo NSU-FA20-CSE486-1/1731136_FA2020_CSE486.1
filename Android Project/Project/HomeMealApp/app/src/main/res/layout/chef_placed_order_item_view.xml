@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="4dp"
     android:background="@drawable/custom_item_view_bg"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
