@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,15 +13,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.FoodOrderDao;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.CustomerUserFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.FoodOrderFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.CompletedFoodOrder;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOrder;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.OrderStatus;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
 
 public class CustomerPaymentActivity extends AppCompatActivity {
+
+    private static final String TAG = "CustPA-debug";
 
     // ui
     private TextView mPaymentAmountTextView, mVendorBkashNumberTextView;
@@ -29,6 +37,28 @@ public class CustomerPaymentActivity extends AppCompatActivity {
 
     // model
     private CompletedFoodOrder mCompletedFoodOrder;
+
+    // variables for user authentication
+    private boolean isUserAuthenticated = false;
+    private Authentication mAuth;
+    private Authentication.AuthenticationCallbacks mAuthCallbacks = new Authentication.AuthenticationCallbacks() {
+        @Override
+        public void onAuthenticationSuccess(AuthenticationUser user) {
+
+            isUserAuthenticated = true;
+        }
+
+        @Override
+        public void onAuthenticationFailure(String message) {
+
+            Toast.makeText(CustomerPaymentActivity.this, R.string.hard_logout, Toast.LENGTH_SHORT)
+                    .show();
+
+            SessionUtil.logoutNow(CustomerPaymentActivity.this, mAuth);
+
+            Log.d(TAG, "onAuthenticationFailure: authentication failed -> "+message);
+        }
+    };
 
     // variables used to insert complete order to database
     private FoodOrderDao mFoodOrderDao;
@@ -88,6 +118,9 @@ public class CustomerPaymentActivity extends AppCompatActivity {
         mPaymentAmountTextView.setText(mCompletedFoodOrder.getmPaymentAmount());
 
         mFoodOrderDao = new FoodOrderFirebaseRealtimeDao();
+
+        mAuth = new FirebaseEmailPasswordAuthentication(mAuthCallbacks);
+        mAuth.authenticateUser();
     }
 
     /*
@@ -112,6 +145,12 @@ public class CustomerPaymentActivity extends AppCompatActivity {
         String transactionCode = mTransactionCodeEditText.getText().toString().trim();
 
         if(validateInputs(transactionCode)) {
+
+            if(!isUserAuthenticated){
+                Toast.makeText(this, R.string.authenticating, Toast.LENGTH_SHORT)
+                        .show();
+                return;
+            }
 
             mCompletedFoodOrder.setmTransactionCode(transactionCode);
 

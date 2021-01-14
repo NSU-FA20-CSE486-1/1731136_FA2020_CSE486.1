@@ -154,6 +154,7 @@
     <string name="confirming">confirming…</string>
     <string name="payment_complete">payment complete!</string>
     <string name="payment_failed">Payment Failed!</string>
+    <string name="authenticating">Authenticating user please wait.</string>
 
     <string-array name="regions_array">
         <item>Mirpur</item>
