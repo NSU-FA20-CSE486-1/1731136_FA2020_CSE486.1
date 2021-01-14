@@ -5,37 +5,33 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="4dp"
     android:background="@drawable/custom_item_view_bg"
+    android:elevation="4dp"
     android:orientation="vertical"
     android:padding="4dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/chef_foodName_orders_TextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:orientation="horizontal">
+        android:layout_weight="70"
+        android:padding="4dp"
+        android:text="@string/foodName_listItem_TextView"
+        android:textColor="@color/theme_dark_color"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/chef_foodName_orders_TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="70"
-            android:padding="4dp"
-            android:text="@string/foodName_listItem_TextView"
-            android:textColor="@color/theme_dark_color"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/chef_foodPrice_orders_TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="30"
-            android:gravity="right"
-            android:padding="4dp"
-            android:text="@string/price_listItem_TextView"
-            android:textColor="@color/theme_dark_color"
-            android:textSize="18sp" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/chef_foodPrice_orders_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_weight="30"
+        android:gravity="right"
+        android:padding="4dp"
+        android:text="@string/price_listItem_TextView"
+        android:textColor="@color/theme_dark_color"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/customer_price_orders_TextView"
@@ -52,10 +48,7 @@
         android:id="@+id/customer_quantity_orders_TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_margin="8dp"
         android:padding="2dp"
         android:text="@string/address_placeHolder"
         android:textColor="@color/theme_dark_color"
