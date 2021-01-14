@@ -4,15 +4,23 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.ChefUserDao;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.firebaseDaos.ChefUserFirebaseRealtimeDao;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.ChefUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.FoodOffer;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.SingleDataChangeListener;
 
 public class CustomerFoodOfferDetailsActivity extends AppCompatActivity {
 
@@ -24,6 +32,11 @@ public class CustomerFoodOfferDetailsActivity extends AppCompatActivity {
 
     // model
     private FoodOffer mFoodOffer;
+
+    // variables to fetch vendor contact number
+    private ChefUserDao mChefUserDao;
+    private SingleDataChangeListener<ChefUser> mChefUserSingleDataChangeListener =
+            chefUser -> dialPhoneNumber(chefUser.getmPhoneNumber());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +65,23 @@ public class CustomerFoodOfferDetailsActivity extends AppCompatActivity {
         populateFoodOfferDetailFields(mFoodOffer);
     }
 
+    /*
+    setup the toolbar with back button
+     */
+    private void setupToolbar() {
+
+        Toolbar myChildToolbar = findViewById(R.id.customerFoodOfferDetails_Toolbar);
+        setSupportActionBar(myChildToolbar);
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+        if(ab!=null) {
+            // Enable the Up button
+            ab.setDisplayHomeAsUpEnabled(true);
+            // set toolbar title
+            ab.setTitle(R.string.meal_details);
+        }
+    }
+
     /**
      * populate view with food offer details
      * @param foodOffer food offer model object
@@ -76,29 +106,68 @@ public class CustomerFoodOfferDetailsActivity extends AppCompatActivity {
         mQuantityTextView.setText(foodOffer.getmQuantity());
     }
 
-    /*
-    setup the toolbar with back button
-     */
-    private void setupToolbar() {
-
-        Toolbar myChildToolbar = findViewById(R.id.customerFoodOfferDetails_Toolbar);
-        setSupportActionBar(myChildToolbar);
-        // Get a support ActionBar corresponding to this toolbar
-        ActionBar ab = getSupportActionBar();
-        if(ab!=null) {
-            // Enable the Up button
-            ab.setDisplayHomeAsUpEnabled(true);
-            // set toolbar title
-            ab.setTitle(R.string.meal_details);
-        }
-    }
-
 
     // 'Contact Vendor' button click listener
     public void contactVendorClick(View view) {
+
+        mChefUserDao = new ChefUserFirebaseRealtimeDao();
+        mChefUserDao.readWithId(
+                mFoodOffer.getmChefUid(),
+                mChefUserSingleDataChangeListener,
+                new DatabaseOperationStatusListener<Void, String>() {
+                    @Override
+                    public void onSuccess(Void successResponse) {
+                        // kept blank intentionally
+                    }
+
+                    @Override
+                    public void onFailed(String failedResponse) {
+                        contactVendorFailedUI();
+                    }
+                });
+
+        contactVendorInProgressUI();
+    }
+
+    /**
+     * open default phone app to call vendor
+     * @param phoneNumber phone number to call
+     */
+    private void dialPhoneNumber(String phoneNumber) {
+
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+            contactVendorSuccessUI();
+        }
+        else contactVendorFailedUI();
     }
 
     // 'Place Order' button click listener
     public void placeOrderClick(View view) {
+    }
+
+
+    private void contactVendorInProgressUI(){
+
+        mContactVendorButton.setEnabled(false);
+        mContactVendorButton.setText(getString(R.string.contacting));
+    }
+
+    private void contactVendorSuccessUI(){
+        mContactVendorButton.setEnabled(true);
+        mContactVendorButton.setText(getString(R.string.customer_food_details_contact_button_label));
+    }
+
+    private void contactVendorFailedUI(){
+
+        mContactVendorButton.setEnabled(true);
+        mContactVendorButton.setText(getString(R.string.customer_food_details_contact_button_label));
+
+        Toast.makeText(this, R.string.failed_to_contact, Toast.LENGTH_SHORT)
+                .show();
     }
 }

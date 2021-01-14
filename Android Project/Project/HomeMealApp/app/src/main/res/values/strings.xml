@@ -142,6 +142,8 @@
     <string name="customerSignUpEmailHint_TextView">Must use different email than your chef account (if any)</string>
     <string name="chefSignup_emailHintTextView">Must be different than your customer account (if any)</string>
     <string name="customer_food_details_contact_button_label">Contact Vendor</string>
+    <string name="contacting">Contacting…</string>
+    <string name="failed_to_contact">Failed to contact vendor!</string>
 
     <string-array name="regions_array">
         <item>Mirpur</item>
