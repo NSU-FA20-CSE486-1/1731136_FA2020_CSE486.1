@@ -147,6 +147,7 @@
     <string name="placing_order">Placing Order…</string>
     <string name="order_placed">Order Placed</string>
     <string name="default_order_quantity">1</string>
+    <string name="call_failed">Failed to dial number</string>
 
     <string-array name="regions_array">
         <item>Mirpur</item>
