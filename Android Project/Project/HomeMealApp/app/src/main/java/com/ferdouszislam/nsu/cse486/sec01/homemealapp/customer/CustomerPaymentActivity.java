@@ -23,7 +23,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.OrderStatus;
 public class CustomerPaymentActivity extends AppCompatActivity {
 
     // ui
-    private TextView mPaymentAmountTextView;
+    private TextView mPaymentAmountTextView, mVendorBkashNumberTextView;
     private EditText mTransactionCodeEditText;
     private Button mConfirmPaymentButton;
 
@@ -77,12 +77,14 @@ public class CustomerPaymentActivity extends AppCompatActivity {
         setupToolbar();
 
         mPaymentAmountTextView = findViewById(R.id.customer_paymentAmount_TextView);
+        mVendorBkashNumberTextView = findViewById(R.id.vendorBkashNumber_TextView);
         mTransactionCodeEditText = findViewById(R.id.customer_transactionCode_EditText);
         mConfirmPaymentButton = findViewById(R.id.customer_confirmPayment_Button);
 
         FoodOrder foodOrder = (FoodOrder) getIntent().getSerializableExtra(CustomerPlacedOrdersActivity.FOOD_ORDER_KEY);
         mCompletedFoodOrder = new CompletedFoodOrder(foodOrder);
 
+        mVendorBkashNumberTextView.setText(mCompletedFoodOrder.getmChefPhone());
         mPaymentAmountTextView.setText(mCompletedFoodOrder.getmPaymentAmount());
 
         mFoodOrderDao = new FoodOrderFirebaseRealtimeDao();
