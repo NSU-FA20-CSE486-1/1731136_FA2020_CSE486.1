@@ -1,6 +1,5 @@
 package com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.recyclerViewAdapters;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,15 +16,16 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.FoodOrde
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.ListDataChangeListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOrder;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.OrderStatus;
 
 import java.util.ArrayList;
 
-public class PlacedOrdersAdapter extends RecyclerView.Adapter<PlacedOrdersAdapter.ViewHolder> {
+public class CustomerPlacedOrdersAdapter extends RecyclerView.Adapter<CustomerPlacedOrdersAdapter.ViewHolder> {
 
     private static final String TAG = "CustPOAd-debug";
 
     // caller activity/fragment callbacks
-    private PlacedOrdersAdapter.CallerCallback mCaller;
+    private CustomerPlacedOrdersAdapter.CallerCallback mCaller;
 
     private boolean isDataListEmpty = true;
 
@@ -87,7 +87,7 @@ public class PlacedOrdersAdapter extends RecyclerView.Adapter<PlacedOrdersAdapte
             };
 
 
-    public PlacedOrdersAdapter(String customerUid, PlacedOrdersAdapter.CallerCallback mCaller) {
+    public CustomerPlacedOrdersAdapter(String customerUid, CustomerPlacedOrdersAdapter.CallerCallback mCaller) {
         this.mCaller = mCaller;
         this.mCustomerUid = customerUid;
         this.mFoodOrders = new ArrayList<>();
@@ -133,7 +133,7 @@ public class PlacedOrdersAdapter extends RecyclerView.Adapter<PlacedOrdersAdapte
         View contactView = inflater.inflate(R.layout.customer_placed_order_item_view, parent, false);
 
         // Return a new holder instance
-        return new PlacedOrdersAdapter.ViewHolder(contactView);
+        return new CustomerPlacedOrdersAdapter.ViewHolder(contactView);
     }
 
     @Override
@@ -152,6 +152,13 @@ public class PlacedOrdersAdapter extends RecyclerView.Adapter<PlacedOrdersAdapte
         holder.quantityTextView.setText(quantity);
 
         holder.payNowButton.setOnClickListener(v -> mCaller.onPayNowClick(foodOrder));
+
+        if(!foodOrder.getmOrderStatus().equals(OrderStatus.ON_THE_WAY)){
+
+            holder.payNowButton.setEnabled(false);
+
+            if(foodOrder.getmOrderStatus().equals(OrderStatus.DELIVERED)) holder.payNowButton.setVisibility(View.GONE);
+        }
     }
 
     @Override

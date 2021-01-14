@@ -18,18 +18,18 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.recyclerViewAdapters.PlacedOrdersAdapter;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.recyclerViewAdapters.CustomerPlacedOrdersAdapter;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOrder;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
 
-public class CustomerPlacedOrdersActivity extends AppCompatActivity implements PlacedOrdersAdapter.CallerCallback {
+public class CustomerPlacedOrdersActivity extends AppCompatActivity implements CustomerPlacedOrdersAdapter.CallerCallback {
 
     private static final String TAG = "CustPOA-debug";
 
     // ui
     private TextView mNoOrdersPlacedTextView;
     private RecyclerView mPlacedOrdersRecyclerView;
-    private PlacedOrdersAdapter mPlacedOrdersAdapter;
+    private CustomerPlacedOrdersAdapter mPlacedOrdersAdapter;
 
     // model data
     private String mCustomerUid;
@@ -77,7 +77,7 @@ public class CustomerPlacedOrdersActivity extends AppCompatActivity implements P
 
     private void loadRecyclerView(String mCustomerUid) {
 
-        mPlacedOrdersAdapter = new PlacedOrdersAdapter(mCustomerUid, this);
+        mPlacedOrdersAdapter = new CustomerPlacedOrdersAdapter(mCustomerUid, this);
         mPlacedOrdersRecyclerView.setAdapter(mPlacedOrdersAdapter);
         mPlacedOrdersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
