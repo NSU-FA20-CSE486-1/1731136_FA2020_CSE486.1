@@ -64,20 +64,12 @@
                         android:layout_weight="1"
                         android:background="@drawable/rounded_edit_text"
                         android:ems="10"
+                        android:enabled="false"
                         android:importantForAutofill="no"
                         android:inputType="number"
-                        android:padding="8dp" />
-
-                    <ImageButton
-                        android:id="@+id/addQuantity_Button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:background="#ffffff"
-                        android:contentDescription="@string/addButton_label"
-                        android:padding="4dp"
-                        app:srcCompat="@drawable/ic_action_add_dark" />
+                        android:padding="8dp"
+                        android:text="@string/default_order_quantity"
+                        android:textColor="@color/theme_dark_color" />
 
                     <ImageButton
                         android:id="@+id/reduceQuantity_Button"
@@ -87,8 +79,21 @@
                         android:layout_weight="1"
                         android:background="#ffffff"
                         android:contentDescription="@string/minus_icon_Alt"
+                        android:onClick="decrementQuantityClick"
                         android:padding="4dp"
                         app:srcCompat="@drawable/ic_action_minus" />
+
+                    <ImageButton
+                        android:id="@+id/addQuantity_Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="#ffffff"
+                        android:contentDescription="@string/addButton_label"
+                        android:onClick="incrementQuantityClick"
+                        android:padding="4dp"
+                        app:srcCompat="@drawable/ic_action_add_dark" />
 
                 </LinearLayout>
 
@@ -226,6 +231,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
+                android:onClick="confirmOrderClick"
                 android:text="@string/confirmOrder_ButtonLabel"
                 android:textAllCaps="false" />
         </LinearLayout>

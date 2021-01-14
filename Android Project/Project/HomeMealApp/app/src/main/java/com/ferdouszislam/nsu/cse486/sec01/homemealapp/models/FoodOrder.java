@@ -4,31 +4,35 @@ public class FoodOrder {
 
     private String mFoodOrderId;
 
-    private String mFoodOfferId, mChefUid, mCustomerUid;
+    private String mFoodOfferId, mFoodName, mChefUid, mCustomerUid;
 
     private String mCustomerLocation, mChefLocation;
 
-    private String mCustomerPhone, mChefPhone;
+    private String mCustomerContactPhone, mCustomerBkashPhone, mChefPhone;
 
-    private String mQuantityPerUnit, mQuantityUnitsSelectedByCustomer, mFullPrice;
+    private String mQuantityPerUnit, mQuantityUnitsSelectedByCustomer, mPaymentAmount;
 
     public FoodOrder() {
     }
 
-    public FoodOrder(String mFoodOrderId, String mFoodOfferId, String mChefUid, String mCustomerUid,
-                     String mCustomerLocation, String mChefLocation, String mCustomerPhone, String mChefPhone,
-                     String mQuantityPerUnit, String mQuantityUnitsSelectedByCustomer, String mFullPrice) {
+    public FoodOrder(String mFoodOrderId, String mFoodOfferId, String mFoodName,
+                     String mChefUid, String mCustomerUid, String mCustomerLocation, String mChefLocation,
+                     String mCustomerContactPhone, String mCustomerBkashPhone, String mChefPhone,
+                     String mQuantityPerUnit, String mQuantityUnitsSelectedByCustomer, String mPaymentAmount) {
+
         this.mFoodOrderId = mFoodOrderId;
         this.mFoodOfferId = mFoodOfferId;
+        this.mFoodName = mFoodName;
         this.mChefUid = mChefUid;
         this.mCustomerUid = mCustomerUid;
         this.mCustomerLocation = mCustomerLocation;
         this.mChefLocation = mChefLocation;
-        this.mCustomerPhone = mCustomerPhone;
+        this.mCustomerContactPhone = mCustomerContactPhone;
+        this.mCustomerBkashPhone = mCustomerBkashPhone;
         this.mChefPhone = mChefPhone;
         this.mQuantityPerUnit = mQuantityPerUnit;
         this.mQuantityUnitsSelectedByCustomer = mQuantityUnitsSelectedByCustomer;
-        this.mFullPrice = mFullPrice;
+        this.mPaymentAmount = mPaymentAmount;
     }
 
     public String getmFoodOrderId() {
@@ -45,6 +49,14 @@ public class FoodOrder {
 
     public void setmFoodOfferId(String mFoodOfferId) {
         this.mFoodOfferId = mFoodOfferId;
+    }
+
+    public String getmFoodName() {
+        return mFoodName;
+    }
+
+    public void setmFoodName(String mFoodName) {
+        this.mFoodName = mFoodName;
     }
 
     public String getmChefUid() {
@@ -79,12 +91,20 @@ public class FoodOrder {
         this.mChefLocation = mChefLocation;
     }
 
-    public String getmCustomerPhone() {
-        return mCustomerPhone;
+    public String getmCustomerContactPhone() {
+        return mCustomerContactPhone;
     }
 
-    public void setmCustomerPhone(String mCustomerPhone) {
-        this.mCustomerPhone = mCustomerPhone;
+    public void setmCustomerContactPhone(String mCustomerContactPhone) {
+        this.mCustomerContactPhone = mCustomerContactPhone;
+    }
+
+    public String getmCustomerBkashPhone() {
+        return mCustomerBkashPhone;
+    }
+
+    public void setmCustomerBkashPhone(String mCustomerBkashPhone) {
+        this.mCustomerBkashPhone = mCustomerBkashPhone;
     }
 
     public String getmChefPhone() {
@@ -111,27 +131,29 @@ public class FoodOrder {
         this.mQuantityUnitsSelectedByCustomer = mQuantityUnitsSelectedByCustomer;
     }
 
-    public String getmFullPrice() {
-        return mFullPrice;
+    public String getmPaymentAmount() {
+        return mPaymentAmount;
     }
 
-    public void setmFullPrice(String mFullPrice) {
-        this.mFullPrice = mFullPrice;
+    public void setmPaymentAmount(String mPaymentAmount) {
+        this.mPaymentAmount = mPaymentAmount;
     }
 
     @Override
     public String toString() {
         return "FoodOrder{" +
-                "mFoodOfferId='" + mFoodOfferId + '\'' +
+                "mFoodOrderId='" + mFoodOrderId + '\'' +
+                ", mFoodOfferId='" + mFoodOfferId + '\'' +
                 ", mChefUid='" + mChefUid + '\'' +
                 ", mCustomerUid='" + mCustomerUid + '\'' +
                 ", mCustomerLocation='" + mCustomerLocation + '\'' +
                 ", mChefLocation='" + mChefLocation + '\'' +
-                ", mCustomerPhone='" + mCustomerPhone + '\'' +
+                ", mCustomerContactPhone='" + mCustomerContactPhone + '\'' +
+                ", mCustomerBkashPhone='" + mCustomerBkashPhone + '\'' +
                 ", mChefPhone='" + mChefPhone + '\'' +
                 ", mQuantityPerUnit='" + mQuantityPerUnit + '\'' +
                 ", mQuantityUnitsSelectedByCustomer='" + mQuantityUnitsSelectedByCustomer + '\'' +
-                ", mFullPrice='" + mFullPrice + '\'' +
+                ", mPaymentAmount='" + mPaymentAmount + '\'' +
                 '}';
     }
 }

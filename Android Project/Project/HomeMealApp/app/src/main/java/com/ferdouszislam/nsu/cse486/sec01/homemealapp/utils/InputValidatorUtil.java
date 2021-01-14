@@ -93,4 +93,10 @@ public abstract class InputValidatorUtil {
 
         return false;
     }
+
+    public static boolean isQuantitySpecifiedByCustomerValid(String quantitySpecifiedByCustomer) {
+
+        return quantitySpecifiedByCustomer!=null && quantitySpecifiedByCustomer.length()>0 &&
+                quantitySpecifiedByCustomer.matches("[0-9]+");
+    }
 }

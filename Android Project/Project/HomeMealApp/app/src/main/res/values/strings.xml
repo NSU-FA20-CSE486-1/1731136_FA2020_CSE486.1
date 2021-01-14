@@ -144,6 +144,9 @@
     <string name="customer_food_details_contact_button_label">Contact Vendor</string>
     <string name="contacting">Contacting…</string>
     <string name="failed_to_contact">Failed to contact vendor!</string>
+    <string name="placing_order">Placing Order…</string>
+    <string name="order_placed">Order Placed</string>
+    <string name="default_order_quantity">1</string>
 
     <string-array name="regions_array">
         <item>Mirpur</item>

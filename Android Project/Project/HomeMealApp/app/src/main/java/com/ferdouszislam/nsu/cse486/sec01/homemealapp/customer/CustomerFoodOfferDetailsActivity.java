@@ -150,6 +150,9 @@ public class CustomerFoodOfferDetailsActivity extends AppCompatActivity {
 
     // 'Place Order' button click listener
     public void placeOrderClick(View view) {
+        Intent intent = new Intent(this, CustomerPlaceOrderActivity.class);
+        intent.putExtra(FOOD_OFFER_ORDER_KEY, mFoodOffer);
+        startActivity(intent);
     }
 
 
