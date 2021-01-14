@@ -47,8 +47,16 @@ public class CustomerPlacedOrdersAdapter extends RecyclerView.Adapter<CustomerPl
 
                     Log.d(TAG, "onDataAdded: new data -> "+data.toString());
 
-                    mFoodOrders.add(0, data);
-                    notifyItemInserted(0);
+                    if(data.getmOrderStatus().equals(OrderStatus.DELIVERED)){
+
+                        mFoodOrders.add(data);
+                        notifyItemInserted(mFoodOrders.size()-1);
+                    }
+
+                    else {
+                        mFoodOrders.add(0, data);
+                        notifyItemInserted(0);
+                    }
                 }
 
                 @Override

@@ -26,6 +26,8 @@ public class CustomerPlacedOrdersActivity extends AppCompatActivity implements C
 
     private static final String TAG = "CustPOA-debug";
 
+    public static final String FOOD_ORDER_KEY = "com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer-foodOrderKey";
+
     // ui
     private TextView mNoOrdersPlacedTextView;
     private RecyclerView mPlacedOrdersRecyclerView;
@@ -101,7 +103,9 @@ public class CustomerPlacedOrdersActivity extends AppCompatActivity implements C
 
     @Override
     public void onPayNowClick(FoodOrder foodOrder) {
-
+        Intent intent = new Intent(this, CustomerPaymentActivity.class);
+        intent.putExtra(FOOD_ORDER_KEY, foodOrder);
+        startActivity(intent);
     }
 
     @Override

@@ -99,4 +99,9 @@ public abstract class InputValidatorUtil {
         return quantitySpecifiedByCustomer!=null && quantitySpecifiedByCustomer.length()>0 &&
                 quantitySpecifiedByCustomer.matches("[0-9]+");
     }
+
+    public static boolean isTransactionCodeValid(String transactionCode){
+
+        return transactionCode!=null && transactionCode.length()==10 && transactionCode.matches("[A-Za-z0-9]+");
+    }
 }

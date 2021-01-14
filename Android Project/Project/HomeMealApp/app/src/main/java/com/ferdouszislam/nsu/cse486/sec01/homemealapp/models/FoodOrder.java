@@ -2,7 +2,10 @@ package com.ferdouszislam.nsu.cse486.sec01.homemealapp.models;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.OrderStatus;
 
-public class FoodOrder {
+import java.io.Serializable;
+
+                       // to allow passing between activities
+public class FoodOrder implements Serializable {
 
     private String mFoodOrderId;
 

@@ -150,6 +150,10 @@
     <string name="call_failed">Failed to dial number</string>
     <string name="failed_to_accept_order">Failed to accept order!</string>
     <string name="failed_to_reject_order">Failed to reject order!</string>
+    <string name="invalid_transaction_code">must be 10 letter alphanumeric</string>
+    <string name="confirming">confirming…</string>
+    <string name="payment_complete">payment complete!</string>
+    <string name="payment_failed">Payment Failed!</string>
 
     <string-array name="regions_array">
         <item>Mirpur</item>
