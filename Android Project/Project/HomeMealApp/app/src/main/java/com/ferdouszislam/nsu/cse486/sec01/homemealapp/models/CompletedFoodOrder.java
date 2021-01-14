@@ -11,9 +11,9 @@ public class CompletedFoodOrder extends FoodOrder {
                               String mChefUid, String mCustomerUid, String mCustomerLocation, String mChefLocation,
                               String mCustomerContactPhone, String mCustomerBkashPhone, String mChefPhone,
                               String mQuantityPerUnit, String mQuantityUnitsSelectedByCustomer, String mPaymentAmount,
-                              String mOrderStatus, String mTransactionId) {
+                              String mOrderStatus, String mTimeStamp, String mTransactionId) {
 
-        super(mFoodOrderId, mFoodOfferId, mFoodName, mChefUid, mCustomerUid, mCustomerLocation, mChefLocation, mCustomerContactPhone, mCustomerBkashPhone, mChefPhone, mQuantityPerUnit, mQuantityUnitsSelectedByCustomer, mPaymentAmount, mOrderStatus);
+        super(mFoodOrderId, mFoodOfferId, mFoodName, mChefUid, mCustomerUid, mCustomerLocation, mChefLocation, mCustomerContactPhone, mCustomerBkashPhone, mChefPhone, mQuantityPerUnit, mQuantityUnitsSelectedByCustomer, mPaymentAmount, mOrderStatus, mTimeStamp);
         this.mTransactionCode = mTransactionId;
     }
 
@@ -33,6 +33,7 @@ public class CompletedFoodOrder extends FoodOrder {
         this.setmQuantityUnitsSelectedByCustomer(foodOrder.getmQuantityUnitsSelectedByCustomer());
         this.setmPaymentAmount(foodOrder.getmPaymentAmount());
         this.setmOrderStatus(foodOrder.getmOrderStatus());
+        this.setmTimeStamp(foodOrder.getmTimeStamp());
     }
 
     public String getmTransactionCode() {

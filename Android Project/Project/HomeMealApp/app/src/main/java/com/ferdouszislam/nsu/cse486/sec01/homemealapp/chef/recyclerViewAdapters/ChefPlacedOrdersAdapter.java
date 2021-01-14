@@ -182,6 +182,8 @@ public class ChefPlacedOrdersAdapter extends RecyclerView.Adapter<ChefPlacedOrde
         String quantity = foodOrder.getmQuantityUnitsSelectedByCustomer() + " X " + foodOrder.getmQuantityPerUnit();
         holder.quantityTextView.setText(quantity);
 
+        holder.timeStampTextView.setText(foodOrder.getmTimeStamp());
+
         if(foodOrder.getmOrderStatus().equals(OrderStatus.IN_QUEUE)) {
             holder.acceptButton.setOnClickListener(v ->{
 
@@ -256,6 +258,7 @@ public class ChefPlacedOrdersAdapter extends RecyclerView.Adapter<ChefPlacedOrde
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView foodNameTextView, priceTextView, quantityTextView, customerLocationTextView, customerPhoneTextView;
+        private TextView timeStampTextView;
         public Button acceptButton, rejectButton;
 
         public ViewHolder(@NonNull View itemView) {
@@ -266,6 +269,7 @@ public class ChefPlacedOrdersAdapter extends RecyclerView.Adapter<ChefPlacedOrde
             quantityTextView = itemView.findViewById(R.id.chef_quantity_orders_TextView);
             customerLocationTextView = itemView.findViewById(R.id.chef_customerLocation_orders_TextView);
             customerPhoneTextView = itemView.findViewById(R.id.chef_orderPhone_orders_TextView);
+            timeStampTextView = itemView.findViewById(R.id.chef_timeStamp_orders_TextView);
             acceptButton = itemView.findViewById(R.id.chef_acceptOrder_orders_Button);
             rejectButton = itemView.findViewById(R.id.chef_rejectOrder_orders_Button);
         }

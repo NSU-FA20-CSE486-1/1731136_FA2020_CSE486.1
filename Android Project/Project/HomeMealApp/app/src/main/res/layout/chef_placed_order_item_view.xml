@@ -13,8 +13,10 @@
         android:id="@+id/chef_foodName_orders_TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_margin="8dp"
         android:layout_weight="70"
+        android:gravity="center"
         android:padding="4dp"
         android:text="@string/foodName_listItem_TextView"
         android:textColor="@color/theme_dark_color"
@@ -22,33 +24,12 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/chef_foodPrice_orders_TextView"
+        android:id="@+id/chef_customerLocation_orders_TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_margin="8dp"
-        android:layout_weight="30"
-        android:gravity="right"
-        android:padding="4dp"
-        android:text="@string/price_listItem_TextView"
-        android:textColor="@color/theme_dark_color"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/chef_quantity_orders_TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_margin="8dp"
-        android:padding="4dp"
-        android:text="@string/quantity_orders_TextView"
-        android:textColor="@color/theme_dark_color"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/chef_customerLocation_orders_TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:gravity="center"
         android:padding="2dp"
         android:text="@string/address_placeHolder"
         android:textColor="@color/theme_dark_color"
@@ -56,13 +37,57 @@
         app:drawableLeftCompat="@drawable/ic_action_location" />
 
     <TextView
-        android:id="@+id/chef_orderPhone_orders_TextView"
-        android:layout_width="match_parent"
+        android:id="@+id/chef_foodPrice_orders_TextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_margin="8dp"
+        android:layout_weight="30"
+        android:gravity="center"
+        android:padding="4dp"
+        android:text="@string/price_listItem_TextView"
+        android:textColor="@color/theme_dark_color"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/chef_quantity_orders_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:drawablePadding="4dp"
+        android:gravity="center"
+        android:padding="4dp"
+        android:text="@string/quantity_orders_TextView"
+        android:textColor="@color/theme_dark_color"
+        android:textSize="14sp"
+        app:drawableStartCompat="@drawable/ic_action_quantity" />
+
+    <TextView
+        android:id="@+id/chef_orderPhone_orders_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:gravity="center"
         android:text="@string/phone_placeHolder"
         android:textColor="@color/theme_dark_color"
+        android:textSize="14sp"
         app:drawableLeftCompat="@drawable/ic_action_call" />
+
+    <TextView
+        android:id="@+id/chef_timeStamp_orders_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:layout_weight="70"
+        android:drawablePadding="4dp"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="@color/theme_dark_color"
+        android:textSize="14sp"
+        app:drawableStartCompat="@drawable/ic_action_calender" />
 
     <LinearLayout
         android:layout_width="match_parent"

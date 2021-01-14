@@ -30,6 +30,10 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.OrderStatus;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class CustomerPlaceOrderActivity extends AppCompatActivity {
 
     private static final String TAG = "CustPOA-debug";
@@ -194,10 +198,19 @@ public class CustomerPlaceOrderActivity extends AppCompatActivity {
             mFoodOrder.setmCustomerLocation(location);
             mFoodOrder.setmPaymentAmount(paymentAmount);
             mFoodOrder.setmOrderStatus(OrderStatus.IN_QUEUE);
+            mFoodOrder.setmTimeStamp(getCurrentTime());
 
             placeFoodOrder(mFoodOrder);
         }
 
+    }
+
+    private String getCurrentTime(){
+
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+
+        return dateFormat.format(date);
     }
 
     private boolean validateInputs(String quantitySpecifiedByCustomer, String contactPhone, String bkashPhone, String location) {

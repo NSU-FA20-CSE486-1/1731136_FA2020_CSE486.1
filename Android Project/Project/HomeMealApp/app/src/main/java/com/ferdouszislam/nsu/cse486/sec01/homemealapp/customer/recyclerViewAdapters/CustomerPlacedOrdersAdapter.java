@@ -159,6 +159,8 @@ public class CustomerPlacedOrdersAdapter extends RecyclerView.Adapter<CustomerPl
         String quantity = foodOrder.getmQuantityUnitsSelectedByCustomer() + " X " + foodOrder.getmQuantityPerUnit();
         holder.quantityTextView.setText(quantity);
 
+        holder.timeStampTextView.setText(foodOrder.getmTimeStamp());
+
         holder.payNowButton.setOnClickListener(v -> mCaller.onPayNowClick(foodOrder));
 
         if(!foodOrder.getmOrderStatus().equals(OrderStatus.ON_THE_WAY)){
@@ -185,7 +187,8 @@ public class CustomerPlacedOrdersAdapter extends RecyclerView.Adapter<CustomerPl
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView foodNameTextView, priceTextView, quantityTextView, orderStatusTextView, chefPhoneTextView;
+        public TextView foodNameTextView, priceTextView, quantityTextView, chefPhoneTextView;
+        public TextView orderStatusTextView, timeStampTextView;
         public Button payNowButton;
 
         public ViewHolder(@NonNull View itemView) {
@@ -196,6 +199,7 @@ public class CustomerPlacedOrdersAdapter extends RecyclerView.Adapter<CustomerPl
             quantityTextView = itemView.findViewById(R.id.customer_quantity_orders_TextView);
             orderStatusTextView = itemView.findViewById(R.id.customer_deliveryStatus_orders_TextView);
             chefPhoneTextView = itemView.findViewById(R.id.customer_orderPhone_orders_TextView);
+            timeStampTextView = itemView.findViewById(R.id.customer_timeStamp_orders_TextView);
             payNowButton = itemView.findViewById(R.id.customer_payNow_orders_Button);
         }
     }

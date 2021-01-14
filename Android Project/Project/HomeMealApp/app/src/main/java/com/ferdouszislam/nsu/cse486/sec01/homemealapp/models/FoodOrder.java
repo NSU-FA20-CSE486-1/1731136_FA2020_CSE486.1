@@ -19,12 +19,15 @@ public class FoodOrder implements Serializable {
 
     private String mOrderStatus;
 
+    private String mTimeStamp;
+
     public FoodOrder() {
     }
 
     public FoodOrder(String mFoodOrderId, String mFoodOfferId, String mFoodName, String mChefUid, String mCustomerUid,
                      String mCustomerLocation, String mChefLocation, String mCustomerContactPhone, String mCustomerBkashPhone, String mChefPhone,
-                     String mQuantityPerUnit, String mQuantityUnitsSelectedByCustomer, String mPaymentAmount, String mOrderStatus) {
+                     String mQuantityPerUnit, String mQuantityUnitsSelectedByCustomer, String mPaymentAmount, String mOrderStatus, String mTimeStamp) {
+
         this.mFoodOrderId = mFoodOrderId;
         this.mFoodOfferId = mFoodOfferId;
         this.mFoodName = mFoodName;
@@ -41,6 +44,8 @@ public class FoodOrder implements Serializable {
         if(mOrderStatus.equals(OrderStatus.DELIVERED) || mOrderStatus.equals(OrderStatus.IN_QUEUE) || mOrderStatus.equals(OrderStatus.ON_THE_WAY))
             this.mOrderStatus = mOrderStatus;
         else this.mOrderStatus = OrderStatus.IN_QUEUE;
+
+        this.mTimeStamp = mTimeStamp;
     }
 
     public String getmFoodOrderId() {
@@ -157,6 +162,14 @@ public class FoodOrder implements Serializable {
             this.mOrderStatus = mOrderStatus;
 
         else this.mOrderStatus = OrderStatus.IN_QUEUE;
+    }
+
+    public String getmTimeStamp() {
+        return mTimeStamp;
+    }
+
+    public void setmTimeStamp(String mTimeStamp) {
+        this.mTimeStamp = mTimeStamp;
     }
 
     @Override
