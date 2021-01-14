@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.recyclerViewAdapters.ChefFoodOffersAdapter;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.FoodOffer;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOffer;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.ChefUserProfileSharedPref;
 
 public class ChefHomeActivity extends AppCompatActivity implements ChefFoodOffersAdapter.CallerCallback {

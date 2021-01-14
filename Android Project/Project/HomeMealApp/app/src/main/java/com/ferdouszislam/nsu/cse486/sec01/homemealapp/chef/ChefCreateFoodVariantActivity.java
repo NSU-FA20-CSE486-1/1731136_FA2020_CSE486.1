@@ -1,17 +1,12 @@
 package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.FoodOffer;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOffer;
 
 public class ChefCreateFoodVariantActivity extends ChefAddFoodOfferActivity {
 

@@ -1,11 +1,11 @@
-package com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.daos.firebaseDaos;
+package com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos;
 
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.daos.CustomerUserDao;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.models.CustomerUser;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.ChefUserDao;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.ChefUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.SingleDataChangeListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.NosqlDatabasePathsUtil;
@@ -14,17 +14,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class CustomerUserFirebaseRealtimeDao implements CustomerUserDao {
+public class ChefUserFirebaseRealtimeDao implements ChefUserDao {
 
-    private static final String TAG = "CustUFRD-debug";
+    private static final String TAG = "CUFRD-debug";
 
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
 
     @Override
-    public void createWithId(CustomerUser customerUser, DatabaseOperationStatusListener<Void, String> listener) {
+    public void createWithId(ChefUser chefUser, DatabaseOperationStatusListener<Void, String> listener) {
 
-        mDatabase.getReference().child(NosqlDatabasePathsUtil.CUSTOMER_USERS_NODE + "/" + customerUser.getmUid())
-                .setValue(customerUser)
+        mDatabase.getReference().child(NosqlDatabasePathsUtil.CHEF_USERS_NODE + "/" + chefUser.getmUid())
+                .setValue(chefUser)
 
                 .addOnSuccessListener(listener::onSuccess)
 
@@ -33,14 +33,13 @@ public class CustomerUserFirebaseRealtimeDao implements CustomerUserDao {
                     listener.onFailed(e.getMessage());
                     Log.d(TAG, "onFailure: failed to create chefuser -> "+e.getStackTrace());
                 });
-
     }
 
     @Override
-    public void updateWithId(CustomerUser customerUser, String id, DatabaseOperationStatusListener<Void, String> listener) {
+    public void updateWithId(ChefUser chefUser, String id, DatabaseOperationStatusListener<Void, String> listener) {
 
-        mDatabase.getReference().child(NosqlDatabasePathsUtil.CUSTOMER_USERS_NODE + "/" + id)
-                .setValue(customerUser)
+        mDatabase.getReference().child(NosqlDatabasePathsUtil.CHEF_USERS_NODE + "/" + id)
+                .setValue(chefUser)
 
                 .addOnCompleteListener(task -> listener.onSuccess(null))
 
@@ -53,10 +52,10 @@ public class CustomerUserFirebaseRealtimeDao implements CustomerUserDao {
     }
 
     @Override
-    public void readWithId(String id, SingleDataChangeListener<CustomerUser> dataListener,
+    public void readWithId(String id, SingleDataChangeListener<ChefUser> dataListener,
                            DatabaseOperationStatusListener<Void, String> statusListener) {
 
-        mDatabase.getReference().child(NosqlDatabasePathsUtil.CUSTOMER_USERS_NODE + "/" + id)
+        mDatabase.getReference().child(NosqlDatabasePathsUtil.CHEF_USERS_NODE + "/" + id)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -67,7 +66,7 @@ public class CustomerUserFirebaseRealtimeDao implements CustomerUserDao {
                             return;
                         }
 
-                        CustomerUser chefUser = snapshot.getValue(CustomerUser.class);
+                        ChefUser chefUser = snapshot.getValue(ChefUser.class);
                         dataListener.onDataChange(chefUser);
                         statusListener.onSuccess(null);
                     }
@@ -80,6 +79,6 @@ public class CustomerUserFirebaseRealtimeDao implements CustomerUserDao {
                         Log.d(TAG, "onCancelled: user with id read->"+error.getDetails());
                     }
                 });
-
     }
+
 }

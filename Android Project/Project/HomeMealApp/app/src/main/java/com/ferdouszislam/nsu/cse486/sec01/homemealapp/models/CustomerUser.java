@@ -1,4 +1,4 @@
-package com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.models;
+package com.ferdouszislam.nsu.cse486.sec01.homemealapp.models;
 
 import java.io.Serializable;
 

@@ -1,6 +1,6 @@
-package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos;
+package com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos;
 
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.FoodOffer;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOffer;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.ListDataChangeListener;
 

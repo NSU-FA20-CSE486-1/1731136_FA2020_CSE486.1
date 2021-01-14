@@ -15,14 +15,16 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.ChefUserDao;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.daos.firebaseDaos.ChefUserFirebaseRealtimeDao;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.ChefUser;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.models.FoodOffer;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.ChefUserDao;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.ChefUserFirebaseRealtimeDao;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.ChefUser;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOffer;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.SingleDataChangeListener;
 
 public class CustomerFoodOfferDetailsActivity extends AppCompatActivity {
+
+    public static final String FOOD_OFFER_ORDER_KEY = "com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer-foodOfferOrderKey";
 
     // ui
     private ImageView mFoodPhotoImageView;

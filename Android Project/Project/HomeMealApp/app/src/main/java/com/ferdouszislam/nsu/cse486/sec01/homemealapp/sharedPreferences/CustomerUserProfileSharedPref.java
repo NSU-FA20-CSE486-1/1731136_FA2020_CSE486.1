@@ -3,7 +3,7 @@ package com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences;
 import android.content.Context;
 import android.util.Log;
 
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.models.CustomerUser;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.CustomerUser;
 import com.google.gson.Gson;
 
 public class CustomerUserProfileSharedPref extends SharedPrefsUtil {
