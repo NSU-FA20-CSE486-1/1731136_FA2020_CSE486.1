@@ -112,7 +112,6 @@ public class CustomerPaymentActivity extends AppCompatActivity {
         if(validateInputs(transactionCode)) {
 
             mCompletedFoodOrder.setmTransactionCode(transactionCode);
-            mCompletedFoodOrder.setmOrderStatus(OrderStatus.DELIVERED);
 
             // create a entry in 'completeFoodOrders' then update 'foodOrders' node
             mFoodOrderDao.createCompletedFoodOrder(mCompletedFoodOrder, mCompleteOrderDatabaseOperationStatusListener);

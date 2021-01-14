@@ -153,6 +153,7 @@ public class CustomerFoodOfferDetailsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CustomerPlaceOrderActivity.class);
         intent.putExtra(FOOD_OFFER_ORDER_KEY, mFoodOffer);
         startActivity(intent);
+        finish();
     }
 
 

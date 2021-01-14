@@ -47,7 +47,7 @@ public class CustomerPlacedOrdersAdapter extends RecyclerView.Adapter<CustomerPl
 
                     Log.d(TAG, "onDataAdded: new data -> "+data.toString());
 
-                    if(data.getmOrderStatus().equals(OrderStatus.DELIVERED)){
+                    if(data.getmOrderStatus().equals(OrderStatus.DELIVERED) || data.getmOrderStatus().equals(OrderStatus.REJECTED)){
 
                         mFoodOrders.add(data);
                         notifyItemInserted(mFoodOrders.size()-1);
@@ -167,7 +167,9 @@ public class CustomerPlacedOrdersAdapter extends RecyclerView.Adapter<CustomerPl
 
             holder.payNowButton.setEnabled(false);
 
-            if(foodOrder.getmOrderStatus().equals(OrderStatus.DELIVERED)) holder.payNowButton.setVisibility(View.GONE);
+            if(foodOrder.getmOrderStatus().equals(OrderStatus.DELIVERED) || foodOrder.getmOrderStatus().equals(OrderStatus.REJECTED)){
+                holder.payNowButton.setVisibility(View.GONE);
+            }
         }
     }
 

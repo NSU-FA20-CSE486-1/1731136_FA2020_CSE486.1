@@ -16,6 +16,8 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.FoodOrde
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.ListDataChangeListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOrder;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.RejectedFoodOrder;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.DateTimeUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.OrderStatus;
 
 import java.util.ArrayList;
@@ -59,9 +61,9 @@ public class ChefPlacedOrdersAdapter extends RecyclerView.Adapter<ChefPlacedOrde
                         insertPosition = ACCEPTED_ORDER_LAST_POSITION+1;
                     }
 
-                    else if(data.getmOrderStatus().equals(OrderStatus.DELIVERED)){
+                    else if(data.getmOrderStatus().equals(OrderStatus.DELIVERED) || data.getmOrderStatus().equals(OrderStatus.REJECTED)){
 
-                        insertPosition = mFoodOrders.size()-1;
+                        insertPosition = mFoodOrders.size();
                     }
                                                             // means accepted
                     else if(data.getmOrderStatus().equals(OrderStatus.ON_THE_WAY)){
@@ -185,23 +187,27 @@ public class ChefPlacedOrdersAdapter extends RecyclerView.Adapter<ChefPlacedOrde
         holder.timeStampTextView.setText(foodOrder.getmTimeStamp());
 
         if(foodOrder.getmOrderStatus().equals(OrderStatus.IN_QUEUE)) {
-            holder.acceptButton.setOnClickListener(v ->{
-
-                acceptOrder(foodOrder);
-
-            } );
+            holder.acceptButton.setOnClickListener(v -> acceptOrder(foodOrder));
             holder.rejectButton.setOnClickListener(v -> rejectOffer(foodOrder));
         }
 
         else{
 
             holder.acceptButton.setEnabled(false);
-
             holder.rejectButton.setEnabled(false);
-            holder.rejectButton.setVisibility(View.GONE);
 
-            if(foodOrder.getmOrderStatus().equals(OrderStatus.ON_THE_WAY)) holder.acceptButton.setText("Accepted");
-            else if(foodOrder.getmOrderStatus().equals(OrderStatus.DELIVERED)) holder.acceptButton.setText("Delivered");
+            if(foodOrder.getmOrderStatus().equals(OrderStatus.ON_THE_WAY)){
+                holder.acceptButton.setText("Accepted");
+                holder.rejectButton.setVisibility(View.GONE);
+            }
+            else if(foodOrder.getmOrderStatus().equals(OrderStatus.DELIVERED)){
+                holder.acceptButton.setText("Delivered");
+                holder.rejectButton.setVisibility(View.GONE);
+            }
+            else if(foodOrder.getmOrderStatus().equals(OrderStatus.REJECTED)){
+                holder.rejectButton.setText("Rejected");
+                holder.acceptButton.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -225,7 +231,10 @@ public class ChefPlacedOrdersAdapter extends RecyclerView.Adapter<ChefPlacedOrde
 
     private void rejectOffer(FoodOrder foodOrder){
 
-        mFoodOrderDao.deleteFoodOrder(foodOrder.getmFoodOrderId(), new DatabaseOperationStatusListener<Void, String>() {
+        foodOrder.setmOrderStatus(OrderStatus.REJECTED);
+
+        // update in "foodOrders" node
+        mFoodOrderDao.updateWithId(foodOrder, foodOrder.getmFoodOrderId(), new DatabaseOperationStatusListener<Void, String>() {
             @Override
             public void onSuccess(Void successResponse) {
                 // kept blank intentionally
@@ -235,6 +244,22 @@ public class ChefPlacedOrdersAdapter extends RecyclerView.Adapter<ChefPlacedOrde
             public void onFailed(String failedResponse) {
                 mCaller.onFailedToRejectOrder();
                 Log.d(TAG, "onFailed: delete(reject) order failed -> "+failedResponse);
+            }
+        });
+
+        // create entry at "rejectedOrders" node
+        RejectedFoodOrder rejectedFoodOrder = new RejectedFoodOrder(foodOrder);
+        rejectedFoodOrder.setmRejectedTimeStamp(DateTimeUtil.getCurrentTime());
+        mFoodOrderDao.createRejectedFoodOrder(rejectedFoodOrder, new DatabaseOperationStatusListener<Void, String>() {
+            @Override
+            public void onSuccess(Void successResponse) {
+                // kept blank intentionally
+            }
+
+            @Override
+            public void onFailed(String failedResponse) {
+                mCaller.onFailedToRejectOrder();
+                Log.d(TAG, "onFailed: create rejected order failed -> "+failedResponse);
             }
         });
     }

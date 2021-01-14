@@ -26,6 +26,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.ChefUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOffer;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOrder;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.CustomerUserProfileSharedPref;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.DateTimeUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.OrderStatus;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
@@ -198,19 +199,11 @@ public class CustomerPlaceOrderActivity extends AppCompatActivity {
             mFoodOrder.setmCustomerLocation(location);
             mFoodOrder.setmPaymentAmount(paymentAmount);
             mFoodOrder.setmOrderStatus(OrderStatus.IN_QUEUE);
-            mFoodOrder.setmTimeStamp(getCurrentTime());
+            mFoodOrder.setmTimeStamp(DateTimeUtil.getCurrentTime());
 
             placeFoodOrder(mFoodOrder);
         }
 
-    }
-
-    private String getCurrentTime(){
-
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = new Date();
-
-        return dateFormat.format(date);
     }
 
     private boolean validateInputs(String quantitySpecifiedByCustomer, String contactPhone, String bkashPhone, String location) {

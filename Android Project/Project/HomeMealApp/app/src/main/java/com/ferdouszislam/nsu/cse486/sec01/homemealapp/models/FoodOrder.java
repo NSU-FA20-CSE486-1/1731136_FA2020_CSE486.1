@@ -158,7 +158,8 @@ public class FoodOrder implements Serializable {
 
     public void setmOrderStatus(String mOrderStatus) {
 
-        if(mOrderStatus.equals(OrderStatus.DELIVERED) || mOrderStatus.equals(OrderStatus.IN_QUEUE) || mOrderStatus.equals(OrderStatus.ON_THE_WAY))
+        if(mOrderStatus.equals(OrderStatus.DELIVERED) || mOrderStatus.equals(OrderStatus.IN_QUEUE)
+                || mOrderStatus.equals(OrderStatus.ON_THE_WAY) || mOrderStatus.equals(OrderStatus.REJECTED))
             this.mOrderStatus = mOrderStatus;
 
         else this.mOrderStatus = OrderStatus.IN_QUEUE;

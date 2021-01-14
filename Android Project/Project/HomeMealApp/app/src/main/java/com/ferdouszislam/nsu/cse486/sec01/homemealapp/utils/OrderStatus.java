@@ -11,5 +11,6 @@ public abstract class OrderStatus {
     public static final String IN_QUEUE = "In Queue";
     public static final String ON_THE_WAY = "On the way";
     public static final String DELIVERED = "Delivered";
+    public static final String REJECTED = "Rejected";
 
 }

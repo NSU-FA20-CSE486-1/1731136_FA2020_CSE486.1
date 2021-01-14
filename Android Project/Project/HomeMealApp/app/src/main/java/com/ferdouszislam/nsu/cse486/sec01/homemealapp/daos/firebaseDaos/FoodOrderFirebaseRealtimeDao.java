@@ -10,6 +10,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOrder;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.FoodOrderDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.ListDataChangeListener;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.RejectedFoodOrder;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.NosqlDatabasePathsUtil;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -39,7 +40,7 @@ public class FoodOrderFirebaseRealtimeDao implements FoodOrderDao {
 
                 .addOnFailureListener(e -> {
                     statusListener.onFailed(e.getMessage());
-                    Log.d(TAG, "onFailure: create food offer error -> "+e.getStackTrace());
+                    Log.d(TAG, "onFailure: create food order error -> "+e.getStackTrace());
                 });
     }
 
@@ -54,7 +55,22 @@ public class FoodOrderFirebaseRealtimeDao implements FoodOrderDao {
 
                 .addOnFailureListener(e -> {
                     statusListener.onFailed(e.getMessage());
-                    Log.d(TAG, "onFailure: create food offer error -> "+e.getStackTrace());
+                    Log.d(TAG, "onFailure: create complete food order error -> "+e.getStackTrace());
+                });
+    }
+
+    @Override
+    public void createRejectedFoodOrder(RejectedFoodOrder foodOrder, DatabaseOperationStatusListener<Void, String> statusListener) {
+
+        DatabaseReference ref = mDatabase.getReference().child(NosqlDatabasePathsUtil.REJECTED_FOOD_ORDERS_NODE);
+
+        ref.child(foodOrder.getmFoodOrderId()).setValue(foodOrder)
+
+                .addOnSuccessListener(aVoid -> statusListener.onSuccess(null))
+
+                .addOnFailureListener(e -> {
+                    statusListener.onFailed(e.getMessage());
+                    Log.d(TAG, "onFailure: create rejected food order error -> "+e.getStackTrace());
                 });
     }
 
@@ -101,7 +117,7 @@ public class FoodOrderFirebaseRealtimeDao implements FoodOrderDao {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
-                Log.d(TAG, "onCancelled: read chef food offers error -> "+error.getDetails());
+                Log.d(TAG, "onCancelled: read customer food orders error -> "+error.getDetails());
 
                 statusListener.onFailed(error.getMessage());
             }
@@ -119,7 +135,7 @@ public class FoodOrderFirebaseRealtimeDao implements FoodOrderDao {
 
                 .addOnFailureListener(e -> {
 
-                    Log.d(TAG, "onFailure: user update failed -> "+e.getStackTrace());
+                    Log.d(TAG, "onFailure: order update failed -> "+e.getStackTrace());
 
                     listener.onFailed(e.getMessage());
                 });
@@ -169,7 +185,7 @@ public class FoodOrderFirebaseRealtimeDao implements FoodOrderDao {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
-                Log.d(TAG, "onCancelled: read chef food offers error -> "+error.getDetails());
+                Log.d(TAG, "onCancelled: read chef food order error -> "+error.getDetails());
 
                 statusListener.onFailed(error.getMessage());
             }
