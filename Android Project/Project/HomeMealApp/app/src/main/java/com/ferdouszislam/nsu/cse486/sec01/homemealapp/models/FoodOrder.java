@@ -1,5 +1,7 @@
 package com.ferdouszislam.nsu.cse486.sec01.homemealapp.models;
 
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.OrderStatus;
+
 public class FoodOrder {
 
     private String mFoodOrderId;
@@ -12,14 +14,14 @@ public class FoodOrder {
 
     private String mQuantityPerUnit, mQuantityUnitsSelectedByCustomer, mPaymentAmount;
 
+    private String mOrderStatus;
+
     public FoodOrder() {
     }
 
-    public FoodOrder(String mFoodOrderId, String mFoodOfferId, String mFoodName,
-                     String mChefUid, String mCustomerUid, String mCustomerLocation, String mChefLocation,
-                     String mCustomerContactPhone, String mCustomerBkashPhone, String mChefPhone,
-                     String mQuantityPerUnit, String mQuantityUnitsSelectedByCustomer, String mPaymentAmount) {
-
+    public FoodOrder(String mFoodOrderId, String mFoodOfferId, String mFoodName, String mChefUid, String mCustomerUid,
+                     String mCustomerLocation, String mChefLocation, String mCustomerContactPhone, String mCustomerBkashPhone, String mChefPhone,
+                     String mQuantityPerUnit, String mQuantityUnitsSelectedByCustomer, String mPaymentAmount, String mOrderStatus) {
         this.mFoodOrderId = mFoodOrderId;
         this.mFoodOfferId = mFoodOfferId;
         this.mFoodName = mFoodName;
@@ -33,6 +35,9 @@ public class FoodOrder {
         this.mQuantityPerUnit = mQuantityPerUnit;
         this.mQuantityUnitsSelectedByCustomer = mQuantityUnitsSelectedByCustomer;
         this.mPaymentAmount = mPaymentAmount;
+        if(mOrderStatus.equals(OrderStatus.DELIVERED) || mOrderStatus.equals(OrderStatus.IN_QUEUE) || mOrderStatus.equals(OrderStatus.ON_THE_WAY))
+            this.mOrderStatus = mOrderStatus;
+        else this.mOrderStatus = OrderStatus.IN_QUEUE;
     }
 
     public String getmFoodOrderId() {
@@ -137,6 +142,18 @@ public class FoodOrder {
 
     public void setmPaymentAmount(String mPaymentAmount) {
         this.mPaymentAmount = mPaymentAmount;
+    }
+
+    public String getmOrderStatus() {
+        return mOrderStatus;
+    }
+
+    public void setmOrderStatus(String mOrderStatus) {
+
+        if(mOrderStatus.equals(OrderStatus.DELIVERED) || mOrderStatus.equals(OrderStatus.IN_QUEUE) || mOrderStatus.equals(OrderStatus.ON_THE_WAY))
+            this.mOrderStatus = mOrderStatus;
+
+        else this.mOrderStatus = OrderStatus.IN_QUEUE;
     }
 
     @Override
