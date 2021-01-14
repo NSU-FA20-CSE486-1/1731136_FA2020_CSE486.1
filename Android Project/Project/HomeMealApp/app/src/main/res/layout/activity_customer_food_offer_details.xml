@@ -16,9 +16,9 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
-        android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:theme="?attr/actionBarTheme"
+        app:titleTextAppearance="@style/CommonToolbarTitleTheme" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -37,56 +37,36 @@
 
             <ImageView
                 android:id="@+id/customer_food_details_foodImageView"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                app:srcCompat="@drawable/ic_add_photo"
-                android:contentDescription="@string/addPhoto_Alt" />
+                android:contentDescription="@string/addPhoto_Alt"
+                app:srcCompat="@drawable/ic_add_photo" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="8dp"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="100">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/customer_food_details_foodName_TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
+                    android:layout_margin="8dp"
                     android:layout_weight="80"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/customer_food_details_foodName_TextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:text="@string/foodName_listItem_TextView"
-                        android:textColor="@color/theme_dark_color"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/customer_food_details_location_TextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:drawablePadding="2dp"
-                        android:text="@string/address_placeHolder"
-                        android:textColor="@color/theme_dark_color"
-                        app:drawableStartCompat="@drawable/ic_action_location" />
-                </LinearLayout>
+                    android:text="@string/foodName_listItem_TextView"
+                    android:textColor="@color/theme_dark_color"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/customer_food_details_price_TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="start|center_vertical"
                     android:layout_margin="4dp"
                     android:layout_weight="20"
                     android:gravity="center"
@@ -95,6 +75,16 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/customer_food_details_location_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:drawablePadding="2dp"
+                android:text="@string/address_placeHolder"
+                android:textColor="@color/theme_dark_color"
+                app:drawableStartCompat="@drawable/ic_action_location" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -204,14 +194,43 @@
                     android:text="@string/quantity_listItem_TextView" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/placeOrder_Button"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="8dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:text="@string/placeOrder_ButtonLabel" />
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Button
+                    android:id="@+id/customer_food_details_contact_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:layout_weight="50"
+                    android:gravity="center"
+                    android:onClick="contactVendorClick"
+                    android:text="@string/customer_food_details_contact_button_label"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/placeOrder_Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:layout_weight="50"
+                    android:gravity="center"
+                    android:onClick="placeOrderClick"
+                    android:text="@string/placeOrder_ButtonLabel"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

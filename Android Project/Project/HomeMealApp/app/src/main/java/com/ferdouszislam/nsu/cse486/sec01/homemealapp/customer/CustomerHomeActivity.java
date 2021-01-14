@@ -21,6 +21,8 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.recyclerViewAdapt
 
 public class CustomerHomeActivity extends AppCompatActivity implements FoodOffersAdapter.CallerCallback{
 
+    public static final String FOOD_OFFER_DETAILS_KEY = "com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer-foodOfferDetailsKey";
+
     // ui
     private TextView mNoFoodOffersTextView;
     private RecyclerView mFoodOffersRecyclerView;
@@ -106,6 +108,11 @@ public class CustomerHomeActivity extends AppCompatActivity implements FoodOffer
     @Override
     public void onSeeMoreClick(FoodOffer foodOffer) {
 
+        Intent intent = new Intent(this, CustomerFoodOfferDetailsActivity.class);
+
+        intent.putExtra(FOOD_OFFER_DETAILS_KEY, foodOffer);
+
+        startActivity(intent);
     }
 
     @Override

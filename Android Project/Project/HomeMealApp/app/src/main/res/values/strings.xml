@@ -99,7 +99,7 @@
     <string name="callPhoneHint_customerPlaceOrder_TextView">Phone number for delivery guy to contact you</string>
     <string name="address_customerPlaceOrder_EditTextHint">full address of your current location</string>
     <string name="addressHint_customerPlaceOrder_TextView">Press the location icon to detect your current location</string>
-    <string name="placeOrder_ButtonLabel">Place Order</string>
+    <string name="placeOrder_ButtonLabel">Proceed to Order</string>
     <string name="customer_place_order_title">Place Order</string>
     <string name="minus_icon_Alt">minus_icon</string>
     <string name="customer_foodOfferSeeMore_listItem_ButtonLabel">See more</string>
@@ -141,6 +141,7 @@
     <string name="failed_to_delete_food_offer">Failed to delete food offer!</string>
     <string name="customerSignUpEmailHint_TextView">Must use different email than your chef account (if any)</string>
     <string name="chefSignup_emailHintTextView">Must be different than your customer account (if any)</string>
+    <string name="customer_food_details_contact_button_label">Contact Vendor</string>
 
     <string-array name="regions_array">
         <item>Mirpur</item>
