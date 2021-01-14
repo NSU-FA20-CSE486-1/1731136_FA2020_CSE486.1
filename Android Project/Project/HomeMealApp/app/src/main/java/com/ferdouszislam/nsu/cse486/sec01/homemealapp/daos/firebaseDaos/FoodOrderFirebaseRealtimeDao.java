@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.CompletedFoodOrder;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOrder;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.FoodOrderDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
@@ -33,6 +34,21 @@ public class FoodOrderFirebaseRealtimeDao implements FoodOrderDao {
         foodOrder.setmFoodOrderId(foodOrderId);
 
         ref.child(foodOrderId).setValue(foodOrder)
+
+                .addOnSuccessListener(aVoid -> statusListener.onSuccess(null))
+
+                .addOnFailureListener(e -> {
+                    statusListener.onFailed(e.getMessage());
+                    Log.d(TAG, "onFailure: create food offer error -> "+e.getStackTrace());
+                });
+    }
+
+    @Override
+    public void createCompletedFoodOrder(CompletedFoodOrder foodOrder, DatabaseOperationStatusListener<Void, String> statusListener) {
+
+        DatabaseReference ref = mDatabase.getReference().child(NosqlDatabasePathsUtil.COMPLETED_FOOD_ORDERS_NODE);
+
+        ref.child(foodOrder.getmFoodOrderId()).setValue(foodOrder)
 
                 .addOnSuccessListener(aVoid -> statusListener.onSuccess(null))
 
