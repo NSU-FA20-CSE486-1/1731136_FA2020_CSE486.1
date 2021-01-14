@@ -23,5 +23,17 @@
         android:layout_centerInParent="true"
         android:text="@string/noPlacedOrders_TextView"
         android:textColor="@color/theme_dark_color"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:visibility="visible" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chefPlacedOrders_RecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/chefPlacedOrders_Toolbar"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:visibility="gone" />
 </RelativeLayout>

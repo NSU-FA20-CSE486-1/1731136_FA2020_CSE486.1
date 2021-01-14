@@ -82,7 +82,7 @@
 
     <string name="create_variant_title">Create a Variant</string>
     <string name="update_profile_title">Update Profile</string>
-    <string name="noPlacedOrders_TextView">No orders placed.</string>
+    <string name="noPlacedOrders_TextView">No orders found.</string>
     <string name="placed_orders_title">Placed Orders</string>
     <string name="customerSignupWelcome_Textview">Register as a customer</string>
     <string name="noFoodOffersFound_TextView">No food offers found.</string>
