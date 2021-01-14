@@ -94,6 +94,23 @@ public class FoodOrderFirebaseRealtimeDao implements FoodOrderDao {
     }
 
     @Override
+    public void updateWithId(FoodOrder foodOrder, String id, DatabaseOperationStatusListener<Void, String> listener) {
+
+        mDatabase.getReference().child(NosqlDatabasePathsUtil.FOOD_ORDERS_NODE + "/" + id)
+                .setValue(foodOrder)
+
+                .addOnCompleteListener(task -> listener.onSuccess(null))
+
+                .addOnFailureListener(e -> {
+
+                    Log.d(TAG, "onFailure: user update failed -> "+e.getStackTrace());
+
+                    listener.onFailed(e.getMessage());
+                });
+    }
+
+
+    @Override
     public void readFoodOrdersForChef(String chefUid, DatabaseOperationStatusListener<Void, String> statusListener,
                                       ListDataChangeListener<FoodOrder> dataChangeListener) {
 

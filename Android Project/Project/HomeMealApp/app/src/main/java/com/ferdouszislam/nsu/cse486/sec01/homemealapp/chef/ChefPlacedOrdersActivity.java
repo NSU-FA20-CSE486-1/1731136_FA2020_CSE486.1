@@ -99,15 +99,7 @@ public class ChefPlacedOrdersActivity extends AppCompatActivity implements ChefP
         }
     }
 
-    @Override
-    public void onAcceptOrderClick(FoodOrder foodOrder) {
 
-    }
-
-    @Override
-    public void onRejectOrderClick(FoodOrder foodOrder) {
-
-    }
 
     @Override
     public void onPlacedOrdersListNotEmpty() {
@@ -120,6 +112,20 @@ public class ChefPlacedOrdersActivity extends AppCompatActivity implements ChefP
     public void onFailedToLoadPlacedOrders() {
 
         Toast.makeText(this, R.string.an_unexpected_error_occurred, Toast.LENGTH_SHORT)
+                .show();
+    }
+
+    @Override
+    public void onFailedToAcceptOrder() {
+
+        Toast.makeText(this, R.string.failed_to_accept_order, Toast.LENGTH_SHORT)
+                .show();
+    }
+
+    @Override
+    public void onFailedToRejectOrder() {
+
+        Toast.makeText(this, R.string.failed_to_reject_order, Toast.LENGTH_SHORT)
                 .show();
     }
 

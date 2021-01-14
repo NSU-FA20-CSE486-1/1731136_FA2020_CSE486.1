@@ -17,6 +17,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.FoodOrde
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.ListDataChangeListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOrder;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.OrderStatus;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,11 @@ public class ChefPlacedOrdersAdapter extends RecyclerView.Adapter<ChefPlacedOrde
     private ArrayList<FoodOrder> mFoodOrders;
     private String mChefUid;
 
+    // last position of Accepted order
+    // this is to keep accepted orders in top
+    // and sort the rest based on time ordered
+    private static int ACCEPTED_ORDER_LAST_POSITION = -1;
+
     // variables to read food offers from database
     private FoodOrderDao mFoodOrderDao;
     private ListDataChangeListener<FoodOrder> mFoodOrderListDataChangeListener =
@@ -47,8 +53,34 @@ public class ChefPlacedOrdersAdapter extends RecyclerView.Adapter<ChefPlacedOrde
 
                     Log.d(TAG, "onDataAdded: new data -> "+data.toString());
 
-                    mFoodOrders.add(0, data);
-                    notifyItemInserted(0);
+                    int insertPosition = 0;
+                                                    // means not accepted
+                    if(data.getmOrderStatus().equals(OrderStatus.IN_QUEUE)){
+
+                        insertPosition = ACCEPTED_ORDER_LAST_POSITION+1;
+                    }
+
+                    else if(data.getmOrderStatus().equals(OrderStatus.DELIVERED)){
+
+                        insertPosition = mFoodOrders.size()-1;
+                    }
+                                                            // means accepted
+                    else if(data.getmOrderStatus().equals(OrderStatus.ON_THE_WAY)){
+
+                        insertPosition = 0;
+                        ACCEPTED_ORDER_LAST_POSITION++;
+                    }
+
+                    try {
+
+                        mFoodOrders.add(insertPosition, data);
+                        notifyItemInserted(insertPosition);
+
+                    } catch (IndexOutOfBoundsException e){
+
+                        mFoodOrders.add(data);
+                        notifyItemInserted(mFoodOrders.size()-1);
+                    }
                 }
 
                 @Override
@@ -151,8 +183,59 @@ public class ChefPlacedOrdersAdapter extends RecyclerView.Adapter<ChefPlacedOrde
         String quantity = foodOrder.getmQuantityUnitsSelectedByCustomer() + " X " + foodOrder.getmQuantityPerUnit();
         holder.quantityTextView.setText(quantity);
 
-        holder.acceptButton.setOnClickListener(v -> mCaller.onAcceptOrderClick(foodOrder));
-        holder.rejectButton.setOnClickListener(v -> mCaller.onRejectOrderClick(foodOrder));
+        if(foodOrder.getmOrderStatus().equals(OrderStatus.IN_QUEUE)) {
+            holder.acceptButton.setOnClickListener(v ->{
+
+                acceptOrder(foodOrder);
+
+            } );
+            holder.rejectButton.setOnClickListener(v -> rejectOffer(foodOrder));
+        }
+
+        else{
+
+            holder.acceptButton.setEnabled(false);
+
+            holder.rejectButton.setEnabled(false);
+            holder.rejectButton.setVisibility(View.GONE);
+
+            if(foodOrder.getmOrderStatus().equals(OrderStatus.ON_THE_WAY)) holder.acceptButton.setText("Accepted");
+            else if(foodOrder.getmOrderStatus().equals(OrderStatus.DELIVERED)) holder.acceptButton.setText("Delivered");
+        }
+    }
+
+    private void acceptOrder(FoodOrder foodOrder) {
+
+        foodOrder.setmOrderStatus(OrderStatus.ON_THE_WAY);
+
+        mFoodOrderDao.updateWithId(foodOrder, foodOrder.getmFoodOrderId(), new DatabaseOperationStatusListener<Void, String>() {
+            @Override
+            public void onSuccess(Void successResponse) {
+                // kept blank intentionally
+            }
+
+            @Override
+            public void onFailed(String failedResponse) {
+                mCaller.onFailedToAcceptOrder();
+                Log.d(TAG, "onFailed: accept(update) order failed -> "+failedResponse);
+            }
+        });
+    }
+
+    private void rejectOffer(FoodOrder foodOrder){
+
+        mFoodOrderDao.deleteFoodOrder(foodOrder.getmFoodOrderId(), new DatabaseOperationStatusListener<Void, String>() {
+            @Override
+            public void onSuccess(Void successResponse) {
+                // kept blank intentionally
+            }
+
+            @Override
+            public void onFailed(String failedResponse) {
+                mCaller.onFailedToRejectOrder();
+                Log.d(TAG, "onFailed: delete(reject) order failed -> "+failedResponse);
+            }
+        });
     }
 
     @Override
@@ -164,10 +247,10 @@ public class ChefPlacedOrdersAdapter extends RecyclerView.Adapter<ChefPlacedOrde
 
     public interface CallerCallback{
 
-        void onAcceptOrderClick(FoodOrder foodOrder);
-        void onRejectOrderClick(FoodOrder foodOrder);
         void onPlacedOrdersListNotEmpty();
         void onFailedToLoadPlacedOrders();
+        void onFailedToAcceptOrder();
+        void onFailedToRejectOrder();
         void contactCustomerClick(String phoneNumber);
     }
 

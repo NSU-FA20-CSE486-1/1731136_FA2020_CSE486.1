@@ -148,6 +148,8 @@
     <string name="order_placed">Order Placed</string>
     <string name="default_order_quantity">1</string>
     <string name="call_failed">Failed to dial number</string>
+    <string name="failed_to_accept_order">Failed to accept order!</string>
+    <string name="failed_to_reject_order">Failed to reject order!</string>
 
     <string-array name="regions_array">
         <item>Mirpur</item>
