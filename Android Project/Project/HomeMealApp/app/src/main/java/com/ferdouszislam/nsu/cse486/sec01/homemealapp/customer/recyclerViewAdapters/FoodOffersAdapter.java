@@ -19,8 +19,11 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.FoodOffe
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOffer;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.ListDataChangeListener;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOrder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FoodOffersAdapter extends RecyclerView.Adapter<FoodOffersAdapter.ViewHolder> {
 
@@ -36,6 +39,10 @@ public class FoodOffersAdapter extends RecyclerView.Adapter<FoodOffersAdapter.Vi
 
     // model
     private ArrayList<FoodOffer> mFoodOffers;
+
+
+    // variables used for region-wise filtration
+    HashMap<Integer, FoodOffer> mHiddenFoodOffers;
 
     // variables to read food offers from database
     private FoodOfferDao mFoodOfferDao;
@@ -94,7 +101,9 @@ public class FoodOffersAdapter extends RecyclerView.Adapter<FoodOffersAdapter.Vi
     public FoodOffersAdapter(Context mContext, FoodOffersAdapter.CallerCallback mCaller) {
         this.mContext = mContext;
         this.mCaller = mCaller;
+
         this.mFoodOffers = new ArrayList<>();
+        this.mHiddenFoodOffers = new HashMap<>();
 
         loadFoodOffers();
     }
@@ -118,6 +127,61 @@ public class FoodOffersAdapter extends RecyclerView.Adapter<FoodOffersAdapter.Vi
                     }
                 },
                 mFoodOfferListDataChangeListener);
+    }
+
+    /**
+     * filter the recycler view by showing food offers from specific region
+     * @param region region to be shown
+     */
+    public void filterByRegion(String region){
+
+        // restore if any foodOffer with 'region' is already hidden
+        for(Map.Entry<Integer, FoodOffer> entry : mHiddenFoodOffers.entrySet()){
+
+            int position = entry.getKey();
+            FoodOffer foodOffer = entry.getValue();
+
+            if(foodOffer.getmRegion().equals(region)){
+
+                mFoodOffers.add(position, foodOffer);
+                notifyItemInserted(position);
+
+                mHiddenFoodOffers.remove(position);
+            }
+        }
+
+        // find positions of food offers which are to be hidden
+        for(int i=0;i<mFoodOffers.size();i++){
+
+            if(!mFoodOffers.get(i).getmRegion().equals(region)){
+
+                mHiddenFoodOffers.put(i, mFoodOffers.get(i));
+            }
+        }
+        // remove the food offers at found positions
+        for(Map.Entry<Integer, FoodOffer> entry : mHiddenFoodOffers.entrySet()){
+
+            int position = entry.getKey();
+            mFoodOffers.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    /**
+     * show all food offers without filtering
+     */
+    public void removeFilter(){
+
+        for(Map.Entry<Integer, FoodOffer> entry : mHiddenFoodOffers.entrySet()){
+
+            int position = entry.getKey();
+            FoodOffer foodOffer = entry.getValue();
+
+            mFoodOffers.add(position, foodOffer);
+            notifyItemInserted(position);
+
+            mHiddenFoodOffers.remove(position);
+        }
     }
 
 
@@ -144,7 +208,7 @@ public class FoodOffersAdapter extends RecyclerView.Adapter<FoodOffersAdapter.Vi
         String price = foodOffer.getmPrice()+ " TK";
         holder.priceTextView.setText(price);
 
-        String location = foodOffer.getmRegion() + "(" + foodOffer.getmAddress() + ")";
+        String location = foodOffer.getmRegion() + " (" + foodOffer.getmAddress() + ")";
         holder.locationTextView.setText(location);
 
         holder.quantityTextView.setText(foodOffer.getmQuantity());

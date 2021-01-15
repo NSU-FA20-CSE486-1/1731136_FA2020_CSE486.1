@@ -9,9 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,12 +25,15 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.recyclerViewAdapt
 
 public class CustomerHomeActivity extends AppCompatActivity implements FoodOffersAdapter.CallerCallback{
 
+    private static final String TAG = "CustHA-debug";
+
     public static final String FOOD_OFFER_DETAILS_KEY = "com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer-foodOfferDetailsKey";
 
     // ui
     private TextView mNoFoodOffersTextView;
     private RecyclerView mFoodOffersRecyclerView;
     private FoodOffersAdapter mFoodOffersAdapter;
+    private Spinner mRegionSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,8 @@ public class CustomerHomeActivity extends AppCompatActivity implements FoodOffer
     private void init() {
 
         setupToolbar();
+
+        setupSpinner();
 
         mNoFoodOffersTextView = findViewById(R.id.noFoodOffersFound_TextView);
         mFoodOffersRecyclerView = findViewById(R.id.customerHome_foodOffers_RecyclerView);
@@ -58,6 +67,35 @@ public class CustomerHomeActivity extends AppCompatActivity implements FoodOffer
             // don't show default(app_name) title
             ab.setTitle("Home");
         }
+    }
+
+    /*
+    setup the region selector spinner
+     */
+    private void setupSpinner() {
+
+        mRegionSpinner = findViewById(R.id.customerHome_regionFilter_Spinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.regions_array, R.layout.region_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(R.layout.region_spinner_dropdown);
+        // Apply the adapter to the spinner
+        mRegionSpinner.setAdapter(adapter);
+
+        mRegionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if(mFoodOffersAdapter!=null) mFoodOffersAdapter.filterByRegion(parent.getSelectedItem().toString().trim());
+
+                Log.d(TAG, "onItemSelected: selected region = " + parent.getSelectedItem().toString().trim());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
     /*
@@ -103,6 +141,9 @@ public class CustomerHomeActivity extends AppCompatActivity implements FoodOffer
     public void closeSearchFilterClick(View view) {
 
         findViewById(R.id.searchFilter_View).setVisibility(View.GONE);
+
+        if(mFoodOffersAdapter!=null) mFoodOffersAdapter.removeFilter();
+
     }
 
     @Override
