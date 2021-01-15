@@ -20,4 +20,5 @@ public abstract class NosqlDatabasePathsUtil {
 
     public static final String REJECTED_FOOD_ORDERS_NODE = "rejectedFoodOrders";
 
+    public static final String CHEF_SERVICE_CHARGE_PAYMENT_RECORDS = "chefServiceChargePaymentRecords";
 }
