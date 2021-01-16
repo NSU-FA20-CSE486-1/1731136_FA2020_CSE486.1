@@ -134,6 +134,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".customer.CustomerPlacedOrdersActivity" />
         </activity>
+
+        <activity android:name=".appSettings.SettingsActivity"></activity>
     </application>
 
 </manifest>
