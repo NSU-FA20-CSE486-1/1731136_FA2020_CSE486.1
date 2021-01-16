@@ -8,12 +8,16 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.appSettings.SettingsFragment;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.ChefPlacedOrdersActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerPlacedOrdersActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.FoodOrderDao;
@@ -31,6 +35,26 @@ public class NotificationService extends Service {
 
     private static final String NOTIFICATION_CHANNEL_ID = "com.ferdouszislam.nsu.cse486.sec01.homemealapp.services";
     private static final int NOTIFICATION_ID = 288;
+
+    // variables for user authentication
+    private Authentication mAuth;
+    private Authentication.AuthenticationCallbacks mAuthCallbacks = new Authentication.AuthenticationCallbacks() {
+        @Override
+        public void onAuthenticationSuccess(AuthenticationUser user) {
+
+            mUid = user.getmUid();
+
+            init();
+        }
+
+        @Override
+        public void onAuthenticationFailure(String message) {
+
+            stopSelf();
+
+            Log.d(TAG, "onAuthenticationFailure: authentication failed -> "+message);
+        }
+    };
 
     // variables used to get the user information
     private String mUid;
@@ -98,14 +122,19 @@ public class NotificationService extends Service {
 
         Log.d(TAG, "onStartCommand: service started!");
 
-        mUid = intent.getStringExtra(SettingsFragment.NOTIFICATION_SERVICE_UID_KEY);
+        mAuth = new FirebaseEmailPasswordAuthentication(this);
+        mAuth.setmAuthenticationCallbacks(mAuthCallbacks);
 
-        if(mUid == null){
-            Log.d(TAG, "onStartCommand: Notification Service stopped beacuse user uid not provided");
-            stopSelf();
+        if(intent!=null){
+
+            mUid = intent.getStringExtra(SettingsFragment.NOTIFICATION_SERVICE_UID_KEY);
+
+            if(mUid == null) mAuth.authenticateUser();
+
+            else init();
         }
 
-        init();
+        else mAuth.authenticateUser();
 
         return START_STICKY;
     }
@@ -222,7 +251,7 @@ public class NotificationService extends Service {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = getString(R.string.enable_notifications_channel);
             String description = getString(R.string.enable_notifications_channel_description);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, name, importance);
             channel.setDescription(description);
             // Register the channel with the system; you can't change the importance
@@ -240,7 +269,7 @@ public class NotificationService extends Service {
                 .setSmallIcon(R.drawable.ic_action_notification)
                 .setContentTitle(notificationTitle)
                 .setContentText(notificationDescription)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
                 // Set the intent that will fire when the user taps the notification
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
