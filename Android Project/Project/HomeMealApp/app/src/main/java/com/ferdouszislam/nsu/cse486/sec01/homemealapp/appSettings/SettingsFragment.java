@@ -11,11 +11,21 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.services.NotificationServi
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
+    public static final String NOTIFICATION_SERVICE_UID_KEY = "common-notification-service-uid-key";
+
     // notification enable/disable swith
     private SwitchPreference mNotificationSwitch;
 
+    // user authentication id
+    private String mUid;
+
     public SettingsFragment() {
         // Required empty public constructor
+    }
+
+    public SettingsFragment(String mUid) {
+
+        this.mUid = mUid;
     }
 
     @Override
@@ -44,9 +54,13 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     private void startNotificationService() {
 
-        if(getContext()!=null) {
-            getContext().startService(new Intent(getContext(), NotificationService.class));
-        }
+        if(getContext()==null) return;
+
+        Intent intent = new Intent(getContext(), NotificationService.class);
+
+        intent.putExtra(NOTIFICATION_SERVICE_UID_KEY, mUid);
+
+        getContext().startService(intent);
     }
 
     private void stopNotificationService() {

@@ -5,11 +5,43 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
 
 public class SettingsActivity extends AppCompatActivity {
+
+    private static final String TAG = "SA-debug";
+
+    // variables for user authentication
+    private String mUid;
+    private Authentication mAuth;
+    private Authentication.AuthenticationCallbacks mAuthCallbacks = new Authentication.AuthenticationCallbacks() {
+        @Override
+        public void onAuthenticationSuccess(AuthenticationUser user) {
+
+            mUid = user.getmUid();
+
+            loadSettingsFragment();
+        }
+
+        @Override
+        public void onAuthenticationFailure(String message) {
+
+            Toast.makeText(SettingsActivity.this, R.string.hard_logout, Toast.LENGTH_SHORT)
+                    .show();
+
+            SessionUtil.logoutNow(SettingsActivity.this, mAuth);
+
+            Log.d(TAG, "onAuthenticationFailure: authentication failed -> "+message);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +55,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         setupToolbar();
 
-        // show the settings fragment
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.settingsContent, new SettingsFragment())
-                .commit();
+        mAuth = new FirebaseEmailPasswordAuthentication(mAuthCallbacks);
+        mAuth.authenticateUser();
     }
 
     /*
@@ -44,6 +74,14 @@ public class SettingsActivity extends AppCompatActivity {
             // set toolbar title
             ab.setTitle(R.string.settings);
         }
+    }
+
+    private void loadSettingsFragment() {
+
+        // show the settings fragment
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.settingsContent, new SettingsFragment(mUid))
+                .commit();
     }
 
     // workaround to enable back navigation
