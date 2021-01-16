@@ -22,6 +22,10 @@
             android:enabled="true"
             android:exported="true"/>
 
+        <service
+            android:name=".services.NotificationJobIntentService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.ferdouszislam.nsu.cse486.sec01.homemealapp.fileprovider"
