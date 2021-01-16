@@ -56,17 +56,17 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         if(getContext()==null) return;
 
-        Intent intent = new Intent(getContext(), NotificationService.class);
+        Intent intent = new Intent(getContext().getApplicationContext(), NotificationService.class);
 
         intent.putExtra(NOTIFICATION_SERVICE_UID_KEY, mUid);
 
-        getContext().startService(intent);
+        getContext().getApplicationContext().startService(intent);
     }
 
     private void stopNotificationService() {
 
         if(getContext()!=null) {
-            getContext().stopService(new Intent(getContext(), NotificationService.class));
+            getContext().getApplicationContext().stopService(new Intent(getContext(), NotificationService.class));
         }
     }
 }

@@ -1,12 +1,21 @@
 package com.ferdouszislam.nsu.cse486.sec01.homemealapp.services;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.appSettings.SettingsFragment;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.ChefPlacedOrdersActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerPlacedOrdersActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.FoodOrderDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.FoodOrderFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
@@ -20,6 +29,9 @@ public class NotificationService extends Service {
 
     private static final String TAG = "NS-debug";
 
+    private static final String NOTIFICATION_CHANNEL_ID = "com.ferdouszislam.nsu.cse486.sec01.homemealapp.services";
+    private static final int NOTIFICATION_ID = 288;
+
     // variables used to get the user information
     private String mUid;
     private String mUserType;
@@ -31,6 +43,8 @@ public class NotificationService extends Service {
             new ListDataChangeListener<FoodOrder>() {
                 @Override
                 public void onDataAdded(FoodOrder data) {
+
+                    Log.d(TAG, "onDataAdded: new order chef");
 
                     showNotification(data);
                 }
@@ -52,6 +66,8 @@ public class NotificationService extends Service {
             new ListDataChangeListener<FoodOrder>() {
                 @Override
                 public void onDataAdded(FoodOrder data) {
+
+                    Log.d(TAG, "onDataAdded: new order customer");
 
                     if(data.getmOrderStatus().equals(OrderStatus.REJECTED)){
                         showNotification(data);
@@ -80,6 +96,8 @@ public class NotificationService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
+        Log.d(TAG, "onStartCommand: service started!");
+
         mUid = intent.getStringExtra(SettingsFragment.NOTIFICATION_SERVICE_UID_KEY);
 
         if(mUid == null){
@@ -89,18 +107,32 @@ public class NotificationService extends Service {
 
         init();
 
-        return Service.START_NOT_STICKY;
+        return START_STICKY;
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+
+        return null;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        
+        Log.d(TAG, "onDestroy: service destroyed");
     }
 
     private void init() {
 
+        createNotificationChannel();
+
         mUserAuthSharedPref = UserAuthSharedPref.build(this);
+        mUserType = mUserAuthSharedPref.getUserType();
 
-        if(mUserAuthSharedPref.getUserType().equals(UserType.CUSTOMER)){
+        if(mUserType.equals(UserType.CUSTOMER)){
 
-            mUserType = UserType.CUSTOMER;
-
-            mCustomerFoodOrderDao = new FoodOrderFirebaseRealtimeDao();
+            mCustomerFoodOrderDao = new FoodOrderFirebaseRealtimeDao(this);
             mCustomerFoodOrderDao.readFoodOrdersForCustomer(
                     mUid,
                     new DatabaseOperationStatusListener<Void, String>() {
@@ -118,11 +150,9 @@ public class NotificationService extends Service {
             );
         }
 
-        else if(mUserAuthSharedPref.getUserType().equals(UserType.CHEF)){
+        else if(mUserType.equals(UserType.CHEF)){
 
-            mUserType = UserType.CHEF;
-
-            mChefFoodOrderDao = new FoodOrderFirebaseRealtimeDao();
+            mChefFoodOrderDao = new FoodOrderFirebaseRealtimeDao(this);
 
             mChefFoodOrderDao.readFoodOrdersForChef(
                     mUid,
@@ -149,34 +179,72 @@ public class NotificationService extends Service {
     }
 
     private void showNotification(FoodOrder data) {
-        // TODO: implement
+
+        String notificationTitle, notificationDescription;
+        Intent intent;
 
         if(mUserType.equals(UserType.CHEF)){
 
-            Toast.makeText(this, "new order "+ data.getmFoodName() +"!", Toast.LENGTH_SHORT)
-                    .show();
+            notificationTitle = getString(R.string.new_order);
+            notificationDescription =
+                    data.getmFoodName() + ", " + data.getmQuantityUnitsSelectedByCustomer() + " X " + data.getmQuantityPerUnit();
+
+            intent = new Intent(this, ChefPlacedOrdersActivity.class);
         }
 
         else if(mUserType.equals(UserType.CUSTOMER)){
 
-            Toast.makeText(this, "order rejected "+ data.getmFoodName() +"!", Toast.LENGTH_SHORT)
-                    .show();
+            notificationTitle = getString(R.string.order_rejected);
+            notificationDescription =
+                    data.getmFoodName() + " X " + data.getmQuantityUnitsSelectedByCustomer() + " " + getString(R.string.was_rejected);
+
+            intent = new Intent(this, CustomerPlacedOrdersActivity.class);
         }
 
         else{
             Log.d(TAG, "showNotification: Notification Service stopped, invalid user type");
             stopSelf();
+
+            return;
         }
+
+        displayNotification(notificationTitle, notificationDescription, intent);
     }
 
     private void removeNotification() {
-        // TODO: implement
+
+        NotificationManagerCompat.from(this).cancel(NOTIFICATION_ID);
     }
 
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.enable_notifications_channel);
+            String description = getString(R.string.enable_notifications_channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 
-    @Override
-    public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
+    private void displayNotification(String notificationTitle, String notificationDescription, Intent intent) {
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_action_notification)
+                .setContentTitle(notificationTitle)
+                .setContentText(notificationDescription)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                // Set the intent that will fire when the user taps the notification
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+
+        NotificationManagerCompat.from(this).notify(NOTIFICATION_ID, builder.build());
     }
 }

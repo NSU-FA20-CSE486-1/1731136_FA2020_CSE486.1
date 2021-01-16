@@ -18,8 +18,9 @@
 
         <service
             android:name=".services.NotificationService"
+            android:process=":notification_service"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

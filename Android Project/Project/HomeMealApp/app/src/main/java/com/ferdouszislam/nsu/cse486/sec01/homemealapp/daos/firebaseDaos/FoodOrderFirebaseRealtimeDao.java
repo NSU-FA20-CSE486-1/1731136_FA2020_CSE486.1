@@ -1,5 +1,6 @@
 package com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperatio
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.ListDataChangeListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.RejectedFoodOrder;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.NosqlDatabasePathsUtil;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,7 +25,23 @@ public class FoodOrderFirebaseRealtimeDao implements FoodOrderDao {
 
     private static final String TAG = "FOrFRD-debug";
 
-    private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+    private FirebaseDatabase mDatabase;
+
+    public FoodOrderFirebaseRealtimeDao() {
+
+        mDatabase = FirebaseDatabase.getInstance();
+    }
+
+    public FoodOrderFirebaseRealtimeDao(Context context) {
+
+        try {
+            mDatabase = FirebaseDatabase.getInstance();
+        } catch (IllegalStateException e){
+
+            FirebaseApp.initializeApp(context);
+            mDatabase = FirebaseDatabase.getInstance();
+        }
+    }
 
     @Override
     public void createFoodOrder(FoodOrder foodOrder, DatabaseOperationStatusListener<Void, String> statusListener) {
