@@ -80,7 +80,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         // show the settings fragment
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.settingsContent, new SettingsFragment(mUid))
+                .replace(R.id.settingsContent, new SettingsFragment(mUid, this))
                 .commit();
     }
 

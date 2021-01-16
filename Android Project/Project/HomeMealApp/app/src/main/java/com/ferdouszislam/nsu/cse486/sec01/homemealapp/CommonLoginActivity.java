@@ -154,8 +154,6 @@ public class CommonLoginActivity extends AppCompatActivity {
      */
     private void openActivityBasedHomeActivity(String userType) {
 
-        startNotificationServiceIfSettingsEnabled();
-
         Intent intent;
 
         if(userType.equals(UserType.CHEF)) intent = new Intent(this, ChefHomeActivity.class);
@@ -170,24 +168,6 @@ public class CommonLoginActivity extends AppCompatActivity {
         // so that back press from this point on closes the app
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-    }
-
-    /*
-    starts the notification service if user had enabled it (before)
-     */
-    private void startNotificationServiceIfSettingsEnabled() {
-
-        boolean notificationWasEnabled =
-                PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.notification_switch_preference_key), false);
-
-        if(notificationWasEnabled){
-
-            Intent intent = new Intent(this, NotificationService.class);
-
-            intent.putExtra(SettingsFragment.NOTIFICATION_SERVICE_UID_KEY, mEmailPasswordAuthUser.getmUid());
-
-            startService(intent);
-        }
     }
 
     @Override

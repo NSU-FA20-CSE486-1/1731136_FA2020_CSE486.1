@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +24,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.BaseActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOffer;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.recyclerViewAdapters.FoodOffersAdapter;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.services.NotificationService;
 
 public class CustomerHomeActivity extends BaseActivity implements FoodOffersAdapter.CallerCallback{
 
@@ -44,6 +46,24 @@ public class CustomerHomeActivity extends BaseActivity implements FoodOffersAdap
         enableInternetStatusFeedback(findViewById(R.id.customer_home_main_view));
 
         init();
+
+        stopRunningServiceAndStartNewServiceIfUserEnabled();
+    }
+
+    /*
+    stop already running notification service if running
+    start a new service if user has enabled in settings
+     */
+    private void stopRunningServiceAndStartNewServiceIfUserEnabled() {
+
+        boolean notificationWasEnabled =
+                PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.notification_switch_preference_key), false);
+
+        if(notificationWasEnabled){
+            Intent intent = new Intent(this, NotificationService.class);
+            stopService(intent);
+            startService(intent);
+        }
     }
 
     private void init() {

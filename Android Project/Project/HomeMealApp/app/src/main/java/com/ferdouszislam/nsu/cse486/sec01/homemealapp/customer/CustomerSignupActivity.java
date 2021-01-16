@@ -226,24 +226,6 @@ public class CustomerSignupActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /*
-    starts the notification service if user had enabled it (before)
-     */
-    private void startNotificationServiceIfSettingsEnabled() {
-
-        boolean notificationWasEnabled =
-                PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.notification_switch_preference_key), false);
-
-        if(notificationWasEnabled){
-
-            Intent intent = new Intent(this, NotificationService.class);
-
-            intent.putExtra(SettingsFragment.NOTIFICATION_SERVICE_UID_KEY, mEmailPasswordAuthUser.getmUid());
-
-            startService(intent);
-        }
-    }
-
 
     /*
     UI to show user while registration is in progress

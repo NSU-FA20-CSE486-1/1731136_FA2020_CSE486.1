@@ -250,31 +250,11 @@ public class ChefSignupActivity extends AppCompatActivity {
 
     private void openChefHomeActivity() {
 
-        startNotificationServiceIfSettingsEnabled();
-
         Intent intent = new Intent(this, ChefHomeActivity.class);
         // clear out all activities on the back stack
         // so that back press from this point on closes the app
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-    }
-
-    /*
-    starts the notification service if user had enabled it (before)
-     */
-    private void startNotificationServiceIfSettingsEnabled() {
-
-        boolean notificationWasEnabled =
-                PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.notification_switch_preference_key), false);
-
-        if(notificationWasEnabled){
-
-            Intent intent = new Intent(this, NotificationService.class);
-
-            intent.putExtra(SettingsFragment.NOTIFICATION_SERVICE_UID_KEY, mChefUser.getmUid());
-
-            startService(intent);
-        }
     }
 
     /*
