@@ -1,14 +1,13 @@
 package com.ferdouszislam.nsu.cse486.sec01.homemealapp.appSettings;
 
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.services.NotificationService;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
@@ -29,16 +28,31 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             mNotificationSwitch.setOnPreferenceChangeListener((preference, newValue) -> {
 
                 if ((Boolean) newValue) {
-                    // TODO: start notification service
-                    Toast.makeText(getContext(), "turn on notifications!", Toast.LENGTH_SHORT)
-                            .show();
+
+                    startNotificationService();
+
                 } else {
-                    // TODO: stop notification service
+
+                    stopNotificationService();
                 }
 
                 return true;
             });
         }
 
+    }
+
+    private void startNotificationService() {
+
+        if(getContext()!=null) {
+            getContext().startService(new Intent(getContext(), NotificationService.class));
+        }
+    }
+
+    private void stopNotificationService() {
+
+        if(getContext()!=null) {
+            getContext().stopService(new Intent(getContext(), NotificationService.class));
+        }
     }
 }
