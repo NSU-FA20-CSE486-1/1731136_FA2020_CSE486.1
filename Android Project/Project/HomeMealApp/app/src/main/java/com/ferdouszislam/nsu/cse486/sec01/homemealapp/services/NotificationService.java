@@ -26,6 +26,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperatio
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.ListDataChangeListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOrder;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.UserAuthSharedPref;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.DateTimeUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.OrderStatus;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.UserType;
 
@@ -70,7 +71,10 @@ public class NotificationService extends Service {
 
                     Log.d(TAG, "onDataAdded: new order chef");
 
-                    showNotification(data);
+                    if(data.getmOrderStatus().equals(OrderStatus.IN_QUEUE)){
+                        Log.d(TAG, "onDataAdded: new order chef");
+                        showNotification(data);
+                    }
                 }
 
                 @Override
@@ -93,7 +97,7 @@ public class NotificationService extends Service {
 
                     Log.d(TAG, "onDataAdded: new order customer");
 
-                    if(data.getmOrderStatus().equals(OrderStatus.REJECTED)){
+                    if(data.getmOrderStatus().equals(OrderStatus.REJECTED) && isTodaysOrder(data)){
                         showNotification(data);
                     }
                 }
@@ -112,6 +116,17 @@ public class NotificationService extends Service {
                     showNotification(data);
                 }
             };
+
+    private boolean isTodaysOrder(FoodOrder data) {
+
+        String todaysDate = DateTimeUtil.getCurrentTime();
+        todaysDate = todaysDate.substring(0, todaysDate.indexOf(' '));
+
+        String foodOrderDate = data.getmTimeStamp();
+        foodOrderDate = foodOrderDate.substring(0, foodOrderDate.indexOf(' '));
+
+        return todaysDate.equals(foodOrderDate);
+    }
 
 
     public NotificationService() {
