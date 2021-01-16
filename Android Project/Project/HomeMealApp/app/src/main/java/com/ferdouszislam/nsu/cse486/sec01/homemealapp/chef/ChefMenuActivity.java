@@ -11,6 +11,7 @@ import android.view.View;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.MainActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.UserTypeChoiceActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.appSettings.SettingsActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerUpdateProfileActivity;
@@ -71,5 +72,10 @@ public class ChefMenuActivity extends AppCompatActivity {
     public void logoutClick(View view) {
 
         SessionUtil.logoutNow(this, new FirebaseEmailPasswordAuthentication());
+    }
+
+    public void settingsClick(View view) {
+
+        startActivity(new Intent(this, SettingsActivity.class));
     }
 }

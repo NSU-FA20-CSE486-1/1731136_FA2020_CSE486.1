@@ -206,6 +206,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+                android:onClick="settingsClick"
                 android:orientation="horizontal">
 
                 <ImageView

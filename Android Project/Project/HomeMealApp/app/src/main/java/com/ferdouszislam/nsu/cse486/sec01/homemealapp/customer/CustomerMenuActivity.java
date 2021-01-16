@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.appSettings.SettingsActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
 
@@ -62,5 +63,10 @@ public class CustomerMenuActivity extends AppCompatActivity {
     public void logoutClick(View view) {
 
         SessionUtil.logoutNow(this, new FirebaseEmailPasswordAuthentication());
+    }
+
+    public void settingsClick(View view) {
+
+        startActivity(new Intent(this, SettingsActivity.class));
     }
 }
