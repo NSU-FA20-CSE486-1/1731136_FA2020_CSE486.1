@@ -101,7 +101,7 @@ public class FoodOrderFirebaseRealtimeDao implements FoodOrderDao {
 
         final boolean[] dataReadSuccess = {false};
 
-        query.getRef().addChildEventListener(new ChildEventListener() {
+        query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
@@ -169,7 +169,7 @@ public class FoodOrderFirebaseRealtimeDao implements FoodOrderDao {
 
         final boolean[] dataReadSuccess = {false};
 
-        query.getRef().addChildEventListener(new ChildEventListener() {
+        query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 

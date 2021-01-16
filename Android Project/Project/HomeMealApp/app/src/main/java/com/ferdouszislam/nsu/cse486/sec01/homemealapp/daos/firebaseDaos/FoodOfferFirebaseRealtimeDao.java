@@ -102,7 +102,7 @@ public class FoodOfferFirebaseRealtimeDao implements FoodOfferDao {
 
         final boolean[] dataReadSuccess = {false};
 
-        query.getRef().addChildEventListener(new ChildEventListener() {
+        query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
