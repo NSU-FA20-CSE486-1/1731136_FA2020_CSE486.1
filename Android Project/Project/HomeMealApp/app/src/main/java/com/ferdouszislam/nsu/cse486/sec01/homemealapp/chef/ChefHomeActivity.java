@@ -15,12 +15,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.BaseActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.recyclerViewAdapters.ChefFoodOffersAdapter;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOffer;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.ChefUserProfileSharedPref;
 
-public class ChefHomeActivity extends AppCompatActivity implements ChefFoodOffersAdapter.CallerCallback {
+public class ChefHomeActivity extends BaseActivity implements ChefFoodOffersAdapter.CallerCallback {
 
     public static final String FOOD_VARIANT_KEY = "com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef-createVariant";
 
@@ -32,6 +33,8 @@ public class ChefHomeActivity extends AppCompatActivity implements ChefFoodOffer
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chef_home);
+
+        enableInternetStatusFeedback(findViewById(R.id.chef_home_main_view));
 
         init();
     }

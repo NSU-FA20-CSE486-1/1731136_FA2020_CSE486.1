@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chef_home_main_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".chef.ChefHomeActivity">
@@ -33,9 +34,9 @@
         android:layout_marginBottom="-24dp"
         android:clickable="true"
         android:contentDescription="@string/addButton_label"
+        android:focusable="true"
         android:onClick="addFoodItemClick"
-        app:srcCompat="@drawable/ic_action_add"
-        android:focusable="true" />
+        app:srcCompat="@drawable/ic_action_add" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/chefHome_Toolbar"

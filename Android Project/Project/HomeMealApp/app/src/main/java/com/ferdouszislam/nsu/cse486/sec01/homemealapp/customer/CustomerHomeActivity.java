@@ -19,11 +19,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.BaseActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOffer;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.recyclerViewAdapters.FoodOffersAdapter;
 
-public class CustomerHomeActivity extends AppCompatActivity implements FoodOffersAdapter.CallerCallback{
+public class CustomerHomeActivity extends BaseActivity implements FoodOffersAdapter.CallerCallback{
 
     private static final String TAG = "CustHA-debug";
 
@@ -39,6 +40,8 @@ public class CustomerHomeActivity extends AppCompatActivity implements FoodOffer
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_home);
+
+        enableInternetStatusFeedback(findViewById(R.id.customer_home_main_view));
 
         init();
     }

@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.BaseActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
@@ -22,7 +23,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.recyclerViewAdapters.
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOrder;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
 
-public class ChefPlacedOrdersActivity extends AppCompatActivity implements ChefPlacedOrdersAdapter.CallerCallback {
+public class ChefPlacedOrdersActivity extends BaseActivity implements ChefPlacedOrdersAdapter.CallerCallback {
 
     private static final String TAG = "ChPOA-debug";
 
@@ -60,6 +61,8 @@ public class ChefPlacedOrdersActivity extends AppCompatActivity implements ChefP
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chef_placed_orders);
+
+        enableInternetStatusFeedback(findViewById(R.id.chef_placed_orders_main_view));
 
         init();
     }

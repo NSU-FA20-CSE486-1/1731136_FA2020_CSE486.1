@@ -7,6 +7,8 @@
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -15,13 +17,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HomeMealApp">
+        <activity android:name=".BaseActivity"></activity>
 
         <service
             android:name=".services.NotificationService"
-            android:process=":notification_service"
             android:enabled="true"
-            android:exported="true"/>
-
+            android:exported="true"
+            android:process=":notification_service" />
         <service
             android:name=".services.NotificationJobIntentService"
             android:permission="android.permission.BIND_JOB_SERVICE" />

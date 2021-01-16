@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.BaseActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
@@ -22,7 +23,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.recyclerViewAdapt
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOrder;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
 
-public class CustomerPlacedOrdersActivity extends AppCompatActivity implements CustomerPlacedOrdersAdapter.CallerCallback {
+public class CustomerPlacedOrdersActivity extends BaseActivity implements CustomerPlacedOrdersAdapter.CallerCallback {
 
     private static final String TAG = "CustPOA-debug";
 
@@ -62,6 +63,8 @@ public class CustomerPlacedOrdersActivity extends AppCompatActivity implements C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_placed_orders);
+
+        enableInternetStatusFeedback(findViewById(R.id.customer_placed_orders_main_view));
 
         init();
     }

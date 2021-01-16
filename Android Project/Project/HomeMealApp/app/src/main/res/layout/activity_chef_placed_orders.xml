@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chef_placed_orders_main_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".chef.ChefPlacedOrdersActivity">
@@ -14,7 +15,7 @@
         android:layout_marginTop="0dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:titleTextAppearance="@style/CommonToolbarTitleTheme"/>
+        app:titleTextAppearance="@style/CommonToolbarTitleTheme" />
 
     <TextView
         android:id="@+id/chef_noPlacedOrders_TextView"
