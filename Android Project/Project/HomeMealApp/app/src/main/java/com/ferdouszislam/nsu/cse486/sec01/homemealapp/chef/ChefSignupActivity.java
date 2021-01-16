@@ -3,6 +3,7 @@ package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.appSettings.SettingsFragment;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.EmailPasswordAuthUser;
@@ -23,6 +25,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.ChefUserDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.ChefUserFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.ChefUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.services.NotificationService;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.ChefUserProfileSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.UserAuthSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;
@@ -247,11 +250,31 @@ public class ChefSignupActivity extends AppCompatActivity {
 
     private void openChefHomeActivity() {
 
+        startNotificationServiceIfSettingsEnabled();
+
         Intent intent = new Intent(this, ChefHomeActivity.class);
         // clear out all activities on the back stack
         // so that back press from this point on closes the app
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    /*
+    starts the notification service if user had enabled it (before)
+     */
+    private void startNotificationServiceIfSettingsEnabled() {
+
+        boolean notificationWasEnabled =
+                PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.notification_switch_preference_key), false);
+
+        if(notificationWasEnabled){
+
+            Intent intent = new Intent(this, NotificationService.class);
+
+            intent.putExtra(SettingsFragment.NOTIFICATION_SERVICE_UID_KEY, mChefUser.getmUid());
+
+            startService(intent);
+        }
     }
 
     /*

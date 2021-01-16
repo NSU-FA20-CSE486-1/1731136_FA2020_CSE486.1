@@ -3,6 +3,7 @@ package com.ferdouszislam.nsu.cse486.sec01.homemealapp;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.appSettings.SettingsFragment;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.EmailPasswordAuthUser;
@@ -28,6 +30,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.Customer
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.CustomerUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.SingleDataChangeListener;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.services.NotificationService;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.ChefUserProfileSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.CustomerUserProfileSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.UserAuthSharedPref;
@@ -56,6 +59,8 @@ public class CommonLoginActivity extends AppCompatActivity {
     private Authentication.AuthenticationCallbacks mAuthCallbacks = new Authentication.AuthenticationCallbacks() {
         @Override
         public void onAuthenticationSuccess(AuthenticationUser user) {
+
+            mEmailPasswordAuthUser.setmUid(user.getmUid());
 
             storeUserTypeToSharedPref(mUserType);
 
@@ -149,6 +154,8 @@ public class CommonLoginActivity extends AppCompatActivity {
      */
     private void openActivityBasedHomeActivity(String userType) {
 
+        startNotificationServiceIfSettingsEnabled();
+
         Intent intent;
 
         if(userType.equals(UserType.CHEF)) intent = new Intent(this, ChefHomeActivity.class);
@@ -163,6 +170,24 @@ public class CommonLoginActivity extends AppCompatActivity {
         // so that back press from this point on closes the app
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    /*
+    starts the notification service if user had enabled it (before)
+     */
+    private void startNotificationServiceIfSettingsEnabled() {
+
+        boolean notificationWasEnabled =
+                PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.notification_switch_preference_key), false);
+
+        if(notificationWasEnabled){
+
+            Intent intent = new Intent(this, NotificationService.class);
+
+            intent.putExtra(SettingsFragment.NOTIFICATION_SERVICE_UID_KEY, mEmailPasswordAuthUser.getmUid());
+
+            startService(intent);
+        }
     }
 
     @Override

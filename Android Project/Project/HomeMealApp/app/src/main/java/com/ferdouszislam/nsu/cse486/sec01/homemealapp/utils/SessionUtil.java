@@ -10,6 +10,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.MainActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.UserTypeChoiceActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.services.NotificationService;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.ChefUserProfileSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.CustomerUserProfileSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.UserAuthSharedPref;
@@ -29,6 +30,8 @@ public abstract class SessionUtil {
 
         clearSharedPreferences(context);
 
+        closeNotificationService(context);
+
         auth.signOut();
 
         Intent intent = new Intent(context, UserTypeChoiceActivity.class);
@@ -47,6 +50,11 @@ public abstract class SessionUtil {
         CustomerUserProfileSharedPref.build(context).clearAllSharedPreferences();
 
         UserAuthSharedPref.build(context).clearAllSharedPreferences();
+    }
+
+    private static void closeNotificationService(Context context) {
+
+        context.stopService(new Intent(context, NotificationService.class));
     }
 
 }

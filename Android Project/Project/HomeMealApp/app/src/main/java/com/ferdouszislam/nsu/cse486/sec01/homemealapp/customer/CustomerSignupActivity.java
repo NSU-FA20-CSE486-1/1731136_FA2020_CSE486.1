@@ -3,6 +3,7 @@ package com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.appSettings.SettingsFragment;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.EmailPasswordAuthUser;
@@ -21,6 +23,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.CustomerUserDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.CustomerUserFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.CustomerUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.services.NotificationService;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.CustomerUserProfileSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.UserAuthSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;
@@ -46,6 +49,7 @@ public class CustomerSignupActivity extends AppCompatActivity {
                 @Override
                 public void onRegistrationSuccess(AuthenticationUser user) {
 
+                    mEmailPasswordAuthUser.setmUid(user.getmUid());
                     mCustomerUser.setmUid(user.getmUid());
 
                     storeUserInformationInDatabase();
@@ -220,6 +224,24 @@ public class CustomerSignupActivity extends AppCompatActivity {
         // so that back press from this point on closes the app
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    /*
+    starts the notification service if user had enabled it (before)
+     */
+    private void startNotificationServiceIfSettingsEnabled() {
+
+        boolean notificationWasEnabled =
+                PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.notification_switch_preference_key), false);
+
+        if(notificationWasEnabled){
+
+            Intent intent = new Intent(this, NotificationService.class);
+
+            intent.putExtra(SettingsFragment.NOTIFICATION_SERVICE_UID_KEY, mEmailPasswordAuthUser.getmUid());
+
+            startService(intent);
+        }
     }
 
 
