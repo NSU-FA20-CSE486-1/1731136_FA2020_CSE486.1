@@ -19,7 +19,6 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.FoodOffe
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOffer;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.ListDataChangeListener;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOrder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -135,20 +134,16 @@ public class FoodOffersAdapter extends RecyclerView.Adapter<FoodOffersAdapter.Vi
      */
     public void filterByRegion(String region){
 
-        // restore if any foodOffer with 'region' is already hidden
+        // restore all hidden foodOffers
         for(Map.Entry<Integer, FoodOffer> entry : mHiddenFoodOffers.entrySet()){
 
             int position = entry.getKey();
             FoodOffer foodOffer = entry.getValue();
 
-            if(foodOffer.getmRegion().equals(region)){
-
-                mFoodOffers.add(position, foodOffer);
-                notifyItemInserted(position);
-
-                mHiddenFoodOffers.remove(position);
-            }
+            if(position>=mFoodOffers.size()) mFoodOffers.add(foodOffer);
+            else mFoodOffers.add(position, foodOffer);
         }
+        mHiddenFoodOffers.clear();
 
         // find positions of food offers which are to be hidden
         for(int i=0;i<mFoodOffers.size();i++){
@@ -159,12 +154,23 @@ public class FoodOffersAdapter extends RecyclerView.Adapter<FoodOffersAdapter.Vi
             }
         }
         // remove the food offers at found positions
+        int removedCount = 0;
         for(Map.Entry<Integer, FoodOffer> entry : mHiddenFoodOffers.entrySet()){
 
             int position = entry.getKey();
+            position-=removedCount;
+
+            if(mFoodOffers.isEmpty()) break;
+
             mFoodOffers.remove(position);
-            notifyItemRemoved(position);
+
+            removedCount++;
         }
+
+        notifyDataSetChanged();
+    }
+
+    private void restoreAllFoodOffers() {
     }
 
     /**
@@ -178,10 +184,11 @@ public class FoodOffersAdapter extends RecyclerView.Adapter<FoodOffersAdapter.Vi
             FoodOffer foodOffer = entry.getValue();
 
             mFoodOffers.add(position, foodOffer);
-            notifyItemInserted(position);
 
             mHiddenFoodOffers.remove(position);
         }
+
+        notifyDataSetChanged();
     }
 
 
