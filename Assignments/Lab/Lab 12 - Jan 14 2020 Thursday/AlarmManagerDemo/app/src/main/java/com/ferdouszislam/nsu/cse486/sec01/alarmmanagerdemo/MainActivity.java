@@ -24,13 +24,27 @@ public class MainActivity extends AppCompatActivity {
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-        long timeInMilliseconds = alarmManager.getNextAlarmClock().getTriggerTime();
+        try {
+
+            long timeInMilliseconds = alarmManager.getNextAlarmClock().getTriggerTime();
+
+            String userReadableTime = getUserReadableTimeFromMilliseconds(timeInMilliseconds);
+
+            Toast.makeText(this, userReadableTime, Toast.LENGTH_SHORT)
+                    .show();
+
+        } catch (NullPointerException e){
+
+            Toast.makeText(this, "No alarms set!", Toast.LENGTH_SHORT)
+                    .show();
+        }
+    }
+
+    private String getUserReadableTimeFromMilliseconds(long timeInMilliseconds) {
 
         DateFormat simple = new SimpleDateFormat("dd MMM yyyy HH:mm:ss Z");
         Date result = new Date(timeInMilliseconds);
-        String userReadableTime =  simple.format(result);
 
-        Toast.makeText(this, userReadableTime, Toast.LENGTH_SHORT)
-                .show();
+        return simple.format(result);
     }
 }
