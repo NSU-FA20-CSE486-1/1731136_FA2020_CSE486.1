@@ -174,6 +174,14 @@ public class NotificationService extends Service {
         mUserAuthSharedPref = UserAuthSharedPref.build(this);
         mUserType = mUserAuthSharedPref.getUserType();
 
+        // TODO: fix bug
+        //  immediately after logging out of customer account if user logs back into to chef account
+        //  mUserType shows 'customer_user' rather than 'chef_user'
+        //  same happens in the other way around
+        //  however mUserType automatically sets to the correct user after restarting the app once
+        //  i.e quitting the app and then opening it again (thus launching the service from home activities)
+        Log.d(TAG, "init: user type -> "+mUserType);
+
         if(mUserType.equals(UserType.CUSTOMER)){
 
             mCustomerFoodOrderDao = new FoodOrderFirebaseRealtimeDao(this);

@@ -106,8 +106,14 @@ public class CommonLoginActivity extends AppCompatActivity {
      */
     private void storeUserTypeToSharedPref(String userType) {
 
+        // TODO: remove added log for tracing notification service bug
+        Log.d(TAG, "storeUserTypeToSharedPref: saving user type to sp -> "+userType);
+
         mUserAuthSharedPref = UserAuthSharedPref.build(CommonLoginActivity.this);
         mUserAuthSharedPref.setUserType(userType);
+
+        // TODO: remove added log for tracing notification service bug
+        Log.d(TAG, "storeUserTypeToSharedPref: user type saved = "+mUserAuthSharedPref.getUserType());
     }
 
     /**

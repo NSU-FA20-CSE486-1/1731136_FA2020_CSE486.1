@@ -25,6 +25,7 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOffer;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.recyclerViewAdapters.FoodOffersAdapter;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.services.NotificationService;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.UserAuthSharedPref;
 
 public class CustomerHomeActivity extends BaseActivity implements FoodOffersAdapter.CallerCallback{
 
@@ -58,6 +59,9 @@ public class CustomerHomeActivity extends BaseActivity implements FoodOffersAdap
 
         boolean notificationWasEnabled =
                 PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.notification_switch_preference_key), false);
+
+        // TODO: remove added log for tracing notification service bug
+        Log.d(TAG, "stopRunningServiceAndStartNewServiceIfUserEnabled: user type -> "+ UserAuthSharedPref.build(this).getUserType());
 
         if(notificationWasEnabled){
             Intent intent = new Intent(this, NotificationService.class);
