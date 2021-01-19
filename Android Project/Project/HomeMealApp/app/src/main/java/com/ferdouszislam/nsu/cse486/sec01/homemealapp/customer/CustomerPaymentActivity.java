@@ -136,7 +136,7 @@ public class CustomerPaymentActivity extends AppCompatActivity {
             // Enable the Up button
             ab.setDisplayHomeAsUpEnabled(true);
             // set toolbar title
-            ab.setTitle(R.string.service_charge_payment_title);
+            ab.setTitle(R.string.customer_payment_title);
         }
     }
 

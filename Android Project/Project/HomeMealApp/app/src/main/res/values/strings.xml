@@ -46,7 +46,7 @@
     <string name="companyBkash_TextView">Company Bkash: </string>
     <string name="companyBkashNumber">+880 12345678910</string>
     <string name="companyBkashHint_TextView">bkash the service charge to this number</string>
-    <string name="paymentProcess_TextView">Please bkash the service charge to the given phone number. After you are done put the bKash transaction code below.</string>
+    <string name="paymentProcess_TextView">Please bkash the payment amount to the given phone number. After you are done, put the bKash transaction code below.</string>
     <string name="transactionCodeHint_Textview">enter valid bKash 10 letter transaction code</string>
     <string name="confirmPayment_ButtonLabel">Confirm Payment</string>
     <string name="service_charge_payment_title">Service Charge Payment</string>
@@ -185,5 +185,6 @@
     <string name="order_rejected">Order rejected by vendor!</string>
     <string name="was_rejected">was rejected</string>
     <string name="no_internet">No internet!</string>
+    <string name="customer_payment_title">Order payment</string>
 
 </resources>
