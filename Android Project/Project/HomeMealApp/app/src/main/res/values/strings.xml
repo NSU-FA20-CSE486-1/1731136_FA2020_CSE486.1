@@ -93,7 +93,7 @@
     <string name="monthlyPlan_TextView">Monthly Meal Plan</string>
     <string name="monthlyPlanSubtitle_Textview">feature coming soon</string>
     <string name="customerMenuPlacedOrderSubtitle_TextView">view list of your placed orders</string>
-    <string name="customerPlaceOrderTitle_TextView">Place your order for Food Name</string>
+    <string name="customerPlaceOrderTitle_TextView">Place your order for</string>
     <string name="quantityHint_TextView">1 unit = (quantity specified by vendor)</string>
     <string name="bKashPhoneHint_customerPlaceOrder_TextView">Bkash payment phone number</string>
     <string name="callPhoneHint_customerPlaceOrder_TextView">Phone number for delivery guy to contact you</string>

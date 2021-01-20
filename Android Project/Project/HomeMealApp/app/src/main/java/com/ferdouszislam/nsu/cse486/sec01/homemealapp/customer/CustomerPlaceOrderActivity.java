@@ -42,7 +42,7 @@ public class CustomerPlaceOrderActivity extends AppCompatActivity {
     // ui
     private EditText mSelectUnitsEditText, mBkashPhoneNumberEditText;
     private EditText mContactPhoneNumberEditText, mCustomerLocationEditText;
-    private TextView mPaymentAmountTextView;
+    private TextView mPaymentAmountTextView, mFoodNameTextView;
     private Button mConfirmOrderButton;
 
     // model
@@ -122,6 +122,7 @@ public class CustomerPlaceOrderActivity extends AppCompatActivity {
         mContactPhoneNumberEditText = findViewById(R.id.callPhone_customerPlaceOrder_EditText);
         mCustomerLocationEditText = findViewById(R.id.address_customerPlaceOrder_EditText);
         mPaymentAmountTextView = findViewById(R.id.paymentAmount_customerPlaceOrder_TextView);
+        mFoodNameTextView = findViewById(R.id.customerPlaceOrderTitle_TextView);
         mConfirmOrderButton = findViewById(R.id.confirmOrder_Button);
 
         mFoodOffer = (FoodOffer) getIntent().getSerializableExtra(CustomerFoodOfferDetailsActivity.FOOD_OFFER_ORDER_KEY);
@@ -143,6 +144,8 @@ public class CustomerPlaceOrderActivity extends AppCompatActivity {
         mContactPhoneNumberEditText.setText(mCustomerUserProfileSharedPref.getCustomerUser().getmPhoneNumber());
         String initialPayment = mFoodOffer.getmPrice() + " BDT";
         mPaymentAmountTextView.setText(initialPayment);
+        String titleWithFoodName = getString(R.string.customerPlaceOrderTitle_TextView) + " " + mFoodOffer.getmFoodName();
+        mFoodNameTextView.setText(titleWithFoodName);
     }
 
     /*
