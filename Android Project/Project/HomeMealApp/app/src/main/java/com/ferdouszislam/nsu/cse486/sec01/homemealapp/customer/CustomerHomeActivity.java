@@ -63,11 +63,10 @@ public class CustomerHomeActivity extends BaseActivity implements FoodOffersAdap
         // TODO: remove added log for tracing notification service bug
         Log.d(TAG, "stopRunningServiceAndStartNewServiceIfUserEnabled: user type -> "+ UserAuthSharedPref.build(this).getUserType());
 
-        if(notificationWasEnabled){
-            Intent intent = new Intent(this, NotificationService.class);
-            stopService(intent);
-            startService(intent);
-        }
+        Intent intent = new Intent(this, NotificationService.class);
+        stopService(intent);
+
+        if(notificationWasEnabled) startService(intent);
     }
 
     private void init() {

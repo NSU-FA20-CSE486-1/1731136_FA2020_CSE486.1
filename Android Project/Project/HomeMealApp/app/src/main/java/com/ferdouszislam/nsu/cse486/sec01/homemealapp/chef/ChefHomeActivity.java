@@ -52,11 +52,10 @@ public class ChefHomeActivity extends BaseActivity implements ChefFoodOffersAdap
         boolean notificationWasEnabled =
                 PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.notification_switch_preference_key), false);
 
-        if(notificationWasEnabled){
-            Intent intent = new Intent(this, NotificationService.class);
-            stopService(intent);
-            startService(intent);
-        }
+        Intent intent = new Intent(this, NotificationService.class);
+        stopService(intent);
+
+        if(notificationWasEnabled) startService(intent);
     }
 
     private void init() {
