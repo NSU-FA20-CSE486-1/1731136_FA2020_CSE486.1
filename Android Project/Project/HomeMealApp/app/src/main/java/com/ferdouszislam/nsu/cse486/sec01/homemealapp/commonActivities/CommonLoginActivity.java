@@ -1,9 +1,8 @@
-package com.ferdouszislam.nsu.cse486.sec01.homemealapp;
+package com.ferdouszislam.nsu.cse486.sec01.homemealapp.commonActivities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,24 +12,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.appSettings.SettingsFragment;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.EmailPasswordAuthUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.ChefHomeActivity;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.ChefSignupActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.activities.ChefHomeActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.activities.ChefSignupActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.ChefUserDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.ChefUserFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.ChefUser;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerHomeActivity;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerSignupActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.activities.CustomerHomeActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.activities.CustomerSignupActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.CustomerUserDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.CustomerUserFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.CustomerUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.SingleDataChangeListener;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.services.NotificationService;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.ChefUserProfileSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.CustomerUserProfileSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.UserAuthSharedPref;

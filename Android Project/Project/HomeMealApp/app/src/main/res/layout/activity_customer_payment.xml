@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".customer.CustomerPaymentActivity">
+    tools:context=".customer.activities.CustomerPaymentActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/customerPayment_Toolbar"

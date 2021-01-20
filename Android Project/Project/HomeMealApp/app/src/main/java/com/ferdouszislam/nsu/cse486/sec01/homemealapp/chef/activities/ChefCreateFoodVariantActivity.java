@@ -1,4 +1,4 @@
-package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef;
+package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;

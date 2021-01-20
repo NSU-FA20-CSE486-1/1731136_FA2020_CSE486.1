@@ -1,9 +1,8 @@
-package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef;
+package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.appSettings.SettingsFragment;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.EmailPasswordAuthUser;
@@ -25,7 +23,6 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.ChefUserDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.ChefUserFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.ChefUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.services.NotificationService;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.ChefUserProfileSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.UserAuthSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;

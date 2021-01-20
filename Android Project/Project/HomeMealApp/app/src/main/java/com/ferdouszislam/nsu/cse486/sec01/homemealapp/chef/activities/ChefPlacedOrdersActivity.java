@@ -1,7 +1,6 @@
-package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef;
+package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.activities;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,13 +13,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.BaseActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.commonActivities.BaseActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.recyclerViewAdapters.ChefPlacedOrdersAdapter;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOrder;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
 
 public class ChefPlacedOrdersActivity extends BaseActivity implements ChefPlacedOrdersAdapter.CallerCallback {

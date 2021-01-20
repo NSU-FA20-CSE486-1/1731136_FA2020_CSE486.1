@@ -1,7 +1,6 @@
-package com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer;
+package com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.activities;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,7 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.BaseActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.commonActivities.BaseActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;

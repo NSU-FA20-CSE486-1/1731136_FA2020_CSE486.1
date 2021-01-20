@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -18,8 +17,8 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.appSettings.SettingsFragme
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.ChefPlacedOrdersActivity;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerPlacedOrdersActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.activities.ChefPlacedOrdersActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.activities.CustomerPlacedOrdersActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.FoodOrderDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.FoodOrderFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;

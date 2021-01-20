@@ -1,4 +1,4 @@
-package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef;
+package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,13 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.MainActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.UserTypeChoiceActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.appSettings.SettingsActivity;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerUpdateProfileActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
 
 public class ChefMenuActivity extends AppCompatActivity {

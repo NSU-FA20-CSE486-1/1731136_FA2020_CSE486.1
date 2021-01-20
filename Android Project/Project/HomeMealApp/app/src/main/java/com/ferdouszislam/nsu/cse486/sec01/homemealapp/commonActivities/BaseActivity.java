@@ -1,4 +1,4 @@
-package com.ferdouszislam.nsu.cse486.sec01.homemealapp;
+package com.ferdouszislam.nsu.cse486.sec01.homemealapp.commonActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.broadcastReceivers.NetworkConnectionBroadcastReceiver;
 import com.google.android.material.snackbar.Snackbar;
 

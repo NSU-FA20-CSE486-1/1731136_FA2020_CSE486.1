@@ -1,4 +1,4 @@
-package com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer;
+package com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,13 +17,11 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.FoodOrderDao;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.CustomerUserFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.FoodOrderFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.CompletedFoodOrder;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.models.FoodOrder;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.OrderStatus;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
 
 public class CustomerPaymentActivity extends AppCompatActivity {

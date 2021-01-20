@@ -17,7 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HomeMealApp">
-        <activity android:name=".BaseActivity"></activity>
+        <activity android:name=".commonActivities.BaseActivity"></activity>
 
         <service
             android:name=".services.NotificationService"
@@ -38,114 +38,114 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".commonActivities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UserTypeChoiceActivity" />
+        <activity android:name=".commonActivities.UserTypeChoiceActivity" />
         <activity
-            android:name=".CommonLoginActivity"
-            android:parentActivityName=".UserTypeChoiceActivity">
+            android:name=".commonActivities.CommonLoginActivity"
+            android:parentActivityName=".commonActivities.UserTypeChoiceActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".UserTypeChoiceActivity" />
+                android:value=".commonActivities.UserTypeChoiceActivity" />
         </activity>
         <activity
-            android:name=".chef.ChefSignupActivity"
-            android:parentActivityName=".UserTypeChoiceActivity">
+            android:name=".chef.activities.ChefSignupActivity"
+            android:parentActivityName=".commonActivities.UserTypeChoiceActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".UserTypeChoiceActivity" />
+                android:value=".commonActivities.UserTypeChoiceActivity" />
         </activity>
-        <activity android:name=".chef.ChefHomeActivity" />
+        <activity android:name=".chef.activities.ChefHomeActivity" />
         <activity
-            android:name=".chef.ChefAddFoodOfferActivity"
-            android:parentActivityName=".chef.ChefHomeActivity">
+            android:name=".chef.activities.ChefAddFoodOfferActivity"
+            android:parentActivityName=".chef.activities.ChefHomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".chef.ChefHomeActivity" />
-        </activity>
-        <activity
-            android:name=".chef.ChefCreateFoodVariantActivity"
-            android:parentActivityName=".chef.ChefHomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".chef.ChefHomeActivity" />
+                android:value=".chef.activities.ChefHomeActivity" />
         </activity>
         <activity
-            android:name=".chef.ChefMenuActivity"
-            android:parentActivityName=".chef.ChefHomeActivity">
+            android:name=".chef.activities.ChefCreateFoodVariantActivity"
+            android:parentActivityName=".chef.activities.ChefHomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".chef.ChefHomeActivity" />
+                android:value=".chef.activities.ChefHomeActivity" />
         </activity>
         <activity
-            android:name=".chef.ChefSCPaymentActivity"
-            android:parentActivityName=".chef.ChefMenuActivity">
+            android:name=".chef.activities.ChefMenuActivity"
+            android:parentActivityName=".chef.activities.ChefHomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".chef.ChefMenuActivity" />
+                android:value=".chef.activities.ChefHomeActivity" />
         </activity>
         <activity
-            android:name=".chef.ChefUpdateProfileActivity"
-            android:parentActivityName=".chef.ChefMenuActivity">
+            android:name=".chef.activities.ChefSCPaymentActivity"
+            android:parentActivityName=".chef.activities.ChefMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".chef.ChefMenuActivity" />
+                android:value=".chef.activities.ChefMenuActivity" />
         </activity>
         <activity
-            android:name=".chef.ChefPlacedOrdersActivity"
-            android:parentActivityName=".chef.ChefMenuActivity">
+            android:name=".chef.activities.ChefUpdateProfileActivity"
+            android:parentActivityName=".chef.activities.ChefMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".chef.ChefMenuActivity" />
+                android:value=".chef.activities.ChefMenuActivity" />
         </activity>
         <activity
-            android:name=".customer.CustomerSignupActivity"
-            android:parentActivityName=".CommonLoginActivity">
+            android:name=".chef.activities.ChefPlacedOrdersActivity"
+            android:parentActivityName=".chef.activities.ChefMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CommonLoginActivity" />
-        </activity>
-        <activity android:name=".customer.CustomerHomeActivity" />
-        <activity
-            android:name=".customer.CustomerFoodOfferDetailsActivity"
-            android:parentActivityName=".customer.CustomerHomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".customer.CustomerHomeActivity" />
+                android:value=".chef.activities.ChefMenuActivity" />
         </activity>
         <activity
-            android:name=".customer.CustomerMenuActivity"
-            android:parentActivityName=".customer.CustomerHomeActivity">
+            android:name=".customer.activities.CustomerSignupActivity"
+            android:parentActivityName=".commonActivities.CommonLoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".customer.CustomerHomeActivity" />
+                android:value=".commonActivities.CommonLoginActivity" />
+        </activity>
+        <activity android:name=".customer.activities.CustomerHomeActivity" />
+        <activity
+            android:name=".customer.activities.CustomerFoodOfferDetailsActivity"
+            android:parentActivityName=".customer.activities.CustomerHomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".customer.activities.CustomerHomeActivity" />
         </activity>
         <activity
-            android:name=".customer.CustomerPlacedOrdersActivity"
-            android:parentActivityName=".customer.CustomerMenuActivity">
+            android:name=".customer.activities.CustomerMenuActivity"
+            android:parentActivityName=".customer.activities.CustomerHomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".customer.CustomerMenuActivity" />
+                android:value=".customer.activities.CustomerHomeActivity" />
         </activity>
         <activity
-            android:name=".customer.CustomerUpdateProfileActivity"
-            android:parentActivityName=".customer.CustomerMenuActivity">
+            android:name=".customer.activities.CustomerPlacedOrdersActivity"
+            android:parentActivityName=".customer.activities.CustomerMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".customer.CustomerMenuActivity" />
+                android:value=".customer.activities.CustomerMenuActivity" />
         </activity>
-        <activity android:name=".customer.CustomerPlaceOrderActivity" />
         <activity
-            android:name=".customer.CustomerPaymentActivity"
-            android:parentActivityName=".customer.CustomerPlacedOrdersActivity">
+            android:name=".customer.activities.CustomerUpdateProfileActivity"
+            android:parentActivityName=".customer.activities.CustomerMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".customer.CustomerPlacedOrdersActivity" />
+                android:value=".customer.activities.CustomerMenuActivity" />
+        </activity>
+        <activity android:name=".customer.activities.CustomerPlaceOrderActivity" />
+        <activity
+            android:name=".customer.activities.CustomerPaymentActivity"
+            android:parentActivityName=".customer.activities.CustomerPlacedOrdersActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".customer.activities.CustomerPlacedOrdersActivity" />
         </activity>
         <activity android:name=".appSettings.SettingsActivity" />
     </application>

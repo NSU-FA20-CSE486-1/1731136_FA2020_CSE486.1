@@ -1,4 +1,4 @@
-package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef;
+package com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +16,6 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerPaymentActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.ChefServiceChargePaymentDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.ChefServiceChargePaymentFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;

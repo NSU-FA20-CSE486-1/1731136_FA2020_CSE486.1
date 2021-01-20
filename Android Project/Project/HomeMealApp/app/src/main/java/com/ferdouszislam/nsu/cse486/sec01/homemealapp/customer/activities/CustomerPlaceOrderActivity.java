@@ -1,4 +1,4 @@
-package com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer;
+package com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,10 +30,6 @@ import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.DateTimeUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.InputValidatorUtil;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.OrderStatus;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.SessionUtil;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class CustomerPlaceOrderActivity extends AppCompatActivity {
 

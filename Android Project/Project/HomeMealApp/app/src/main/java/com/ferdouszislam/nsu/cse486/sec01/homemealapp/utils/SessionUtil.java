@@ -2,13 +2,8 @@ package com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.CommonLoginActivity;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.MainActivity;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.UserTypeChoiceActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.commonActivities.UserTypeChoiceActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.services.NotificationService;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.ChefUserProfileSharedPref;

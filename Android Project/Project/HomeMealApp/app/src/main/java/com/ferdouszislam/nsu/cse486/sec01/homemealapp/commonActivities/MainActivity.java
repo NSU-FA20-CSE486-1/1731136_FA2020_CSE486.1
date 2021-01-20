@@ -1,4 +1,4 @@
-package com.ferdouszislam.nsu.cse486.sec01.homemealapp;
+package com.ferdouszislam.nsu.cse486.sec01.homemealapp.commonActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,11 +7,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.Authentication;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.AuthenticationUser;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.auth.FirebaseEmailPasswordAuthentication;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.ChefHomeActivity;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerHomeActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.activities.ChefHomeActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.activities.CustomerHomeActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.sharedPreferences.UserAuthSharedPref;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.utils.UserType;
 

@@ -16,8 +16,8 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.R;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.appSettings.SettingsFragment;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.ChefPlacedOrdersActivity;
-import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.CustomerPlacedOrdersActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.chef.activities.ChefPlacedOrdersActivity;
+import com.ferdouszislam.nsu.cse486.sec01.homemealapp.customer.activities.CustomerPlacedOrdersActivity;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.FoodOrderDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.daos.firebaseDaos.FoodOrderFirebaseRealtimeDao;
 import com.ferdouszislam.nsu.cse486.sec01.homemealapp.listeners.DatabaseOperationStatusListener;

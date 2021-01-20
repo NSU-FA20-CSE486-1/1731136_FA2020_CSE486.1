@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible"
-    tools:context=".chef.ChefAddFoodOfferActivity">
+    tools:context=".chef.activities.ChefAddFoodOfferActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/chefAddFoodOffer_Toolbar"
