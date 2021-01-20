@@ -184,9 +184,8 @@ public class FoodOffersAdapter extends RecyclerView.Adapter<FoodOffersAdapter.Vi
             FoodOffer foodOffer = entry.getValue();
 
             mFoodOffers.add(position, foodOffer);
-
-            mHiddenFoodOffers.remove(position);
         }
+        mHiddenFoodOffers.clear();
 
         notifyDataSetChanged();
     }
